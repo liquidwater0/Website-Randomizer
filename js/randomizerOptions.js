@@ -54,20 +54,20 @@ function saveTheme() {
     chrome.storage.sync.set({"currentTheme": html.getAttribute("data-theme")});
 }
 
-const imageAllCheckbox = document.getElementById("imageAll");
+const imageAllButton = document.getElementById("imageAll");
 const imageCheckboxes = document.querySelectorAll("#imageCheckboxes input:not(#imageAll)");
 
-const textAllCheckbox = document.getElementById("textAll");
+const textAllButton = document.getElementById("textAll");
 const textCheckboxes = document.querySelectorAll("#textCheckboxes input:not(#textAll)");
 
-const elementAllCheckbox = document.getElementById("elementAll");
+const elementAllButton = document.getElementById("elementAll");
 const elementCheckboxes = document.querySelectorAll("#elementCheckboxes input:not(#elementAll)");
 
 let imageCheckState;
 let textCheckState;
 let elementCheckState;
 
-imageAllCheckbox.addEventListener("click", function() {
+imageAllButton.addEventListener("click", function() {
     imageCheckState = !imageCheckState;
 
     imageCheckboxes.forEach(function(checkbox) {
@@ -75,7 +75,7 @@ imageAllCheckbox.addEventListener("click", function() {
     });
 });
 
-textAllCheckbox.addEventListener("click", function() {
+textAllButton.addEventListener("click", function() {
     textCheckState = !textCheckState;
 
     textCheckboxes.forEach(function(checkbox) {
@@ -83,7 +83,7 @@ textAllCheckbox.addEventListener("click", function() {
     });
 });
 
-elementAllCheckbox.addEventListener("click", function() {
+elementAllButton.addEventListener("click", function() {
     elementCheckState = !elementCheckState;
 
     elementCheckboxes.forEach(function(checkbox) {
