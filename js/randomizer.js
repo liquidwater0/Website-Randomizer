@@ -5,7 +5,6 @@ chrome.storage.sync.get({randomElementsCheck: false, randomIconCheck: true}, fun
 });
 
 let imagesPause = true;
-//let linksPause = true;
 let textPause = true;
 let elementsPause = true;
 
@@ -13,8 +12,6 @@ document.addEventListener("keydown", function(event) {
   const key = event.keyCode;
 
   if (event.shiftKey && key == 73) { imagesPause = !imagesPause }; //Shift + I (73)
-  
-  //if (event.shiftKey && key == 76) { linksPause = !linksPause }; //Shift + L (76)
 
   if (event.shiftKey && key == 84) { textPause = !textPause }; //Shift + T (84)
 
@@ -71,32 +68,6 @@ function randomImages() {
   }
 }
 });
-
-/*
-chrome.storage.sync.get({randomLinksCheck: false, linksDelay: 1, linksEveryCheck: true, linksAutoCheck: true}, function(items) {
-
-if (items.randomLinksCheck == true && items.linksAutoCheck == true) {
-  linksPause = false;
-  setTimeout(randomLinks, items.linksDelay * 1000);
-} else if (items.randomLinksCheck == true && items.linksAutoCheck == false) {
-  setInterval(randomLinks, items.linksDelay * 1000); 
-}
-
-function randomLinks() {
-  const links = document.querySelectorAll("a");
-
-    if (items.linksEveryCheck == true) {
-      for (let l = 0; !linksPause; l++) {
-        links[l].href = links[Math.floor(Math.random() * links.length)].href;
-      }  
-    } else if (items.linksEveryCheck == false && linksPause == false) {
-      const link = links[Math.floor(Math.random() * links.length)];
-
-      link.href = links[Math.floor(Math.random() * links.length)].href;
-    }
-  }
-});
-*/
 
 chrome.storage.sync.get({randomTextCheck: false, singleWordsCheck: false, textDelay: 1, textEveryCheck: true, changeTitleCheck: true, textAutoCheck: true, 
 textFieldCheck: true, textFieldPlaceCheck: true, textCheck: true, fontFamilyCheck: true, fontWeightCheck: true, fontStyleCheck: true, textAlignCheck:true,
