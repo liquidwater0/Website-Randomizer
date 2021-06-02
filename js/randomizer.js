@@ -1,6 +1,7 @@
 chrome.storage.sync.get({randomElementsCheck: false, randomIconCheck: true}, function(items) {
   if (items.randomElementsCheck == true && items.randomIconCheck == true) {
     document.head.insertAdjacentHTML("beforeend", `<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">`);
+    document.head.insertAdjacentHTML("beforeend", `<style>.material-icons {font-family: 'Material Icons' !important;}</style>`);
   }
 });
 
