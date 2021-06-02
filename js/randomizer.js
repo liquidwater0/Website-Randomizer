@@ -22,8 +22,29 @@ function getRandomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-chrome.storage.sync.get({randomImagesCheck: false, imagesDelay: 1, imagesEveryCheck: true, imagesAutoCheck: true, imageCheck: true,
-imageWidthCheck: true, imageHeightCheck: true}, function(items) {
+//Get every element or a single element
+let checkStates = {};
+
+chrome.storage.sync.get({imagesEveryCheck: true, textEveryCheck: true, elementsEveryCheck: true}, function(items) {
+  checkStates = {
+    imageEvery: items.imagesEveryCheck,
+    textEvery: items.textEveryCheck,
+    elementEvery: items.elementsEveryCheck
+  }
+});
+
+function getElement(every, single, randomizer) {
+  switch (randomizer) {
+    case "image":
+      return checkStates.imageEvery ? every : single;
+    case "text":
+      return checkStates.textEvery ? every : single;
+    case "element":
+      return checkStates.elementEvery ? every : single;
+  }
+}
+
+chrome.storage.sync.get({randomImagesCheck: false, imagesDelay: 1, imagesAutoCheck: true, imageCheck: true, imageWidthCheck: true, imageHeightCheck: true}, function(items) {
 
 if (items.randomImagesCheck == true && items.imagesAutoCheck == true) {
 
@@ -42,37 +63,29 @@ function randomImages() {
   const images = document.querySelectorAll("img");
   const singleImage = images[Math.floor(Math.random() * images.length)];
 
-  function getElement(every, single) {
-    if (items.imagesEveryCheck == true) {
-      return every;
-    } else {
-      return single;
-    }
-  }
-
   if (imagesPause == false) {
     for (let img = 0; img < images.length; img++) {
       if (items.imageCheck == true) {
-        getElement(images[img], singleImage).src = images[Math.floor(Math.random() * images.length)].src;
-        getElement(images[img], singleImage).srcset = "";
+        getElement(images[img], singleImage, "image").src = images[Math.floor(Math.random() * images.length)].src;
+        getElement(images[img], singleImage, "image").srcset = "";
       }
 
       if (items.imageWidthCheck == true) {
-        getElement(images[img], singleImage).width = getRandomNumber(0, 500);
+        getElement(images[img], singleImage, "image").width = getRandomNumber(0, 500);
       }
 
       if (items.imageHeightCheck == true) {
-        getElement(images[img], singleImage).height = getRandomNumber(0, 500);
+        getElement(images[img], singleImage, "image").height = getRandomNumber(0, 500);
       }
     }
   }
 }
 });
 
-chrome.storage.sync.get({randomTextCheck: false, singleWordsCheck: false, textDelay: 1, textEveryCheck: true, changeTitleCheck: true, textAutoCheck: true, 
-textFieldCheck: true, textFieldPlaceCheck: true, textCheck: true, fontFamilyCheck: true, fontWeightCheck: true, fontStyleCheck: true, textAlignCheck:true,
-textDecorCheck: true, fontSizeCheck: true, colorCheck: true, textTransformCheck: true, letterSpacingCheck: true, lineHeightCheck: true, textShadowCheck: true,
-textIndentCheck: true, writingModeCheck: true}, function(items) {
+chrome.storage.sync.get({randomTextCheck: false, singleWordsCheck: false, textDelay: 1, changeTitleCheck: true, textAutoCheck: true, textFieldCheck: true, 
+textFieldPlaceCheck: true, textCheck: true, fontFamilyCheck: true, fontWeightCheck: true, fontStyleCheck: true, textAlignCheck:true, textDecorCheck: true, 
+fontSizeCheck: true, colorCheck: true, textTransformCheck: true, letterSpacingCheck: true, lineHeightCheck: true, textShadowCheck: true, textIndentCheck: true, 
+writingModeCheck: true}, function(items) {
 
 if (items.randomTextCheck == true && items.textAutoCheck == true) { 
 
@@ -116,18 +129,10 @@ function randomText() {
     }
   }
 
-  function getElement(every, single) {
-    if (items.textEveryCheck == true) {
-      return every;
-    } else {
-      return single;
-    }
-  }
-
   if (textPause == false) {  
     for (let te = 0; te < textElements.length; te++) {
-      if (items.textCheck == true && getElement(textElements[te], singleTextElement).hasChildNodes()) {
-        getElement(textElements[te], singleTextElement).childNodes[0].nodeValue = getRandomText();
+      if (items.textCheck == true && getElement(textElements[te], singleTextElement, "text").hasChildNodes()) {
+        getElement(textElements[te], singleTextElement, "text").childNodes[0].nodeValue = getRandomText();
       }
 
       if (items.changeTitleCheck == true) {
@@ -135,68 +140,68 @@ function randomText() {
       } 
 
       if (items.writingModeCheck == true) {
-        getElement(textElements[te], singleTextElement).style.writingMode = writingModes[Math.floor(Math.random() * writingModes.length)];
+        getElement(textElements[te], singleTextElement, "text").style.writingMode = writingModes[Math.floor(Math.random() * writingModes.length)];
       }
     }
     
     for (let i = 0; i < inputs.length; i++) {
       if (items.textFieldCheck == true) {
-        getElement(inputs[i], singleInput).value = getRandomText();
+        getElement(inputs[i], singleInput, "text").value = getRandomText();
       }
 
       if (items.textFieldPlaceCheck == true) {
-        getElement(inputs[i], singleInput).placeholder = getRandomText();
+        getElement(inputs[i], singleInput, "text").placeholder = getRandomText();
       }
     } 
 
     for (let e = 0; e < elements.length; e++) {
       if (items.fontFamilyCheck) {
-        getElement(elements[e], singleElement).style.fontFamily = fonts[Math.floor(Math.random() * fonts.length)];
+        getElement(elements[e], singleElement, "text").style.fontFamily = fonts[Math.floor(Math.random() * fonts.length)];
       }
 
       if (items.fontWeightCheck == true) {
-        getElement(elements[e], singleElement).style.fontWeight = getRandomNumber(100, 900);
+        getElement(elements[e], singleElement, "text").style.fontWeight = getRandomNumber(100, 900);
       }
 
       if (items.fontStyleCheck == true) {
-        getElement(elements[e], singleElement).style.fontStyle = fontStyles[Math.floor(Math.random() * fontStyles.length)];
+        getElement(elements[e], singleElement, "text").style.fontStyle = fontStyles[Math.floor(Math.random() * fontStyles.length)];
       }
 
       if (items.textAlignCheck == true) {
-        getElement(elements[e], singleElement).style.textAlign = textAlign[Math.floor(Math.random() * textAlign.length)];
+        getElement(elements[e], singleElement, "text").style.textAlign = textAlign[Math.floor(Math.random() * textAlign.length)];
       }
 
       if (items.textDecorCheck == true) {
-        getElement(elements[e], singleElement).style.textDecoration = textDecor[Math.floor(Math.random() * textDecor.length)];
+        getElement(elements[e], singleElement, "text").style.textDecoration = textDecor[Math.floor(Math.random() * textDecor.length)];
       }
 
       if (items.fontSizeCheck == true) {
-        getElement(elements[e], singleElement).style.fontSize = `${getRandomNumber(1, 50)}px`;
+        getElement(elements[e], singleElement, "text").style.fontSize = `${getRandomNumber(1, 50)}px`;
       }
 
       if (items.colorCheck == true) {
-        getElement(elements[e], singleElement).style.color = `rgb(${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)})`;
+        getElement(elements[e], singleElement, "text").style.color = `rgb(${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)})`;
       }
 
       if (items.textTransformCheck == true) {
-        getElement(elements[e], singleElement).style.textTransform = textTransform[Math.floor(Math.random() * textTransform.length)];
+        getElement(elements[e], singleElement, "text").style.textTransform = textTransform[Math.floor(Math.random() * textTransform.length)];
       }
 
       if (items.letterSpacingCheck == true) {
-        getElement(elements[e], singleElement).style.letterSpacing = `${getRandomNumber(0, 25)}px`;
+        getElement(elements[e], singleElement, "text").style.letterSpacing = `${getRandomNumber(0, 25)}px`;
       }
 
       if (items.lineHeightCheck == true) {
-        getElement(elements[e], singleElement).style.lineHeight = `${getRandomNumber(0, 100)}%`;
+        getElement(elements[e], singleElement, "text").style.lineHeight = `${getRandomNumber(0, 100)}%`;
       }
 
       if (items.textShadowCheck == true) {
-        getElement(elements[e], singleElement).style.textShadow = `${getRandomNumber(0, 10)}px ${getRandomNumber(0, 10)}px ${getRandomNumber(0, 10)}px 
+        getElement(elements[e], singleElement, "text").style.textShadow = `${getRandomNumber(0, 10)}px ${getRandomNumber(0, 10)}px ${getRandomNumber(0, 10)}px 
         rgb(${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)})`;
       }
 
       if (items.textIndentCheck == true) {
-        getElement(elements[e], singleElement).style.textIndent = `${getRandomNumber(0, 100)}%`;
+        getElement(elements[e], singleElement, "text").style.textIndent = `${getRandomNumber(0, 100)}%`;
       }
     }
   }
@@ -205,10 +210,10 @@ function randomText() {
 
 chrome.storage.sync.get({randomElementsCheck: false, borderCheck: true, outlineCheck: true, rotationCheck: true, cursorCheck: true, elementBackgroundCheck: true, 
 borderRadiusCheck: true, paddingCheck: true, opacityCheck: true, positionCheck: true, boxShadowCheck: true, elementAutoCheck: true, elementsDelay: 1, floatCheck: true, 
-widthCheck: true, heightCheck: true, visibilityCheck: true, displayCheck: true, overflowCheck: true, zIndexCheck: true, directionCheck: true, elementsEveryCheck: true, 
-translateCheck: true, randomIDCheck: true, randomClassCheck: true, randomTitleCheck: true, randomContentEditCheck: true, randomDraggableCheck: true, resizeCheck: true, 
-randomDisabledCheck: true, randomSelectedCheck: true, backgroundImageCheck: true, randomIconCheck: true, randomTypeCheck: true, randomStartCheck: true, randomMaxLengthCheck: true,
-randomTabIndexCheck: true, randomReversedCheck: true}, function(items) {
+widthCheck: true, heightCheck: true, visibilityCheck: true, displayCheck: true, overflowCheck: true, zIndexCheck: true, directionCheck: true, translateCheck: true, 
+randomIDCheck: true, randomClassCheck: true, randomTitleCheck: true, randomContentEditCheck: true, randomDraggableCheck: true, resizeCheck: true, randomDisabledCheck: true, 
+randomSelectedCheck: true, backgroundImageCheck: true, randomIconCheck: true, randomTypeCheck: true, randomStartCheck: true, randomMaxLengthCheck: true, randomTabIndexCheck: true, 
+randomReversedCheck: true}, function(items) {
 
 if (items.randomElementsCheck == true && items.elementAutoCheck == true) {
 
@@ -280,153 +285,151 @@ function randomElements() {
   "streetview", "strikethrough_s", "style", "subdirectory_arrow_left", "subdirectory_arrow_right", "subject", "subscriptions", "subtitle", "subway", "supervisor_account", "surround_sound", "swap_calls", "swap_horiz", "swap_vert", "swap_vertical_circle", "switch_camera", "switch_video", "sync", "sync_disabled", "sync_problem", "system_update", "system_update_alt", "tab", "tab_unselected", "tablet", "tablet_android", "tablet_mac", "tag_faces", "tap_and_play", "terrain", "text_fields", "text_format", "textsms", "texture", "theaters", "thumb_down", "thumb_up", "thumbs_up_down", "time_to_leave", "timelapse", "timeline", "timer", "timer_10", "timer_3", "timer_off", "title", "toc", "today", "toll", "tonality", "touch_app", "toys", "track_changes", "traffic", "train", "tram", "transfer_within_a_station", "transform", "translate", "trending_down", "trending_flat", "trending_up", "tune", "turned_in", "turned_in_not", "tv", "unarchive", "undo", "unfold_less", "unfold_more", "update", "usb", "verified_user", "vertical_align_bottom", "vertical_align_center", "vertical_align_top", "vibration", "video_call", "video_label", "video_library", "videocam", 
   "videocam_off", "videogame_asset", "view_agenda", "view_array", "view_carousel", "view_column", "view_comfy", "view_compact", "view_day", "view_headline", "view_list", "view_module", "view_quilt", "view_stream", "view_week", "vignette", "visibility", "visibility_off", "voice_chat", "voicemail", "volume_down", "volume_mute", "volume_off", "volume_up", "vpn_key", "vpn_lock", "wallpaper", "warning", "watch", "watch_later", "wb_auto", "wb_cloudy", "wb_incandescent", "wb_iridescent", "wb_sunny", "wc", "web", "web_asset", "weekend", "whatshot", "widgets", "wifi", "wifi_lock", "wifi_tethering", "work", "wrap_text", "youtube_searched_for", "zoom_in", "zoom_out", "zoom_out_map"];
 
-  function getElement(every, single) {
-    if (items.elementsEveryCheck == true) {
-      return every;
-    } else {
-      return single;
-    }
-  }
-
   if (elementsPause == false) {
     icons.forEach(function(icon) { icon.remove() });
     
     for (let e = 0; e < elements.length; e++) {
       if (items.borderCheck == true) {
-        getElement(elements[e], singleElement).style.border = `${borders[Math.floor(Math.random() * borders.length)]} rgb(${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)})
+        getElement(elements[e], singleElement, "element").style.border = `${borders[Math.floor(Math.random() * borders.length)]} rgb(${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)})
         ${getRandomNumber(0, 25)}px`;
       }
 
       if (items.outlineCheck == true) {
-        getElement(elements[e], singleElement).style.outline = `${borders[Math.floor(Math.random() * borders.length)]} rgb(${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)})
+        getElement(elements[e], singleElement, "element").style.outline = `${borders[Math.floor(Math.random() * borders.length)]} rgb(${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)})
         ${getRandomNumber(0, 25)}px`;
       }
 
       if (items.rotationCheck == true) {
-        getElement(elements[e], singleElement).style.transform = `rotate(${getRandomNumber(-360, 360)}deg)`;
+        getElement(elements[e], singleElement, "element").style.transform = `rotate(${getRandomNumber(-360, 360)}deg)`;
       }
 
       if (items.cursorCheck == true) {
-        getElement(elements[e], singleElement).style.cursor = cursors[Math.floor(Math.random() * cursors.length)];
+        getElement(elements[e], singleElement, "element").style.cursor = cursors[Math.floor(Math.random() * cursors.length)];
       }
 
       if (items.elementBackgroundCheck == true) {
-        getElement(elements[e], singleElement).style.backgroundColor = `rgb(${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)})`;
+        getElement(elements[e], singleElement, "element").style.backgroundColor = `rgb(${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)})`;
       }
 
       if (items.borderRadiusCheck == true) {
-        getElement(elements[e], singleElement).style.borderRadius = `${getRandomNumber(0, 100)}px ${getRandomNumber(0, 100)}px ${getRandomNumber(0, 100)}px ${getRandomNumber(0, 100)}px`;
+        getElement(elements[e], singleElement, "element").style.borderRadius = `${getRandomNumber(0, 100)}px ${getRandomNumber(0, 100)}px ${getRandomNumber(0, 100)}px ${getRandomNumber(0, 100)}px`;
       }
 
       if (items.paddingCheck == true) {
-        getElement(elements[e], singleElement).style.padding = `${getRandomNumber(0, 50)}px ${getRandomNumber(0, 50)}px ${getRandomNumber(0, 50)}px ${getRandomNumber(0, 50)}px`;
+        getElement(elements[e], singleElement, "element").style.padding = `${getRandomNumber(0, 50)}px ${getRandomNumber(0, 50)}px ${getRandomNumber(0, 50)}px ${getRandomNumber(0, 50)}px`;
       }
 
       if (items.opacityCheck == true) {
-        getElement(elements[e], singleElement).style.opacity = Math.random();
+        getElement(elements[e], singleElement, "element").style.opacity = Math.random();
       }
 
       if (items.positionCheck == true) {
-        getElement(elements[e], singleElement).style.position = positions[Math.floor(Math.random() * positions.length)];
+        getElement(elements[e], singleElement, "element").style.position = positions[Math.floor(Math.random() * positions.length)];
       }
 
       if (items.boxShadowCheck == true) {
-        getElement(elements[e], singleElement).style.boxShadow = `${getRandomNumber(0, 100)}px ${getRandomNumber(0, 100)}px ${getRandomNumber(0, 100)}px ${getRandomNumber(0, 100)}px 
+        getElement(elements[e], singleElement, "element").style.boxShadow = `${getRandomNumber(0, 100)}px ${getRandomNumber(0, 100)}px ${getRandomNumber(0, 100)}px ${getRandomNumber(0, 100)}px 
         rgb(${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}) ${boxShadow[Math.floor(Math.random() * boxShadow.length)]}`;
       }
 
       if (items.floatCheck == true) {
-        getElement(elements[e], singleElement).style.float = floats[Math.floor(Math.random() * floats.length)];
+        getElement(elements[e], singleElement, "element").style.float = floats[Math.floor(Math.random() * floats.length)];
       }
 
       if (items.widthCheck == true) {
-        getElement(elements[e], singleElement).style.width = `${getRandomNumber(0, 100)}%`;
+        getElement(elements[e], singleElement, "element").style.width = `${getRandomNumber(0, 100)}%`;
       }
 
       if (items.heightCheck == true) {
-        getElement(elements[e], singleElement).style.height = `${getRandomNumber(0, 100)}%`;
+        getElement(elements[e], singleElement, "element").style.height = `${getRandomNumber(0, 100)}%`;
       }
 
       if (items.visibilityCheck == true) {
-        getElement(elements[e], singleElement).style.visibility = visibility[Math.floor(Math.random() * visibility.length)];
+        getElement(elements[e], singleElement, "element").style.visibility = visibility[Math.floor(Math.random() * visibility.length)];
       }
 
       if (items.displayCheck == true) {
-        getElement(elements[e], singleElement).style.display = displays[Math.floor(Math.random() * displays.length)];
+        getElement(elements[e], singleElement, "element").style.display = displays[Math.floor(Math.random() * displays.length)];
       }
 
       if (items.overflowCheck == true) {
-        getElement(elements[e], singleElement).style.overflow = overflow[Math.floor(Math.random() * overflow.length)];
+        getElement(elements[e], singleElement, "element").style.overflow = overflow[Math.floor(Math.random() * overflow.length)];
       }
       
       if (items.zIndexCheck == true) {
-        getElement(elements[e], singleElement).style.zIndex = getRandomNumber(-1, 5);
+        getElement(elements[e], singleElement, "element").style.zIndex = getRandomNumber(-1, 5);
       }
 
       if (items.directionCheck == true) {
-        getElement(elements[e], singleElement).style.direction = directions[Math.floor(Math.random() * directions.length)];
+        getElement(elements[e], singleElement, "element").style.direction = directions[Math.floor(Math.random() * directions.length)];
       }
 
       if (items.translateCheck == true) {
-        getElement(elements[e], singleElement).style.transform = `translate(${getRandomNumber(0, 200)}px, ${getRandomNumber(0, 200)}px)`;
+        getElement(elements[e], singleElement, "element").style.transform = `translate(${getRandomNumber(0, 200)}px, ${getRandomNumber(0, 200)}px)`;
       }
 
       if (items.randomContentEditCheck == true) {
-        getElement(elements[e], singleElement).contentEditable = trueFalse[Math.floor(Math.random() * trueFalse.length)];
+        getElement(elements[e], singleElement, "element").contentEditable = trueFalse[Math.floor(Math.random() * trueFalse.length)];
       }
 
       if (items.randomIDCheck == true) {
-        getElement(elements[e], singleElement).id = elements[Math.floor(Math.random() * elements.length)].id;
+        getElement(elements[e], singleElement, "element").id = elements[Math.floor(Math.random() * elements.length)].id;
       }
 
       if (items.randomClassCheck == true) {
-        getElement(elements[e], singleElement).classList = elements[Math.floor(Math.random() * elements.length)].classList;
+        getElement(elements[e], singleElement, "element").classList = elements[Math.floor(Math.random() * elements.length)].classList;
       } 
 
       if (items.randomDraggableCheck == true) {
-        getElement(elements[e], singleElement).draggable = trueFalse[Math.floor(Math.random() * trueFalse.length)];
+        getElement(elements[e], singleElement, "element").draggable = trueFalse[Math.floor(Math.random() * trueFalse.length)];
       }
 
       if (items.randomTitleCheck == true) { 
-        getElement(elements[e], singleElement).title = elements[Math.floor(Math.random() * elements.length)].textContent;
+        getElement(elements[e], singleElement, "element").title = elements[Math.floor(Math.random() * elements.length)].textContent;
       } 
 
       if (items.resizeCheck == true) {
-        getElement(elements[e], singleElement).style.resize = resizeValues[Math.floor(Math.random() * resizeValues.length)];
+        getElement(elements[e], singleElement, "element").style.resize = resizeValues[Math.floor(Math.random() * resizeValues.length)];
       }
 
       if (items.backgroundImageCheck == true && images[Math.floor(Math.random() * images.length)]) {
-        getElement(elements[e], singleElement).style.backgroundImage = `url(${images[Math.floor(Math.random() * images.length)].src})`;
+        getElement(elements[e], singleElement, "element").style.backgroundImage = `url(${images[Math.floor(Math.random() * images.length)].src})`;
       }
 
       if (items.randomIconCheck == true) {
         const iconElement = `<i class='material-icons'>${googleIcons[Math.floor(Math.random() * googleIcons.length)]}</i>`;
 
-        getElement(elements[e], singleElement).insertAdjacentHTML(insertPositions[Math.floor(Math.random() * insertPositions.length)], iconElement);
+        getElement(elements[e], singleElement, "element").insertAdjacentHTML(insertPositions[Math.floor(Math.random() * insertPositions.length)], iconElement);
       }
 
       if (items.randomTabIndexCheck == true) {
-        getElement(elements[e], singleElement).tabIndex = getRandomNumber(0, elements.length);
+        getElement(elements[e], singleElement, "element").tabIndex = getRandomNumber(0, elements.length);
       }
     }
 
     for (let o = 0; o < ol.length; o++) {
       if (items.randomStartCheck == true) {
-        getElement(ol[o], singleOl).start = getRandomNumber(0, li.length);
+        getElement(ol[o], singleOl, "element").start = getRandomNumber(0, li.length);
       }
 
       if (items.randomReversedCheck == true) {
-        if (singleOl.hasAttribute("reversed")) {
-          getElement(ol[o], singleOl).removeAttribute("reversed");
+        if (getElement(ol[o], singleOl, "element").hasAttribute("reversed")) {
+          getElement(ol[o], singleOl, "element").removeAttribute("reversed");
         } else {
-          getElement(ol[o], singleOl).setAttributeNode(document.createAttribute("reversed"));
+          getElement(ol[o], singleOl, "element").setAttributeNode(document.createAttribute("reversed"));
         }
       }
     }
 
     for (let i = 0; i < inputs.length; i++) {
       if (items.randomMaxLengthCheck == true) {
-        getElement(inputs[i], singleInput).maxLength = getRandomNumber(0, 100);
+        getElement(inputs[i], singleInput, "element").maxLength = getRandomNumber(0, 100);
+      }
+    }
+
+    for (let te = 0; te < typeElements.length; te++) {
+      if (items.randomTypeCheck == true) {
+        getElement(typeElements[te], singleTypeElement, "element").type = types[Math.floor(Math.random() * types.length)];
       }
     }
 
@@ -443,12 +446,6 @@ function randomElements() {
         randomOption.removeAttribute("selected");
       }
       randomOption.setAttributeNode(document.createAttribute("selected"));
-    }
-
-    for (let te = 0; te < typeElements.length; te++) {
-      if (items.randomTypeCheck == true) {
-        getElement(typeElements[te], singleTypeElement).type = types[Math.floor(Math.random() * types.length)];
-      }
     }
   }
 }
