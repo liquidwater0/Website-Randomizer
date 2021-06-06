@@ -161,6 +161,9 @@ function save() {
     const randomMaxLengthChecked = document.getElementById("randomMaxLengthCheck").checked;
     const randomTabIndexChecked = document.getElementById("randomTabIndexCheck").checked;
     const randomReversedChecked = document.getElementById("randomReversedCheck").checked;
+    const whiteSpaceChecked = document.getElementById("whiteSpaceCheck").checked;
+    const wordBreakChecked = document.getElementById("wordBreakCheck").checked;
+    const wordSpacingChecked = document.getElementById("wordSpacingCheck").checked;
 
     chrome.storage.sync.set({
         "randomImagesCheck": randomImagesChecked, "randomTextCheck": randomTextChecked, "singleWordsCheck": singleWordsChecked, "randomElementsCheck": randomElementsChecked, "borderCheck": borderChecked,
@@ -175,7 +178,8 @@ function save() {
         "randomContentEditCheck": randomContentEditChecked, "textFieldCheck": textFieldChecked, "textFieldPlaceCheck": textFieldPlaceChecked, "textCheck": textChecked, "randomDraggableCheck": randomDraggableChecked,
         "imageCheck": imageChecked, "imageWidthCheck": imageWidthChecked, "imageHeightCheck": imageHeightChecked, "resizeCheck": resizeChecked, "writingModeCheck": writingModeChecked, "randomDisabledCheck": randomDisabledChecked,
         "randomSelectedCheck": randomSelectedChecked, "backgroundImageCheck": backgroundImageChecked, "randomIconCheck": randomIconChecked, "randomTypeCheck": randomTypeChecked, "randomStartCheck": randomStartChecked,
-        "randomMaxLengthCheck": randomMaxLengthChecked, "randomTabIndexCheck": randomTabIndexChecked, "randomReversedCheck": randomReversedChecked
+        "randomMaxLengthCheck": randomMaxLengthChecked, "randomTabIndexCheck": randomTabIndexChecked, "randomReversedCheck": randomReversedChecked, "whiteSpaceCheck": whiteSpaceChecked, "wordBreakCheck": wordBreakChecked,
+        "wordSpacingCheck": wordSpacingChecked
     }, function() {
         saveButton.textContent = "Saved!"
         chrome.storage.sync.get({mainColorText: "0, 160, 255", imagesDelay: 1, textDelay: 1, elementsDelay: 1}, function(items) {
@@ -229,14 +233,14 @@ function save() {
 }
 function get() {
     chrome.storage.sync.get({
-        currentTheme: "dark", randomImagesCheck: false, randomTextCheck: false, singleWordsCheck: false, randomElementsCheck: false, borderCheck: true, outlineCheck: true,
-        fontFamilyCheck: true, fontWeightCheck: true, fontStyleCheck: true, textAlignCheck: true, textDecorCheck: true, rotationCheck: true, fontSizeCheck: true, colorCheck: true, textTransformCheck: true, cursorCheck: true,
-        elementBackgroundCheck: true, borderRadiusCheck: true, paddingCheck: true, opacityCheck: true, positionCheck: true, letterSpacingCheck: true, boxShadowCheck: true, mainColorText: "0, 160, 255", imagesDelay: 1,
-        textDelay: 1, randomIDCheck: true, randomClassCheck: true, randomTitleCheck: true, elementAutoCheck: true, elementsDelay: 1, floatCheck: true, widthCheck: true, heightCheck: true, visibilityCheck: true,
-        displayCheck: true, overflowCheck: true, lineHeightCheck: true, textShadowCheck: true, zIndexCheck: true, directionCheck: true, textIndentCheck: true, elementsEveryCheck: true, textEveryCheck: true,
-        imagesEveryCheck: true, translateCheck: true, changeTitleCheck: true, textAutoCheck: true, imagesAutoCheck: true, randomContentEditCheck: true, textFieldCheck: true, textFieldPlaceCheck: true,
-        textCheck: true, randomDraggableCheck: true, imageCheck: true, imageWidthCheck: true, imageHeightCheck: true, resizeCheck: true, writingModeCheck: true, randomDisabledCheck: true, randomSelectedCheck: true,
-        themeSwitchChecked: true, backgroundImageCheck: true, randomIconCheck: true, randomTypeCheck: true, randomStartCheck: true, randomMaxLengthCheck: true, randomTabIndexCheck: true, randomReversedCheck: true
+        currentTheme: "dark", randomImagesCheck: false, randomTextCheck: false, singleWordsCheck: false, randomElementsCheck: false, borderCheck: true, outlineCheck: true, fontFamilyCheck: true, fontWeightCheck: true, 
+        fontStyleCheck: true, textAlignCheck: true, textDecorCheck: true, rotationCheck: true, fontSizeCheck: true, colorCheck: true, textTransformCheck: true, cursorCheck: true, elementBackgroundCheck: true, 
+        borderRadiusCheck: true, paddingCheck: true, opacityCheck: true, positionCheck: true, letterSpacingCheck: true, boxShadowCheck: true, mainColorText: "0, 160, 255", imagesDelay: 1, textDelay: 1, 
+        randomIDCheck: true, randomClassCheck: true, randomTitleCheck: true, elementAutoCheck: true, elementsDelay: 1, floatCheck: true, widthCheck: true, heightCheck: true, visibilityCheck: true, displayCheck: true, 
+        overflowCheck: true, lineHeightCheck: true, textShadowCheck: true, zIndexCheck: true, directionCheck: true, textIndentCheck: true, elementsEveryCheck: true, textEveryCheck: true, imagesEveryCheck: true, 
+        translateCheck: true, changeTitleCheck: true, textAutoCheck: true, imagesAutoCheck: true, randomContentEditCheck: true, textFieldCheck: true, textFieldPlaceCheck: true, textCheck: true, randomDraggableCheck: true, 
+        imageCheck: true, imageWidthCheck: true, imageHeightCheck: true, resizeCheck: true, writingModeCheck: true, randomDisabledCheck: true, randomSelectedCheck: true, themeSwitchChecked: true, backgroundImageCheck: true, 
+        randomIconCheck: true, randomTypeCheck: true, randomStartCheck: true, randomMaxLengthCheck: true, randomTabIndexCheck: true, randomReversedCheck: true, whiteSpaceCheck: true, wordBreakCheck: true, wordSpacingCheck: true
     }, function(items) {
 
         if (items.imagesDelay == 1) {
@@ -325,5 +329,8 @@ function get() {
         document.getElementById("randomMaxLengthCheck").checked = items.randomMaxLengthCheck;
         document.getElementById("randomTabIndexCheck").checked = items.randomTabIndexCheck;
         document.getElementById("randomReversedCheck").checked = items.randomReversedCheck;
+        document.getElementById("whiteSpaceCheck").checked = items.whiteSpaceCheck;
+        document.getElementById("wordBreakCheck").checked = items.wordBreakCheck;
+        document.getElementById("wordSpacingCheck").checked = items.wordSpacingCheck;
     });
 }
