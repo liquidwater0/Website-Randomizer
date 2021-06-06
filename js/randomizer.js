@@ -86,7 +86,7 @@ function randomImages() {
 chrome.storage.sync.get({randomTextCheck: false, singleWordsCheck: false, textDelay: 1, changeTitleCheck: true, textAutoCheck: true, textFieldCheck: true, 
 textFieldPlaceCheck: true, textCheck: true, fontFamilyCheck: true, fontWeightCheck: true, fontStyleCheck: true, textAlignCheck:true, textDecorCheck: true, 
 fontSizeCheck: true, colorCheck: true, textTransformCheck: true, letterSpacingCheck: true, lineHeightCheck: true, textShadowCheck: true, textIndentCheck: true, 
-writingModeCheck: true}, function(items) {
+writingModeCheck: true, whiteSpaceCheck: true, wordBreakCheck: true, wordSpacingCheck: true}, function(items) {
 
 if (items.randomTextCheck == true && items.textAutoCheck == true) { 
 
@@ -119,6 +119,8 @@ function randomText() {
   const textDecor = ["none", "underline", "overline", "line-through", "initial", "inherit"];
   const textTransform = ["none", "capitalize", "uppercase", "lowercase", "initial", "inherit"];
   const writingModes = ["horizontal-tb", "vertical-rl", "vertical-lr"];
+  const whiteSpaceValues = ["normal", "nowrap", "pre", "pre-line", "pre-wrap", "initial", "inherit"];
+  const wordBreakValues = ["normal", "break-all", "keep-all", "break-word", "initial", "inherit"];
 
   function getRandomText() {
     const words = textElements[Math.floor(Math.random() * textElements.length)].textContent.split(" ");
@@ -203,6 +205,18 @@ function randomText() {
 
       if (items.textIndentCheck == true) {
         getElement(elements[e], singleElement, "text").style.textIndent = `${getRandomNumber(0, 100)}%`;
+      }
+
+      if (items.whiteSpaceCheck == true) {
+        getElement(elements[e], singleElement, "text").style.whiteSpace = whiteSpaceValues[Math.floor(Math.random() * whiteSpaceValues.length)];
+      }
+
+      if (items.wordBreakCheck == true) {
+        getElement(elements[e], singleElement, "text").style.wordBreak = wordBreakValues[Math.floor(Math.random() * wordBreakValues.length)];
+      }
+
+      if (items.wordSpacingCheck == true) {
+        getElement(elements[e], singleElement, "text").style.wordSpacing = `${getRandomNumber(1, 50)}px`;
       }
     }
   }
