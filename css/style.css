@@ -1,9 +1,9 @@
 :root {
-	--mainColor: 0, 160, 255;
+	--primaryColor: 0, 160, 255;
 	
-	--mainColor1: rgb(var(--mainColor));
-	--mainColor2: rgba(var(--mainColor), 0.5);
-	--mainColor3: rgba(var(--mainColor), 0.75);
+	--primaryColor1: rgb(var(--primaryColor));
+	--primaryColor2: rgba(var(--primaryColor), 0.5);
+	--primaryColor3: rgba(var(--primaryColor), 0.75);
 }
 
 html[data-theme="dark"] {
@@ -63,13 +63,13 @@ body {
 }
 
 button {
-	background-color: var(--mainColor1) !important;
+	background-color: var(--primaryColor1) !important;
 	font-weight: 500;
 	border-radius: 4px !important;
 }
 
 button:hover {
-	background-color: var(--mainColor3) !important;
+	background-color: var(--primaryColor3) !important;
 }
 
 .input-field {
@@ -77,12 +77,12 @@ button:hover {
 }
 
 .input-field input {
-	border-bottom-color: var(--mainColor1) !important;
-	box-shadow: 0px 0px 0px 0px var(--mainColor1) !important;
+	border-bottom-color: var(--primaryColor1) !important;
+	box-shadow: 0px 0px 0px 0px var(--primaryColor1) !important;
 }
 
 .input-field input:focus, .input-field input:hover {
-	box-shadow: 0px 1px 0px 0px var(--mainColor1) !important;
+	box-shadow: 0px 1px 0px 0px var(--primaryColor1) !important;
 }
 
 .input-field input[type="text"] + label {
@@ -90,17 +90,17 @@ button:hover {
 }
 
 .input-field input[type="text"]:focus + label {
-	color: var(--mainColor1) !important;
+	color: var(--primaryColor1) !important;
 }
 
 .filled-in:checked ~ span::after {
-	background-color: var(--mainColor1) !important;
-	border-color: var(--mainColor1) !important;
+	background-color: var(--primaryColor1) !important;
+	border-color: var(--primaryColor1) !important;
 }
 
 .filled-in:checked:hover ~ span::after {
-	background-color: var(--mainColor3) !important;
-	border-color: var(--mainColor3) !important;
+	background-color: var(--primaryColor3) !important;
+	border-color: var(--primaryColor3) !important;
 }
 
 .filled-in:hover ~ span::after {
@@ -118,23 +118,23 @@ button:hover {
 
 .switch input[type="checkbox"]:checked + .lever::before,
 .switch input[type="checkbox"] + .lever::before {
-	background-color: var(--mainColor1) !important;
+	background-color: var(--primaryColor1) !important;
 	opacity: 0.15;
 }
 
 .switch input[type="checkbox"]:checked + .lever::after,
 .switch input[type="checkbox"] + .lever::after {
-	background-color: var(--mainColor1) !important;
+	background-color: var(--primaryColor1) !important;
 }
 
 .switch input[type="checkbox"]:checked:hover + .lever::after,
 .switch input[type="checkbox"]:hover + .lever::after {
-	background-color: var(--mainColor3) !important;
+	background-color: var(--primaryColor3) !important;
 }
 
 .switch input[type="checkbox"]:checked + .lever,
 .switch input[type="checkbox"] + .lever {
-	background-color: var(--mainColor2) !important;
+	background-color: var(--primaryColor2) !important;
 }
 
 /* Randomizer Options CSS */
@@ -192,7 +192,7 @@ body#randomizerOptionsBody {
 
 .allAndEnable a {
 	background-color: rgba(0, 0, 0, 0) !important;
-	color: var(--mainColor1);
+	color: var(--primaryColor1);
 	cursor: pointer;
 	font-size: 14px;
 	font-weight: bold;
