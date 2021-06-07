@@ -92,10 +92,22 @@ elementAllButton.addEventListener("click", function() {
 });
 
 function save() {
+    const saveButton = document.getElementById("saveButton");
+    const primaryColorText = document.getElementById("primaryColorText");
     const randomImagesChecked = document.getElementById("randomImagesCheck").checked;
+    const imagesAutoChecked = document.getElementById("imagesAutoCheck").checked;
+    const imagesEveryChecked = document.getElementById("imagesEveryCheck").checked;
+    const imageDelayTextField = document.getElementById("imagesDelayText");
     const randomTextChecked = document.getElementById("randomTextCheck").checked;
+    const textAutoChecked = document.getElementById("textAutoCheck").checked;
+    const textEveryChecked = document.getElementById("textEveryCheck").checked;
+    const textDelayTextField = document.getElementById("textDelayText");
     const singleWordsChecked = document.getElementById("singleWordsCheck").checked;
     const randomElementsChecked = document.getElementById("randomElementsCheck").checked;
+    const elementAutoChecked = document.getElementById("elementAutoCheck").checked;
+    const elementsEveryChecked = document.getElementById("elementsEveryCheck").checked;
+    const elementsDelayTextField = document.getElementById("elementsDelayText");
+    const imageChecked = document.getElementById("imageCheck").checked;
     const borderChecked = document.getElementById("borderCheck").checked;
     const outlineChecked = document.getElementById("outlineCheck").checked;
     const fontFamilyChecked = document.getElementById("fontFamilyCheck").checked;
@@ -115,15 +127,9 @@ function save() {
     const positionChecked = document.getElementById("positionCheck").checked;
     const letterSpacingChecked = document.getElementById("letterSpacingCheck").checked;
     const boxShadowChecked = document.getElementById("boxShadowCheck").checked;
-    const mainColorText = document.getElementById("mainColorText");
-    const saveButton = document.getElementById("saveButton");
-    const imageDelayTextField = document.getElementById("imagesDelayText");
-    const textDelayTextField = document.getElementById("textDelayText");
     const randomIDChecked = document.getElementById("randomIDCheck").checked;
     const randomClassChecked = document.getElementById("randomClassCheck").checked;
     const randomTitleChecked = document.getElementById("randomTitleCheck").checked;
-    const elementAutoChecked = document.getElementById("elementAutoCheck").checked;
-    const elementsDelayTextField = document.getElementById("elementsDelayText");
     const floatChecked = document.getElementById("floatCheck").checked;
     const widthChecked = document.getElementById("widthCheck").checked;
     const heightChecked = document.getElementById("heightCheck").checked;
@@ -135,19 +141,13 @@ function save() {
     const zIndexChecked = document.getElementById("zIndexCheck").checked;
     const directionChecked = document.getElementById("directionCheck").checked;
     const textIndentChecked = document.getElementById("textIndentCheck").checked;
-    const elementsEveryChecked = document.getElementById("elementsEveryCheck").checked;
-    const textEveryChecked = document.getElementById("textEveryCheck").checked;
-    const imagesEveryChecked = document.getElementById("imagesEveryCheck").checked;
     const translateChecked = document.getElementById("translateCheck").checked;
     const changeTitleChecked = document.getElementById("changeTitleCheck").checked;
-    const textAutoChecked = document.getElementById("textAutoCheck").checked;
-    const imagesAutoChecked = document.getElementById("imagesAutoCheck").checked;
     const randomContentEditChecked = document.getElementById("randomContentEditCheck").checked;
     const textFieldChecked = document.getElementById("textFieldCheck").checked;
     const textFieldPlaceChecked = document.getElementById("textFieldPlaceCheck").checked;
     const textChecked = document.getElementById("textCheck").checked;
     const randomDraggableChecked = document.getElementById("randomDraggableCheck").checked;
-    const imageChecked = document.getElementById("imageCheck").checked;
     const imageWidthChecked = document.getElementById("imageWidthCheck").checked;
     const imageHeightChecked = document.getElementById("imageHeightCheck").checked;
     const resizeChecked = document.getElementById("resizeCheck").checked;
@@ -167,11 +167,11 @@ function save() {
     const verticalAlignChecked = document.getElementById("verticalAlignCheck").checked;
 
     chrome.storage.sync.set({
-        "randomImagesCheck": randomImagesChecked, "randomTextCheck": randomTextChecked, "singleWordsCheck": singleWordsChecked, "randomElementsCheck": randomElementsChecked, "borderCheck": borderChecked, 
-        "outlineCheck": outlineChecked, "fontFamilyCheck": fontFamilyChecked, "fontWeightCheck": fontWeightChecked, "fontStyleCheck": fontStyleChecked, "textAlignCheck": textAlignChecked, 
+        "primaryColorText": primaryColorText.value, "randomImagesCheck": randomImagesChecked, "randomTextCheck": randomTextChecked, "singleWordsCheck": singleWordsChecked, "randomElementsCheck": randomElementsChecked, 
+        "borderCheck": borderChecked, "outlineCheck": outlineChecked, "fontFamilyCheck": fontFamilyChecked, "fontWeightCheck": fontWeightChecked, "fontStyleCheck": fontStyleChecked, "textAlignCheck": textAlignChecked, 
         "textDecorCheck": textDecorChecked, "rotationCheck": rotationChecked, "fontSizeCheck": fontSizeChecked, "colorCheck": colorChecked, "textTransformCheck": textTransformChecked, "cursorCheck": cursorChecked,
         "elementBackgroundCheck": elementBgColorChecked, "borderRadiusCheck": borderRadiusChecked, "paddingCheck": paddingChecked, "opacityCheck": opacityChecked, "positionCheck": positionChecked,
-        "letterSpacingCheck": letterSpacingChecked, "boxShadowCheck": boxShadowChecked, "mainColorText": mainColorText.value, "imagesDelay": imageDelayTextField.value.split(" ")[0], "textDelay": textDelayTextField.value.split(" ")[0],
+        "letterSpacingCheck": letterSpacingChecked, "boxShadowCheck": boxShadowChecked, "imagesDelay": imageDelayTextField.value.split(" ")[0], "textDelay": textDelayTextField.value.split(" ")[0], 
         "randomIDCheck": randomIDChecked, "randomClassCheck": randomClassChecked, "randomTitleCheck": randomTitleChecked, "elementAutoCheck": elementAutoChecked, "elementsDelay": elementsDelayTextField.value.split(" ")[0],
         "floatCheck": floatChecked, "widthCheck": widthChecked, "heightCheck": heightChecked, "visibilityCheck": visibilityChecked, "displayCheck": displayChecked, "overflowCheck": overflowChecked, "lineHeightCheck": lineHeightChecked,
         "textShadowCheck": textShadowChecked, "zIndexCheck": zIndexChecked, "directionCheck": directionChecked, "textIndentCheck": textIndentChecked,"elementsEveryCheck": elementsEveryChecked, "textEveryCheck": textEveryChecked,
@@ -183,15 +183,15 @@ function save() {
         "wordSpacingCheck": wordSpacingChecked, "verticalAlignCheck": verticalAlignChecked
     }, function() {
         saveButton.textContent = "Saved!"
-        chrome.storage.sync.get({mainColorText: "0, 160, 255", imagesDelay: 1, textDelay: 1, elementsDelay: 1}, function(items) {
-            document.documentElement.style.setProperty("--mainColor", items.mainColorText);
+        chrome.storage.sync.get({primaryColorText: "0, 160, 255", imagesDelay: 1, textDelay: 1, elementsDelay: 1}, function(items) {
+            document.documentElement.style.setProperty("--primaryColor", items.primaryColorText);
 
-            if (items.mainColorText == "") {
-                document.documentElement.style.setProperty("--mainColor", "0, 160, 255");
-                document.getElementById("mainColorText").value = "0, 160, 255";
+            if (items.primaryColorText == "") {
+                document.documentElement.style.setProperty("--primaryColor", "0, 160, 255");
+                document.getElementById("primaryColorText").value = "0, 160, 255";
                 save()
             } else {
-                document.getElementById("mainColorText").value = items.mainColorText; 
+                document.getElementById("primaryColorText").value = items.primaryColorText; 
             }
 
             if (items.imagesDelay == "") {
@@ -234,7 +234,7 @@ function save() {
 }
 function get() {
     chrome.storage.sync.get({
-        currentTheme: "dark", mainColorText: "0, 160, 255", randomImagesCheck: false, randomTextCheck: false, singleWordsCheck: false, randomElementsCheck: false, borderCheck: true, outlineCheck: true, 
+        currentTheme: "dark", primaryColorText: "0, 160, 255", randomImagesCheck: false, randomTextCheck: false, singleWordsCheck: false, randomElementsCheck: false, borderCheck: true, outlineCheck: true, 
         fontFamilyCheck: true, fontWeightCheck: true, fontStyleCheck: true, textAlignCheck: true, textDecorCheck: true, rotationCheck: true, fontSizeCheck: true, colorCheck: true, textTransformCheck: true, 
         cursorCheck: true, elementBackgroundCheck: true, borderRadiusCheck: true, paddingCheck: true, opacityCheck: true, positionCheck: true, letterSpacingCheck: true, boxShadowCheck: true,  imagesDelay: 1, 
         textDelay: 1, randomIDCheck: true, randomClassCheck: true, randomTitleCheck: true, elementAutoCheck: true, elementsDelay: 1, floatCheck: true, widthCheck: true, heightCheck: true, visibilityCheck: true, 
@@ -263,12 +263,19 @@ function get() {
         }
 
         html.setAttribute("data-theme", items.currentTheme);
-        document.documentElement.style.setProperty("--mainColor", items.mainColorText);
+        document.documentElement.style.setProperty("--primaryColor", items.primaryColorText);
+        document.getElementById("primaryColorText").value = items.primaryColorText;
         themeSwitch.checked = items.themeSwitchChecked;
         document.getElementById("randomImagesCheck").checked = items.randomImagesCheck;
+        document.getElementById("imagesAutoCheck").checked = items.imagesAutoCheck;
+        document.getElementById("imagesEveryCheck").checked = items.imagesEveryCheck;
         document.getElementById("randomTextCheck").checked = items.randomTextCheck;
+        document.getElementById("textAutoCheck").checked = items.textAutoCheck;
+        document.getElementById("textEveryCheck").checked = items.textEveryCheck;
         document.getElementById("singleWordsCheck").checked = items.singleWordsCheck;
         document.getElementById("randomElementsCheck").checked = items.randomElementsCheck;
+        document.getElementById("elementAutoCheck").checked = items.elementAutoCheck;
+        document.getElementById("elementsEveryCheck").checked = items.elementsEveryCheck;
         document.getElementById("borderCheck").checked = items.borderCheck;
         document.getElementById("outlineCheck").checked = items.outlineCheck;
         document.getElementById("fontFamilyCheck").checked = items.fontFamilyCheck;
@@ -288,11 +295,9 @@ function get() {
         document.getElementById("positionCheck").checked = items.positionCheck;
         document.getElementById("letterSpacingCheck").checked = items.letterSpacingCheck;
         document.getElementById("boxShadowCheck").checked = items.boxShadowCheck;
-        document.getElementById("mainColorText").value = items.mainColorText;
         document.getElementById("randomIDCheck").checked = items.randomIDCheck;
         document.getElementById("randomClassCheck").checked = items.randomClassCheck;
         document.getElementById("randomTitleCheck").checked = items.randomTitleCheck;
-        document.getElementById("elementAutoCheck").checked = items.elementAutoCheck;
         document.getElementById("floatCheck").checked = items.floatCheck;
         document.getElementById("widthCheck").checked = items.widthCheck;
         document.getElementById("heightCheck").checked = items.heightCheck;
@@ -304,13 +309,8 @@ function get() {
         document.getElementById("zIndexCheck").checked = items.zIndexCheck;
         document.getElementById("directionCheck").checked = items.directionCheck;
         document.getElementById("textIndentCheck").checked = items.textIndentCheck;
-        document.getElementById("elementsEveryCheck").checked = items.elementsEveryCheck;
-        document.getElementById("textEveryCheck").checked = items.textEveryCheck;
-        document.getElementById("imagesEveryCheck").checked = items.imagesEveryCheck;
         document.getElementById("translateCheck").checked = items.translateCheck;
         document.getElementById("changeTitleCheck").checked = items.changeTitleCheck;
-        document.getElementById("textAutoCheck").checked = items.textAutoCheck;
-        document.getElementById("imagesAutoCheck").checked = items.imagesAutoCheck;
         document.getElementById("randomContentEditCheck").checked = items.randomContentEditCheck;
         document.getElementById("textFieldCheck").checked = items.textFieldCheck;
         document.getElementById("textFieldPlaceCheck").checked = items.textFieldPlaceCheck;
