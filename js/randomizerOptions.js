@@ -164,10 +164,11 @@ function save() {
     const whiteSpaceChecked = document.getElementById("whiteSpaceCheck").checked;
     const wordBreakChecked = document.getElementById("wordBreakCheck").checked;
     const wordSpacingChecked = document.getElementById("wordSpacingCheck").checked;
+    const verticalAlignChecked = document.getElementById("verticalAlignCheck").checked;
 
     chrome.storage.sync.set({
-        "randomImagesCheck": randomImagesChecked, "randomTextCheck": randomTextChecked, "singleWordsCheck": singleWordsChecked, "randomElementsCheck": randomElementsChecked, "borderCheck": borderChecked,
-        "outlineCheck": outlineChecked, "fontFamilyCheck": fontFamilyChecked, "fontWeightCheck": fontWeightChecked, "fontStyleCheck": fontStyleChecked, "textAlignCheck": textAlignChecked,
+        "randomImagesCheck": randomImagesChecked, "randomTextCheck": randomTextChecked, "singleWordsCheck": singleWordsChecked, "randomElementsCheck": randomElementsChecked, "borderCheck": borderChecked, 
+        "outlineCheck": outlineChecked, "fontFamilyCheck": fontFamilyChecked, "fontWeightCheck": fontWeightChecked, "fontStyleCheck": fontStyleChecked, "textAlignCheck": textAlignChecked, 
         "textDecorCheck": textDecorChecked, "rotationCheck": rotationChecked, "fontSizeCheck": fontSizeChecked, "colorCheck": colorChecked, "textTransformCheck": textTransformChecked, "cursorCheck": cursorChecked,
         "elementBackgroundCheck": elementBgColorChecked, "borderRadiusCheck": borderRadiusChecked, "paddingCheck": paddingChecked, "opacityCheck": opacityChecked, "positionCheck": positionChecked,
         "letterSpacingCheck": letterSpacingChecked, "boxShadowCheck": boxShadowChecked, "mainColorText": mainColorText.value, "imagesDelay": imageDelayTextField.value.split(" ")[0], "textDelay": textDelayTextField.value.split(" ")[0],
@@ -179,7 +180,7 @@ function save() {
         "imageCheck": imageChecked, "imageWidthCheck": imageWidthChecked, "imageHeightCheck": imageHeightChecked, "resizeCheck": resizeChecked, "writingModeCheck": writingModeChecked, "randomDisabledCheck": randomDisabledChecked,
         "randomSelectedCheck": randomSelectedChecked, "backgroundImageCheck": backgroundImageChecked, "randomIconCheck": randomIconChecked, "randomTypeCheck": randomTypeChecked, "randomStartCheck": randomStartChecked,
         "randomMaxLengthCheck": randomMaxLengthChecked, "randomTabIndexCheck": randomTabIndexChecked, "randomReversedCheck": randomReversedChecked, "whiteSpaceCheck": whiteSpaceChecked, "wordBreakCheck": wordBreakChecked,
-        "wordSpacingCheck": wordSpacingChecked
+        "wordSpacingCheck": wordSpacingChecked, "verticalAlignCheck": verticalAlignChecked
     }, function() {
         saveButton.textContent = "Saved!"
         chrome.storage.sync.get({mainColorText: "0, 160, 255", imagesDelay: 1, textDelay: 1, elementsDelay: 1}, function(items) {
@@ -233,15 +234,15 @@ function save() {
 }
 function get() {
     chrome.storage.sync.get({
-        currentTheme: "dark", randomImagesCheck: false, randomTextCheck: false, singleWordsCheck: false, randomElementsCheck: false, borderCheck: true, outlineCheck: true, fontFamilyCheck: true, fontWeightCheck: true, 
-        fontStyleCheck: true, textAlignCheck: true, textDecorCheck: true, rotationCheck: true, fontSizeCheck: true, colorCheck: true, textTransformCheck: true, cursorCheck: true, elementBackgroundCheck: true, 
-        borderRadiusCheck: true, paddingCheck: true, opacityCheck: true, positionCheck: true, letterSpacingCheck: true, boxShadowCheck: true, mainColorText: "0, 160, 255", imagesDelay: 1, textDelay: 1, 
-        randomIDCheck: true, randomClassCheck: true, randomTitleCheck: true, elementAutoCheck: true, elementsDelay: 1, floatCheck: true, widthCheck: true, heightCheck: true, visibilityCheck: true, displayCheck: true, 
-        overflowCheck: true, lineHeightCheck: true, textShadowCheck: true, zIndexCheck: true, directionCheck: true, textIndentCheck: true, elementsEveryCheck: true, textEveryCheck: true, imagesEveryCheck: true, 
-        translateCheck: true, changeTitleCheck: true, textAutoCheck: true, imagesAutoCheck: true, randomContentEditCheck: true, textFieldCheck: true, textFieldPlaceCheck: true, textCheck: true, randomDraggableCheck: true, 
-        imageCheck: true, imageWidthCheck: true, imageHeightCheck: true, resizeCheck: true, writingModeCheck: true, randomDisabledCheck: true, randomSelectedCheck: true, themeSwitchChecked: true, backgroundImageCheck: true, 
-        randomIconCheck: true, randomTypeCheck: true, randomStartCheck: true, randomMaxLengthCheck: true, randomTabIndexCheck: true, randomReversedCheck: true, whiteSpaceCheck: true, wordBreakCheck: true, wordSpacingCheck: true
-    }, function(items) {
+        currentTheme: "dark", mainColorText: "0, 160, 255", randomImagesCheck: false, randomTextCheck: false, singleWordsCheck: false, randomElementsCheck: false, borderCheck: true, outlineCheck: true, 
+        fontFamilyCheck: true, fontWeightCheck: true, fontStyleCheck: true, textAlignCheck: true, textDecorCheck: true, rotationCheck: true, fontSizeCheck: true, colorCheck: true, textTransformCheck: true, 
+        cursorCheck: true, elementBackgroundCheck: true, borderRadiusCheck: true, paddingCheck: true, opacityCheck: true, positionCheck: true, letterSpacingCheck: true, boxShadowCheck: true,  imagesDelay: 1, 
+        textDelay: 1, randomIDCheck: true, randomClassCheck: true, randomTitleCheck: true, elementAutoCheck: true, elementsDelay: 1, floatCheck: true, widthCheck: true, heightCheck: true, visibilityCheck: true, 
+        displayCheck: true, overflowCheck: true, lineHeightCheck: true, textShadowCheck: true, zIndexCheck: true, directionCheck: true, textIndentCheck: true, elementsEveryCheck: true, textEveryCheck: true, 
+        imagesEveryCheck: true, translateCheck: true, changeTitleCheck: true, textAutoCheck: true, imagesAutoCheck: true, randomContentEditCheck: true, textFieldCheck: true, textFieldPlaceCheck: true, textCheck: true, 
+        randomDraggableCheck: true, imageCheck: true, imageWidthCheck: true, imageHeightCheck: true, resizeCheck: true, writingModeCheck: true, randomDisabledCheck: true, randomSelectedCheck: true, themeSwitchChecked: true, 
+        backgroundImageCheck: true, randomIconCheck: true, randomTypeCheck: true, randomStartCheck: true, randomMaxLengthCheck: true, randomTabIndexCheck: true, randomReversedCheck: true, whiteSpaceCheck: true, 
+        wordBreakCheck: true, wordSpacingCheck: true, verticalAlignCheck: true}, function(items) {
 
         if (items.imagesDelay == 1) {
             document.getElementById("imagesDelayText").value = `${items.imagesDelay} second`;
@@ -262,6 +263,8 @@ function get() {
         }
 
         html.setAttribute("data-theme", items.currentTheme);
+        document.documentElement.style.setProperty("--mainColor", items.mainColorText);
+        themeSwitch.checked = items.themeSwitchChecked;
         document.getElementById("randomImagesCheck").checked = items.randomImagesCheck;
         document.getElementById("randomTextCheck").checked = items.randomTextCheck;
         document.getElementById("singleWordsCheck").checked = items.singleWordsCheck;
@@ -285,7 +288,6 @@ function get() {
         document.getElementById("positionCheck").checked = items.positionCheck;
         document.getElementById("letterSpacingCheck").checked = items.letterSpacingCheck;
         document.getElementById("boxShadowCheck").checked = items.boxShadowCheck;
-        document.documentElement.style.setProperty("--mainColor", items.mainColorText);
         document.getElementById("mainColorText").value = items.mainColorText;
         document.getElementById("randomIDCheck").checked = items.randomIDCheck;
         document.getElementById("randomClassCheck").checked = items.randomClassCheck;
@@ -321,7 +323,6 @@ function get() {
         document.getElementById("writingModeCheck").checked = items.writingModeCheck;
         document.getElementById("randomDisabledCheck").checked = items.randomDisabledCheck;
         document.getElementById("randomSelectedCheck").checked = items.randomSelectedCheck;
-        themeSwitch.checked = items.themeSwitchChecked;
         document.getElementById("backgroundImageCheck").checked = items.backgroundImageCheck;
         document.getElementById("randomIconCheck").checked = items.randomIconCheck;
         document.getElementById("randomTypeCheck").checked = items.randomTypeCheck;
@@ -332,5 +333,6 @@ function get() {
         document.getElementById("whiteSpaceCheck").checked = items.whiteSpaceCheck;
         document.getElementById("wordBreakCheck").checked = items.wordBreakCheck;
         document.getElementById("wordSpacingCheck").checked = items.wordSpacingCheck;
+        document.getElementById("verticalAlignCheck").checked = items.verticalAlignCheck;
     });
 }
