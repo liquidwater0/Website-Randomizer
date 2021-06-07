@@ -15,13 +15,13 @@ document.getElementById("optionsButton").addEventListener("click", function() {
 });
 
 function get() {
-    chrome.storage.sync.get({currentTheme: "dark", mainColorText: "0, 160, 255"}, function(items) {
+    chrome.storage.sync.get({currentTheme: "dark", primaryColorText: "0, 160, 255"}, function(items) {
         html.setAttribute("data-theme", items.currentTheme);
 
-        document.documentElement.style.setProperty("--mainColor", items.mainColorText);
+        document.documentElement.style.setProperty("--primaryColor", items.primaryColorText);
 
-        if (items.mainColorText == "") {
-            document.documentElement.style.setProperty("--mainColor", "0, 160, 255");
+        if (items.primaryColorText == "") {
+            document.documentElement.style.setProperty("--primaryColor", "0, 160, 255");
         }
     });
 }
