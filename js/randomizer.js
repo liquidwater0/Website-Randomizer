@@ -86,7 +86,7 @@ function randomImages() {
 chrome.storage.sync.get({randomTextCheck: false, singleWordsCheck: false, textDelay: 1, changeTitleCheck: true, textAutoCheck: true, textFieldCheck: true, 
 textFieldPlaceCheck: true, textCheck: true, fontFamilyCheck: true, fontWeightCheck: true, fontStyleCheck: true, textAlignCheck:true, textDecorCheck: true, 
 fontSizeCheck: true, colorCheck: true, textTransformCheck: true, letterSpacingCheck: true, lineHeightCheck: true, textShadowCheck: true, textIndentCheck: true, 
-writingModeCheck: true, whiteSpaceCheck: true, wordBreakCheck: true, wordSpacingCheck: true}, function(items) {
+writingModeCheck: true, whiteSpaceCheck: true, wordBreakCheck: true, wordSpacingCheck: true, directionCheck: true, verticalAlignCheck: true}, function(items) {
 
 if (items.randomTextCheck == true && items.textAutoCheck == true) { 
 
@@ -121,6 +121,8 @@ function randomText() {
   const writingModes = ["horizontal-tb", "vertical-rl", "vertical-lr"];
   const whiteSpaceValues = ["normal", "nowrap", "pre", "pre-line", "pre-wrap", "initial", "inherit"];
   const wordBreakValues = ["normal", "break-all", "keep-all", "break-word", "initial", "inherit"];
+  const directions = ["ltr", "rtl", "initial", "inherit"];
+  const verticalAlignValues = ["baseline", "sub", "super", "top", "text-top", "middle", "bottom", "text-bottom", "initial", "inherit"];
 
   function getRandomText() {
     const words = textElements[Math.floor(Math.random() * textElements.length)].textContent.split(" ");
@@ -158,7 +160,11 @@ function randomText() {
     } 
 
     for (let e = 0; e < elements.length; e++) {
-      if (items.fontFamilyCheck) {
+      if (items.directionCheck == true) {
+        getElement(elements[e], singleElement, "text").style.direction = directions[Math.floor(Math.random() * directions.length)];
+      }
+
+      if (items.fontFamilyCheck == true) {
         getElement(elements[e], singleElement, "text").style.fontFamily = fonts[Math.floor(Math.random() * fonts.length)];
       }
 
@@ -218,17 +224,20 @@ function randomText() {
       if (items.wordSpacingCheck == true) {
         getElement(elements[e], singleElement, "text").style.wordSpacing = `${getRandomNumber(1, 50)}px`;
       }
+
+      if (items.verticalAlignCheck == true) {
+        getElement(elements[e], singleElement, "text").style.verticalAlign = verticalAlignValues[Math.floor(Math.random() * verticalAlignValues.length)];
+      }
     }
   }
 }
 });
 
-chrome.storage.sync.get({randomElementsCheck: false, borderCheck: true, outlineCheck: true, rotationCheck: true, cursorCheck: true, elementBackgroundCheck: true, 
-borderRadiusCheck: true, paddingCheck: true, opacityCheck: true, positionCheck: true, boxShadowCheck: true, elementAutoCheck: true, elementsDelay: 1, floatCheck: true, 
-widthCheck: true, heightCheck: true, visibilityCheck: true, displayCheck: true, overflowCheck: true, zIndexCheck: true, directionCheck: true, translateCheck: true, 
-randomIDCheck: true, randomClassCheck: true, randomTitleCheck: true, randomContentEditCheck: true, randomDraggableCheck: true, resizeCheck: true, randomDisabledCheck: true, 
-randomSelectedCheck: true, backgroundImageCheck: true, randomIconCheck: true, randomTypeCheck: true, randomStartCheck: true, randomMaxLengthCheck: true, randomTabIndexCheck: true, 
-randomReversedCheck: true}, function(items) {
+chrome.storage.sync.get({randomElementsCheck: false, borderCheck: true, outlineCheck: true, rotationCheck: true, cursorCheck: true, elementBackgroundCheck: true, borderRadiusCheck: true, 
+paddingCheck: true, opacityCheck: true, positionCheck: true, boxShadowCheck: true, elementAutoCheck: true, elementsDelay: 1, floatCheck: true, widthCheck: true, heightCheck: true, 
+visibilityCheck: true, displayCheck: true, overflowCheck: true, zIndexCheck: true, translateCheck: true, randomIDCheck: true, randomClassCheck: true, randomTitleCheck: true, 
+randomContentEditCheck: true, randomDraggableCheck: true, resizeCheck: true, randomDisabledCheck: true, randomSelectedCheck: true, backgroundImageCheck: true, randomIconCheck: true, 
+randomTypeCheck: true, randomStartCheck: true, randomMaxLengthCheck: true, randomTabIndexCheck: true, randomReversedCheck: true}, function(items) {
 
 if (items.randomElementsCheck == true && items.elementAutoCheck == true) {
 
@@ -279,7 +288,6 @@ function randomElements() {
   const displays = ["inline", "block", "contents", "flex", "grid", "inline-block", "inline-flex", "inline-grid", "inline-table", "list-item", "run-in", "table", "table-caption",
   "table-column-group", "table-header-group", "table-footer-group", "table-row-group", "table-cell", "table-column", "table-row", "none", "initial", "inherit"];
   const overflow = ["visible", "hidden", "scroll", "auto", "initial", "inherit"];
-  const directions = ["ltr", "rtl", "initial", "inherit"];
   const trueFalse = [true, false];
   const resizeValues = ["none", "both", "horizontal", "vertical", "initial", "inherit"];
   const insertPositions = ["afterbegin", "beforeend"];
@@ -373,10 +381,6 @@ function randomElements() {
       
       if (items.zIndexCheck == true) {
         getElement(elements[e], singleElement, "element").style.zIndex = getRandomNumber(-1, 5);
-      }
-
-      if (items.directionCheck == true) {
-        getElement(elements[e], singleElement, "element").style.direction = directions[Math.floor(Math.random() * directions.length)];
       }
 
       if (items.translateCheck == true) {
