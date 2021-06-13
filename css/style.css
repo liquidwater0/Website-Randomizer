@@ -143,6 +143,10 @@ body#randomizerOptionsBody {
 	padding: 0px 20px;
 }
 
+#colorPicker {
+	display: none;
+}
+
 .default {
 	color: var(--primaryTextColor);
 }
@@ -161,18 +165,16 @@ body#randomizerOptionsBody {
 	display: grid;
 	grid-template-areas: "line category line2";
 	align-items: center;
+	color: var(--primaryTextColor);
 	text-align: center;
+	font-size: 20px;
+	font-weight: 450;
 	margin: 25px 0px;
 }
 
-.category span {
-	color: var(--primaryTextColor);
-	font-size: 20px;
-	font-weight: 450;
-}
-
-.category hr {
-	border-color: var(--primaryTextColor);
+.category::before, .category::after {
+	content: "";
+	border: 1px solid var(--primaryTextColor);
 	opacity: 0.33;
 }
 
@@ -197,6 +199,7 @@ body#randomizerOptionsBody {
 	font-size: 14px;
 	font-weight: bold;
 	padding: 8px 15px;
+	border-radius: 5px;
 	margin-bottom: 13px;
 	user-select: none;
 	transition: 0.25s background-color;
