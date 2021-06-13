@@ -143,6 +143,10 @@ body#randomizerOptionsBody {
 	padding: 0px 20px;
 }
 
+#primaryColorText {
+	cursor: pointer;
+}
+
 #colorPicker {
 	display: none;
 }
