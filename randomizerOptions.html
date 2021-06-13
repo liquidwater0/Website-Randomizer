@@ -51,7 +51,7 @@
       <label><input class="filled-in" id="textFieldPlaceCheck" type="checkbox"><span>Random Text Field Placeholders</span></label><br>
       <label><input class="filled-in" id="textFieldCheck" type="checkbox"><span>Random Text Field Values</span></label>
       <div>
-        <div class="category"><hr><span>Styles</span><hr></div>
+        <div class="category">Styles</div>
         <label><input class="filled-in" id="fontFamilyCheck" type="checkbox"><span>Random Font</span></label><br>
         <label><input class="filled-in" id="fontSizeCheck" type="checkbox"><span>Random Font Size</span></label><br>
         <label><input class="filled-in" id="fontStyleCheck" type="checkbox"><span>Random Font Style</span></label><br>
@@ -84,7 +84,7 @@
       </div>
       <label><input class="filled-in" id="randomIconCheck" type="checkbox"><span>Random Icons</span></label>
       <div>
-        <div class="category"><hr><span>Attributes</span><hr></div>
+        <div class="category">Attributes</div>
         <label><input class="filled-in" id="randomClassCheck" type="checkbox"><span>Random Class</span></label><br>
         <label><input class="filled-in" id="randomContentEditCheck" type="checkbox"><span>Random Content Editable</span></label><br>
         <label><input class="filled-in" id="randomDisabledCheck" type="checkbox"><span>Random Disabled</span></label><br>
@@ -99,7 +99,7 @@
         <label><input class="filled-in" id="randomTypeCheck" type="checkbox"><span>Random Type</span></label>
       </div>
       <div>
-        <div class="category"><hr><span>Styles</span><hr></div>
+        <div class="category">Styles</div>
         <label><input class="filled-in" id="elementBackgroundCheck" type="checkbox"><span>Random Background Color</span></label><br>
         <label><input class="filled-in" id="backgroundImageCheck" type="checkbox"><span>Random Background Image</span></label><br>
         <label><input class="filled-in" id="borderCheck" type="checkbox"><span>Random Border</span></label><br>
@@ -127,7 +127,7 @@
   <div id="randomizerOptions">
     <h4 class="z-depth-2 heading">Randomizer Options</h4>
     <div>
-      <div class="category"><hr><span>Image Randomizer</span><hr></div>
+      <div class="category">Image Randomizer</div>
       <form>
         <label><input class="filled-in" id="imagesAutoCheck" type="checkbox"><span>Activate Automatically</span></label><br>
         <label><input class="filled-in" id="imagesEveryCheck" type="checkbox"><span>Randomize Every Element</span></label> 
@@ -136,7 +136,7 @@
     </div>
 
     <div>
-      <div class="category"><hr><span>Text Randomizer</span><hr></div>
+      <div class="category">Text Randomizer</div>
       <form>
         <label><input class="filled-in" id="textAutoCheck" type="checkbox"><span>Activate Automatically</span></label><br> 
         <label><input class="filled-in" id="textEveryCheck" type="checkbox"><span>Randomize Every Element</span></label><br>
@@ -146,7 +146,7 @@
     </div>
 
     <div>
-      <div class="category"><hr><span>Element Randomizer</span><hr></div>
+      <div class="category">Element Randomizer</div>
       <form>
         <label><input class="filled-in" id="elementAutoCheck" type="checkbox"><span>Activate Automatically</span></label><br>
         <label><input class="filled-in" id="elementsEveryCheck" type="checkbox"><span>Randomize Every Element</span></label>
@@ -158,13 +158,16 @@
   <div id="uiOptions">
     <h4 class="z-depth-2 heading">UI Options</h4>
     <div>
-      <div class="category"><hr><span>Theme</span><hr></div>
+      <div class="category">Theme</div>
       <div class="switch"><label>Light<input id="themeSwitch" type="checkbox"><span class="lever"></span>Dark</label></div>
     </div>
 
     <div>
-      <div class="category"><hr><span>Primary Color</span><hr></div>
-      <div class="input-field"><input placeholder="Enter RGB Value" id="primaryColorText" type="text"><label>Primary Color (RGB) <span class="default">- Default: 0, 160, 255</span></label></div>
+      <div class="category">Primary Color</div>
+      <div class="input-field">
+        <input placeholder="Enter RGB Value" id="primaryColorText" type="text" readonly><label>Primary Color<span class="default"> - Default: #00a0FF</span></label>
+        <input type="color" id="colorPicker">
+      </div>
     </div>
   </div>
 
