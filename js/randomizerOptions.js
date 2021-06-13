@@ -91,9 +91,24 @@ elementAllButton.addEventListener("click", function() {
     });
 });
 
+function convertHexToRGB(hex) {
+    const hex_code = hex.split("");
+    const red = parseInt(hex_code[1]+hex_code[2],16);
+    const green = parseInt(hex_code[3]+hex_code[4],16);
+    const blue = parseInt(hex_code[5]+hex_code[6],16);
+    const rgb = `${red}, ${green}, ${blue}`;
+
+    return rgb;
+}
+
+const primaryColorText = document.getElementById("primaryColorText");
+const colorPickerInput = document.getElementById("colorPicker");
+
+primaryColorText.addEventListener("click", function() { colorPickerInput.click() });
+colorPickerInput.addEventListener("input", function() { primaryColorText.value = colorPickerInput.value });
+
 function save() {
     const saveButton = document.getElementById("saveButton");
-    const primaryColorText = document.getElementById("primaryColorText");
     const randomImagesChecked = document.getElementById("randomImagesCheck").checked;
     const imagesAutoChecked = document.getElementById("imagesAutoCheck").checked;
     const imagesEveryChecked = document.getElementById("imagesEveryCheck").checked;
@@ -167,32 +182,26 @@ function save() {
     const verticalAlignChecked = document.getElementById("verticalAlignCheck").checked;
 
     chrome.storage.sync.set({
-        "primaryColorText": primaryColorText.value, "randomImagesCheck": randomImagesChecked, "randomTextCheck": randomTextChecked, "singleWordsCheck": singleWordsChecked, "randomElementsCheck": randomElementsChecked, 
-        "borderCheck": borderChecked, "outlineCheck": outlineChecked, "fontFamilyCheck": fontFamilyChecked, "fontWeightCheck": fontWeightChecked, "fontStyleCheck": fontStyleChecked, "textAlignCheck": textAlignChecked, 
-        "textDecorCheck": textDecorChecked, "rotationCheck": rotationChecked, "fontSizeCheck": fontSizeChecked, "colorCheck": colorChecked, "textTransformCheck": textTransformChecked, "cursorCheck": cursorChecked,
-        "elementBackgroundCheck": elementBgColorChecked, "borderRadiusCheck": borderRadiusChecked, "paddingCheck": paddingChecked, "opacityCheck": opacityChecked, "positionCheck": positionChecked,
-        "letterSpacingCheck": letterSpacingChecked, "boxShadowCheck": boxShadowChecked, "imagesDelay": imageDelayTextField.value.split(" ")[0], "textDelay": textDelayTextField.value.split(" ")[0], 
-        "randomIDCheck": randomIDChecked, "randomClassCheck": randomClassChecked, "randomTitleCheck": randomTitleChecked, "elementAutoCheck": elementAutoChecked, "elementsDelay": elementsDelayTextField.value.split(" ")[0],
-        "floatCheck": floatChecked, "widthCheck": widthChecked, "heightCheck": heightChecked, "visibilityCheck": visibilityChecked, "displayCheck": displayChecked, "overflowCheck": overflowChecked, "lineHeightCheck": lineHeightChecked,
-        "textShadowCheck": textShadowChecked, "zIndexCheck": zIndexChecked, "directionCheck": directionChecked, "textIndentCheck": textIndentChecked,"elementsEveryCheck": elementsEveryChecked, "textEveryCheck": textEveryChecked,
-        "imagesEveryCheck": imagesEveryChecked, "translateCheck": translateChecked, "changeTitleCheck": changeTitleChecked, "textAutoCheck": textAutoChecked, "imagesAutoCheck": imagesAutoChecked,
-        "randomContentEditCheck": randomContentEditChecked, "textFieldCheck": textFieldChecked, "textFieldPlaceCheck": textFieldPlaceChecked, "textCheck": textChecked, "randomDraggableCheck": randomDraggableChecked,
-        "imageCheck": imageChecked, "imageWidthCheck": imageWidthChecked, "imageHeightCheck": imageHeightChecked, "resizeCheck": resizeChecked, "writingModeCheck": writingModeChecked, "randomDisabledCheck": randomDisabledChecked,
-        "randomSelectedCheck": randomSelectedChecked, "backgroundImageCheck": backgroundImageChecked, "randomIconCheck": randomIconChecked, "randomTypeCheck": randomTypeChecked, "randomStartCheck": randomStartChecked,
-        "randomMaxLengthCheck": randomMaxLengthChecked, "randomTabIndexCheck": randomTabIndexChecked, "randomReversedCheck": randomReversedChecked, "whiteSpaceCheck": whiteSpaceChecked, "wordBreakCheck": wordBreakChecked,
-        "wordSpacingCheck": wordSpacingChecked, "verticalAlignCheck": verticalAlignChecked
-    }, function() {
-        saveButton.textContent = "Saved!"
-        chrome.storage.sync.get({primaryColorText: "0, 160, 255", imagesDelay: 1, textDelay: 1, elementsDelay: 1}, function(items) {
-            document.documentElement.style.setProperty("--primaryColor", items.primaryColorText);
+        "primaryColor": colorPickerInput.value, "randomImagesCheck": randomImagesChecked, "randomTextCheck": randomTextChecked, "singleWordsCheck": singleWordsChecked, "randomElementsCheck": randomElementsChecked, 
+        "borderCheck": borderChecked, "outlineCheck": outlineChecked, "fontFamilyCheck": fontFamilyChecked, "fontWeightCheck": fontWeightChecked, "fontStyleCheck": fontStyleChecked, "textAlignCheck": textAlignChecked,  
+        "textDecorCheck": textDecorChecked, "rotationCheck": rotationChecked, "fontSizeCheck": fontSizeChecked, "colorCheck": colorChecked, "textTransformCheck": textTransformChecked, "cursorCheck": cursorChecked, 
+        "elementBackgroundCheck": elementBgColorChecked, "borderRadiusCheck": borderRadiusChecked, "paddingCheck": paddingChecked, "opacityCheck": opacityChecked, "positionCheck": positionChecked, 
+        "letterSpacingCheck": letterSpacingChecked, "boxShadowCheck": boxShadowChecked, "imagesDelay": imageDelayTextField.value.split(" ")[0], "textDelay": textDelayTextField.value.split(" ")[0], "randomIDCheck": randomIDChecked, 
+        "randomClassCheck": randomClassChecked, "randomTitleCheck": randomTitleChecked, "elementAutoCheck": elementAutoChecked, "elementsDelay": elementsDelayTextField.value.split(" ")[0], "floatCheck": floatChecked, 
+        "widthCheck": widthChecked, "heightCheck": heightChecked, "visibilityCheck": visibilityChecked, "displayCheck": displayChecked, "overflowCheck": overflowChecked, "lineHeightCheck": lineHeightChecked, 
+        "textShadowCheck": textShadowChecked, "zIndexCheck": zIndexChecked, "directionCheck": directionChecked, "textIndentCheck": textIndentChecked,"elementsEveryCheck": elementsEveryChecked, "textEveryCheck": textEveryChecked, 
+        "imagesEveryCheck": imagesEveryChecked, "translateCheck": translateChecked, "changeTitleCheck": changeTitleChecked, "textAutoCheck": textAutoChecked, "imagesAutoCheck": imagesAutoChecked, 
+        "randomContentEditCheck": randomContentEditChecked, "textFieldCheck": textFieldChecked, "textFieldPlaceCheck": textFieldPlaceChecked, "textCheck": textChecked, "randomDraggableCheck": randomDraggableChecked, 
+        "imageCheck": imageChecked, "imageWidthCheck": imageWidthChecked, "imageHeightCheck": imageHeightChecked, "resizeCheck": resizeChecked, "writingModeCheck": writingModeChecked, "randomDisabledCheck": randomDisabledChecked, 
+        "randomSelectedCheck": randomSelectedChecked, "backgroundImageCheck": backgroundImageChecked, "randomIconCheck": randomIconChecked, "randomTypeCheck": randomTypeChecked, "randomStartCheck": randomStartChecked, 
+        "randomMaxLengthCheck": randomMaxLengthChecked, "randomTabIndexCheck": randomTabIndexChecked, "randomReversedCheck": randomReversedChecked, "whiteSpaceCheck": whiteSpaceChecked, "wordBreakCheck": wordBreakChecked, 
+        "wordSpacingCheck": wordSpacingChecked, "verticalAlignCheck": verticalAlignChecked}, function() {
 
-            if (items.primaryColorText == "") {
-                document.documentElement.style.setProperty("--primaryColor", "0, 160, 255");
-                document.getElementById("primaryColorText").value = "0, 160, 255";
-                save()
-            } else {
-                document.getElementById("primaryColorText").value = items.primaryColorText; 
-            }
+        saveButton.textContent = "Saved!";
+
+        chrome.storage.sync.get({imagesDelay: 1, textDelay: 1, elementsDelay: 1, primaryColor: "#00a0FF"}, function(items) {
+
+            document.documentElement.style.setProperty("--primaryColor", convertHexToRGB(items.primaryColor));
 
             if (items.imagesDelay == "") {
                 document.getElementById("imagesDelayText").value = 1;
@@ -227,14 +236,12 @@ function save() {
                 }
             }
         });
-        setTimeout(function() {
-         saveButton.textContent = "Save"
-        }, 2000);
+        setTimeout(function() { saveButton.textContent = "Save" }, 2000);
     });
 }
 function get() {
     chrome.storage.sync.get({
-        currentTheme: "dark", primaryColorText: "0, 160, 255", randomImagesCheck: false, randomTextCheck: false, singleWordsCheck: false, randomElementsCheck: false, borderCheck: true, outlineCheck: true, 
+        currentTheme: "dark", primaryColor: "#00a0FF", randomImagesCheck: false, randomTextCheck: false, singleWordsCheck: false, randomElementsCheck: false, borderCheck: true, outlineCheck: true, 
         fontFamilyCheck: true, fontWeightCheck: true, fontStyleCheck: true, textAlignCheck: true, textDecorCheck: true, rotationCheck: true, fontSizeCheck: true, colorCheck: true, textTransformCheck: true, 
         cursorCheck: true, elementBackgroundCheck: true, borderRadiusCheck: true, paddingCheck: true, opacityCheck: true, positionCheck: true, letterSpacingCheck: true, boxShadowCheck: true,  imagesDelay: 1, 
         textDelay: 1, randomIDCheck: true, randomClassCheck: true, randomTitleCheck: true, elementAutoCheck: true, elementsDelay: 1, floatCheck: true, widthCheck: true, heightCheck: true, visibilityCheck: true, 
@@ -263,8 +270,9 @@ function get() {
         }
 
         html.setAttribute("data-theme", items.currentTheme);
-        document.documentElement.style.setProperty("--primaryColor", items.primaryColorText);
-        document.getElementById("primaryColorText").value = items.primaryColorText;
+        document.documentElement.style.setProperty("--primaryColor", convertHexToRGB(items.primaryColor));
+        colorPickerInput.value = items.primaryColor;
+        primaryColorText.value = items.primaryColor;
         themeSwitch.checked = items.themeSwitchChecked;
         document.getElementById("randomImagesCheck").checked = items.randomImagesCheck;
         document.getElementById("imagesAutoCheck").checked = items.imagesAutoCheck;
