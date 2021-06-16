@@ -1,5 +1,5 @@
 {
-	"manifest_version": 2,
+	"manifest_version": 3,
 	"name": "Website Randomizer",
 	"version": "2.2",
 	"description": "Website Randomizer is a fun little extension that randomizes Images, Text, and Elements on websites.",
@@ -10,7 +10,7 @@
 		"48": "wr_48.png",
 		"128": "wr_128.png"
 	},
-	"browser_action": {
+	"action": {
 		"default_popup": "randomizerPopup.html"
 	},
 	"options_ui": {
@@ -18,8 +18,7 @@
 		"open_in_tab": false
 	},
 	"background": {
-		"scripts": ["js/background.js"],
-		"persistent": false
+		"service_worker": "background.js"
 	},
 	"content_scripts": [
 		{
