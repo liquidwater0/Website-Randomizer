@@ -31,13 +31,11 @@ document.getElementById("scrollUI").addEventListener("click", function() {
 themeSwitch.addEventListener("input", function() {
     chrome.storage.sync.set({"themeSwitchChecked": themeSwitch.checked});
 
-    chrome.storage.sync.get({themeSwitchChecked: true}, function(items) {
-        if (items.themeSwitchChecked == true) {
-            darkMode();
-        } else {
-            lightMode();
-        }
-    });
+    if (themeSwitch.checked == true) {
+        darkMode();
+    } else {
+        lightMode();
+    }
 });
 
 function lightMode() {
@@ -180,6 +178,7 @@ function save() {
     const wordBreakChecked = document.getElementById("wordBreakCheck").checked;
     const wordSpacingChecked = document.getElementById("wordSpacingCheck").checked;
     const verticalAlignChecked = document.getElementById("verticalAlignCheck").checked;
+    const randomSelectionChecked = document.getElementById("randomSelectionCheck").checked;
 
     chrome.storage.sync.set({
         "primaryColor": colorPickerInput.value, "randomImagesCheck": randomImagesChecked, "randomTextCheck": randomTextChecked, "singleWordsCheck": singleWordsChecked, "randomElementsCheck": randomElementsChecked, 
@@ -195,7 +194,7 @@ function save() {
         "imageCheck": imageChecked, "imageWidthCheck": imageWidthChecked, "imageHeightCheck": imageHeightChecked, "resizeCheck": resizeChecked, "writingModeCheck": writingModeChecked, "randomDisabledCheck": randomDisabledChecked, 
         "randomSelectedCheck": randomSelectedChecked, "backgroundImageCheck": backgroundImageChecked, "randomIconCheck": randomIconChecked, "randomTypeCheck": randomTypeChecked, "randomStartCheck": randomStartChecked, 
         "randomMaxLengthCheck": randomMaxLengthChecked, "randomTabIndexCheck": randomTabIndexChecked, "randomReversedCheck": randomReversedChecked, "whiteSpaceCheck": whiteSpaceChecked, "wordBreakCheck": wordBreakChecked, 
-        "wordSpacingCheck": wordSpacingChecked, "verticalAlignCheck": verticalAlignChecked}, function() {
+        "wordSpacingCheck": wordSpacingChecked, "verticalAlignCheck": verticalAlignChecked, "randomSelectionCheck": randomSelectionChecked}, function() {
 
         saveButton.textContent = "Saved!";
 
@@ -205,35 +204,23 @@ function save() {
 
             if (items.imagesDelay == "") {
                 document.getElementById("imagesDelayText").value = 1;
-                save()
+                save();
             } else {
-                if (items.imagesDelay == 1) {
-                    document.getElementById("imagesDelayText").value = `${items.imagesDelay} second`;
-                } else if (items.imagesDelay != 1) {
-                    document.getElementById("imagesDelayText").value = `${items.imagesDelay} seconds`;
-                }
+                document.getElementById("imagesDelayText").value = (items.imagesDelay == 1) ? `${items.imagesDelay} second` : `${items.imagesDelay} seconds`;
             }
 
             if (items.textDelay == "") {
                 document.getElementById("textDelayText").value = 1;
-                save()
+                save();
             } else {
-                if (items.textDelay == 1) {
-                    document.getElementById("textDelayText").value = `${items.textDelay} second`;
-                } else if (items.textDelay != 1) {
-                    document.getElementById("textDelayText").value = `${items.textDelay} seconds`;
-                }
+                document.getElementById("textDelayText").value = (items.textDelay == 1) ? `${items.textDelay} second` : `${items.textDelay} seconds`;
             }
 
             if (items.elementsDelay == "") {
                 document.getElementById("elementsDelayText").value = 1;
-                save()
+                save();
             } else {
-                if (items.elementsDelay == 1) {
-                    document.getElementById("elementsDelayText").value = `${items.elementsDelay} second`;
-                } else if (items.elementsDelay != 1) {
-                    document.getElementById("elementsDelayText").value = `${items.elementsDelay} seconds`;
-                }
+                document.getElementById("elementsDelayText").value = (items.elementsDelay == 1) ? `${items.elementsDelay} second` : `${items.elementsDelay} seconds`;
             }
         });
         setTimeout(function() { saveButton.textContent = "Save" }, 2000);
@@ -249,25 +236,11 @@ function get() {
         imagesEveryCheck: true, translateCheck: true, changeTitleCheck: true, textAutoCheck: true, imagesAutoCheck: true, randomContentEditCheck: true, textFieldCheck: true, textFieldPlaceCheck: true, textCheck: true, 
         randomDraggableCheck: true, imageCheck: true, imageWidthCheck: true, imageHeightCheck: true, resizeCheck: true, writingModeCheck: true, randomDisabledCheck: true, randomSelectedCheck: true, themeSwitchChecked: true, 
         backgroundImageCheck: true, randomIconCheck: true, randomTypeCheck: true, randomStartCheck: true, randomMaxLengthCheck: true, randomTabIndexCheck: true, randomReversedCheck: true, whiteSpaceCheck: true, 
-        wordBreakCheck: true, wordSpacingCheck: true, verticalAlignCheck: true}, function(items) {
+        wordBreakCheck: true, wordSpacingCheck: true, verticalAlignCheck: true, randomSelectionCheck: true}, function(items) {
 
-        if (items.imagesDelay == 1) {
-            document.getElementById("imagesDelayText").value = `${items.imagesDelay} second`;
-        } else if (items.imagesDelay != 1) {
-            document.getElementById("imagesDelayText").value = `${items.imagesDelay} seconds`;
-        }
-
-        if (items.textDelay == 1) {
-            document.getElementById("textDelayText").value = `${items.textDelay} second`;
-        } else if (items.textDelay != 1) {
-            document.getElementById("textDelayText").value = `${items.textDelay} seconds`;
-        }
-
-        if (items.elementsDelay == 1) {
-            document.getElementById("elementsDelayText").value = `${items.elementsDelay} second`;
-        } else if (items.elementsDelay != 1) {
-            document.getElementById("elementsDelayText").value = `${items.elementsDelay} seconds`;
-        }
+        document.getElementById("imagesDelayText").value = (items.imagesDelay == 1) ? `${items.imagesDelay} second` : `${items.imagesDelay} seconds`;
+        document.getElementById("textDelayText").value = (items.textDelay == 1) ? `${items.textDelay} second` : `${items.textDelay} seconds`;
+        document.getElementById("elementsDelayText").value = (items.elementsDelay == 1) ? `${items.elementsDelay} second` : `${items.elementsDelay} seconds`;
 
         html.setAttribute("data-theme", items.currentTheme);
         document.documentElement.style.setProperty("--primaryColor", convertHexToRGB(items.primaryColor));
@@ -342,5 +315,6 @@ function get() {
         document.getElementById("wordBreakCheck").checked = items.wordBreakCheck;
         document.getElementById("wordSpacingCheck").checked = items.wordSpacingCheck;
         document.getElementById("verticalAlignCheck").checked = items.verticalAlignCheck;
+        document.getElementById("randomSelectionCheck").checked = items.randomSelectionCheck;
     });
 }
