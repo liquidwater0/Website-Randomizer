@@ -1,7 +1,7 @@
 chrome.storage.sync.get({randomElementsCheck: false, randomIconCheck: true}, function(items) {
   if (items.randomElementsCheck == true && items.randomIconCheck == true) {
     document.head.insertAdjacentHTML("beforeend", `<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">`);
-    document.head.insertAdjacentHTML("beforeend", `<style>.material-icons {font-family: 'Material Icons' !important;}</style>`);
+    document.head.insertAdjacentHTML("beforeend", `<style>.material-icons { font-family: 'Material Icons' !important }</style>`);
   }
 });
 
@@ -12,11 +12,11 @@ let elementsPause = true;
 document.addEventListener("keydown", function(event) {
   const key = event.keyCode;
 
-  if (event.shiftKey && key == 73) { imagesPause = !imagesPause }; //Shift + I (73)
+  if (event.shiftKey && key == 73) imagesPause = !imagesPause; //Shift + I (73)
 
-  if (event.shiftKey && key == 84) { textPause = !textPause }; //Shift + T (84)
+  if (event.shiftKey && key == 84) textPause = !textPause; //Shift + T (84)
 
-  if (event.shiftKey && key == 69) { elementsPause = !elementsPause }; //Shift + E (69)
+  if (event.shiftKey && key == 69) elementsPause = !elementsPause; //Shift + E (69)
 }); 
 
 function getRandomNumber(min, max) {
@@ -86,7 +86,8 @@ function randomImages() {
 chrome.storage.sync.get({randomTextCheck: false, singleWordsCheck: false, textDelay: 1, changeTitleCheck: true, textAutoCheck: true, textFieldCheck: true, 
 textFieldPlaceCheck: true, textCheck: true, fontFamilyCheck: true, fontWeightCheck: true, fontStyleCheck: true, textAlignCheck:true, textDecorCheck: true, 
 fontSizeCheck: true, colorCheck: true, textTransformCheck: true, letterSpacingCheck: true, lineHeightCheck: true, textShadowCheck: true, textIndentCheck: true, 
-writingModeCheck: true, whiteSpaceCheck: true, wordBreakCheck: true, wordSpacingCheck: true, directionCheck: true, verticalAlignCheck: true}, function(items) {
+writingModeCheck: true, whiteSpaceCheck: true, wordBreakCheck: true, wordSpacingCheck: true, directionCheck: true, verticalAlignCheck: true, randomSelectionCheck: true
+}, function(items) {
 
 if (items.randomTextCheck == true && items.textAutoCheck == true) { 
 
@@ -228,6 +229,21 @@ function randomText() {
       if (items.verticalAlignCheck == true) {
         getElement(elements[e], singleElement, "text").style.verticalAlign = verticalAlignValues[Math.floor(Math.random() * verticalAlignValues.length)];
       }
+    }
+
+    if (items.randomSelectionCheck == true) {
+      const selectionStyle = document.querySelector("[data-extension='websiteRandomizer']#selectionStyle");
+
+      if (selectionStyle) selectionStyle.remove();
+
+      document.head.insertAdjacentHTML("beforeend", `
+        <style data-extension="websiteRandomizer" id="selectionStyle">
+          ::selection {
+            background-color: rgb(${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}) !important;
+            color: rgb(${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}) !important;
+          }
+        </style>
+      `);
     }
   }
 }
