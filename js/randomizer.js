@@ -136,14 +136,14 @@ function randomText() {
   }
 
   if (textPause == false) {  
+    if (items.changeTitleCheck == true) {
+      document.title = getRandomText();
+    } 
+    
     for (let te = 0; te < textElements.length; te++) {
       if (items.textCheck == true && getElement(textElements[te], singleTextElement, "text").hasChildNodes()) {
         getElement(textElements[te], singleTextElement, "text").childNodes[0].nodeValue = getRandomText();
       }
-
-      if (items.changeTitleCheck == true) {
-        document.title = getRandomText();
-      } 
 
       if (items.writingModeCheck == true) {
         getElement(textElements[te], singleTextElement, "text").style.writingMode = writingModes[Math.floor(Math.random() * writingModes.length)];
