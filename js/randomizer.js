@@ -5,18 +5,18 @@ chrome.storage.sync.get({randomElementsCheck: false, randomIconCheck: true}, fun
   }
 });
 
-let imagesPause = true;
-let textPause = true;
-let elementsPause = true;
+let imagesPaused = true;
+let textPaused = true;
+let elementsPaused = true;
 
 document.addEventListener("keydown", function(event) {
   const key = event.keyCode;
 
-  if (event.shiftKey && key == 73) imagesPause = !imagesPause; //Shift + I (73)
+  if (event.shiftKey && key == 73) imagesPaused = !imagesPaused; //Shift + I (73)
 
-  if (event.shiftKey && key == 84) textPause = !textPause; //Shift + T (84)
+  if (event.shiftKey && key == 84) textPaused = !textPaused; //Shift + T (84)
 
-  if (event.shiftKey && key == 69) elementsPause = !elementsPause; //Shift + E (69)
+  if (event.shiftKey && key == 69) elementsPaused = !elementsPaused; //Shift + E (69)
 }); 
 
 function getRandomNumber(min, max) {
@@ -30,9 +30,9 @@ chrome.storage.sync.get({randomImagesCheck: false, imagesDelay: 1, imagesAutoChe
 if (items.randomImagesCheck == true && items.imagesAutoCheck == true) {
 
   setTimeout(function() {
-    imagesPause = false;
+    imagesPaused = false;
     randomImages();
-    imagesPause = true;
+    imagesPaused = true;
     setInterval(randomImages, items.imagesDelay * 1000);
   }, items.imagesDelay * 1000);
 
@@ -44,20 +44,20 @@ function randomImages() {
   const images = document.querySelectorAll("img");
   const singleImage = images[Math.floor(Math.random() * images.length)];
 
-  if (imagesPause == false) {
-    for (let img = 0; img < images.length; img++) {
-      if (items.imageCheck == true) {
-        getElement(images[img], singleImage, items.imagesEveryCheck).src = images[Math.floor(Math.random() * images.length)].src;
-        getElement(images[img], singleImage, items.imagesEveryCheck).srcset = "";
-      }
+  if (imagesPaused) return;
 
-      if (items.imageWidthCheck == true) {
-        getElement(images[img], singleImage, items.imagesEveryCheck).width = getRandomNumber(0, 500);
-      }
+  for (let img = 0; img < images.length; img++) {
+    if (items.imageCheck == true) {
+      getElement(images[img], singleImage, items.imagesEveryCheck).src = images[Math.floor(Math.random() * images.length)].src;
+      getElement(images[img], singleImage, items.imagesEveryCheck).srcset = "";
+    }
 
-      if (items.imageHeightCheck == true) {
-        getElement(images[img], singleImage, items.imagesEveryCheck).height = getRandomNumber(0, 500);
-      }
+    if (items.imageWidthCheck == true) {
+      getElement(images[img], singleImage, items.imagesEveryCheck).width = getRandomNumber(0, 500);
+    }
+
+    if (items.imageHeightCheck == true) {
+      getElement(images[img], singleImage, items.imagesEveryCheck).height = getRandomNumber(0, 500);
     }
   }
 }
@@ -72,9 +72,9 @@ textEveryCheck: true}, function(items) {
 if (items.randomTextCheck == true && items.textAutoCheck == true) { 
 
   setTimeout(function() {
-    textPause = false;
+    textPaused = false;
     randomText();
-    textPause = true;
+    textPaused = true;
     setInterval(randomText, items.textDelay * 1000);
   }, items.textDelay * 1000);
 
@@ -115,116 +115,116 @@ function randomText() {
     }
   }
 
-  if (textPause == false) {  
-    if (items.changeTitleCheck == true) {
-      document.title = getRandomText();
-    } 
-    
-    for (let te = 0; te < textElements.length; te++) {
-      if (items.textCheck == true && getElement(textElements[te], singleTextElement, items.textEveryCheck).hasChildNodes()) {
-        getElement(textElements[te], singleTextElement, items.textEveryCheck).childNodes[0].nodeValue = getRandomText();
-      }
-
-      if (items.writingModeCheck == true) {
-        getElement(textElements[te], singleTextElement, items.textEveryCheck).style.writingMode = writingModes[Math.floor(Math.random() * writingModes.length)];
-      }
-    }
-    
-    for (let i = 0; i < inputs.length; i++) {
-      if (items.textFieldCheck == true) {
-        getElement(inputs[i], singleInput, items.textEveryCheck).value = getRandomText();
-      }
-
-      if (items.textFieldPlaceCheck == true) {
-        getElement(inputs[i], singleInput, items.textEveryCheck).placeholder = getRandomText();
-      }
-    } 
-
-    for (let e = 0; e < elements.length; e++) {
-      if (items.directionCheck == true) {
-        getElement(elements[e], singleElement, items.textEveryCheck).style.direction = directions[Math.floor(Math.random() * directions.length)];
-      }
-
-      if (items.fontFamilyCheck == true) {
-        getElement(elements[e], singleElement, items.textEveryCheck).style.fontFamily = fonts[Math.floor(Math.random() * fonts.length)];
-      }
-
-      if (items.fontWeightCheck == true) {
-        getElement(elements[e], singleElement, items.textEveryCheck).style.fontWeight = getRandomNumber(100, 900);
-      }
-
-      if (items.fontStyleCheck == true) {
-        getElement(elements[e], singleElement, items.textEveryCheck).style.fontStyle = fontStyles[Math.floor(Math.random() * fontStyles.length)];
-      }
-
-      if (items.textAlignCheck == true) {
-        getElement(elements[e], singleElement, items.textEveryCheck).style.textAlign = textAlign[Math.floor(Math.random() * textAlign.length)];
-      }
-
-      if (items.textDecorCheck == true) {
-        getElement(elements[e], singleElement, items.textEveryCheck).style.textDecoration = textDecor[Math.floor(Math.random() * textDecor.length)];
-      }
-
-      if (items.fontSizeCheck == true) {
-        getElement(elements[e], singleElement, items.textEveryCheck).style.fontSize = `${getRandomNumber(1, 50)}px`;
-      }
-
-      if (items.colorCheck == true) {
-        getElement(elements[e], singleElement, items.textEveryCheck).style.color = `rgb(${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)})`;
-      }
-
-      if (items.textTransformCheck == true) {
-        getElement(elements[e], singleElement, items.textEveryCheck).style.textTransform = textTransform[Math.floor(Math.random() * textTransform.length)];
-      }
-
-      if (items.letterSpacingCheck == true) {
-        getElement(elements[e], singleElement, items.textEveryCheck).style.letterSpacing = `${getRandomNumber(0, 25)}px`;
-      }
-
-      if (items.lineHeightCheck == true) {
-        getElement(elements[e], singleElement, items.textEveryCheck).style.lineHeight = `${getRandomNumber(0, 100)}%`;
-      }
-
-      if (items.textShadowCheck == true) {
-        getElement(elements[e], singleElement, items.textEveryCheck).style.textShadow = `${getRandomNumber(0, 10)}px ${getRandomNumber(0, 10)}px ${getRandomNumber(0, 10)}px 
-        rgb(${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)})`;
-      }
-
-      if (items.textIndentCheck == true) {
-        getElement(elements[e], singleElement, items.textEveryCheck).style.textIndent = `${getRandomNumber(0, 100)}%`;
-      }
-
-      if (items.whiteSpaceCheck == true) {
-        getElement(elements[e], singleElement, items.textEveryCheck).style.whiteSpace = whiteSpaceValues[Math.floor(Math.random() * whiteSpaceValues.length)];
-      }
-
-      if (items.wordBreakCheck == true) {
-        getElement(elements[e], singleElement, items.textEveryCheck).style.wordBreak = wordBreakValues[Math.floor(Math.random() * wordBreakValues.length)];
-      }
-
-      if (items.wordSpacingCheck == true) {
-        getElement(elements[e], singleElement, items.textEveryCheck).style.wordSpacing = `${getRandomNumber(1, 50)}px`;
-      }
-
-      if (items.verticalAlignCheck == true) {
-        getElement(elements[e], singleElement, items.textEveryCheck).style.verticalAlign = verticalAlignValues[Math.floor(Math.random() * verticalAlignValues.length)];
-      }
+  if (textPaused) return;
+ 
+  if (items.changeTitleCheck == true) {
+    document.title = getRandomText();
+  } 
+  
+  for (let te = 0; te < textElements.length; te++) {
+    if (items.textCheck == true && getElement(textElements[te], singleTextElement, items.textEveryCheck).hasChildNodes()) {
+      getElement(textElements[te], singleTextElement, items.textEveryCheck).childNodes[0].nodeValue = getRandomText();
     }
 
-    if (items.randomSelectionCheck == true) {
-      const selectionStyle = document.querySelector("[data-extension='websiteRandomizer']#selectionStyle");
-
-      if (selectionStyle) selectionStyle.remove();
-
-      document.head.insertAdjacentHTML("beforeend", `
-        <style data-extension="websiteRandomizer" id="selectionStyle">
-          ::selection {
-            background-color: rgb(${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}) !important;
-            color: rgb(${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}) !important;
-          }
-        </style>
-      `);
+    if (items.writingModeCheck == true) {
+      getElement(textElements[te], singleTextElement, items.textEveryCheck).style.writingMode = writingModes[Math.floor(Math.random() * writingModes.length)];
     }
+  }
+  
+  for (let i = 0; i < inputs.length; i++) {
+    if (items.textFieldCheck == true) {
+      getElement(inputs[i], singleInput, items.textEveryCheck).value = getRandomText();
+    }
+
+    if (items.textFieldPlaceCheck == true) {
+      getElement(inputs[i], singleInput, items.textEveryCheck).placeholder = getRandomText();
+    }
+  } 
+
+  for (let e = 0; e < elements.length; e++) {
+    if (items.directionCheck == true) {
+      getElement(elements[e], singleElement, items.textEveryCheck).style.direction = directions[Math.floor(Math.random() * directions.length)];
+    }
+
+    if (items.fontFamilyCheck == true) {
+      getElement(elements[e], singleElement, items.textEveryCheck).style.fontFamily = fonts[Math.floor(Math.random() * fonts.length)];
+    }
+
+    if (items.fontWeightCheck == true) {
+      getElement(elements[e], singleElement, items.textEveryCheck).style.fontWeight = getRandomNumber(100, 900);
+    }
+
+    if (items.fontStyleCheck == true) {
+      getElement(elements[e], singleElement, items.textEveryCheck).style.fontStyle = fontStyles[Math.floor(Math.random() * fontStyles.length)];
+    }
+
+    if (items.textAlignCheck == true) {
+      getElement(elements[e], singleElement, items.textEveryCheck).style.textAlign = textAlign[Math.floor(Math.random() * textAlign.length)];
+    }
+
+    if (items.textDecorCheck == true) {
+      getElement(elements[e], singleElement, items.textEveryCheck).style.textDecoration = textDecor[Math.floor(Math.random() * textDecor.length)];
+    }
+
+    if (items.fontSizeCheck == true) {
+      getElement(elements[e], singleElement, items.textEveryCheck).style.fontSize = `${getRandomNumber(1, 50)}px`;
+    }
+
+    if (items.colorCheck == true) {
+      getElement(elements[e], singleElement, items.textEveryCheck).style.color = `rgb(${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)})`;
+    }
+
+    if (items.textTransformCheck == true) {
+      getElement(elements[e], singleElement, items.textEveryCheck).style.textTransform = textTransform[Math.floor(Math.random() * textTransform.length)];
+    }
+
+    if (items.letterSpacingCheck == true) {
+      getElement(elements[e], singleElement, items.textEveryCheck).style.letterSpacing = `${getRandomNumber(0, 25)}px`;
+    }
+
+    if (items.lineHeightCheck == true) {
+      getElement(elements[e], singleElement, items.textEveryCheck).style.lineHeight = `${getRandomNumber(0, 100)}%`;
+    }
+
+    if (items.textShadowCheck == true) {
+      getElement(elements[e], singleElement, items.textEveryCheck).style.textShadow = `${getRandomNumber(0, 10)}px ${getRandomNumber(0, 10)}px ${getRandomNumber(0, 10)}px 
+      rgb(${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)})`;
+    }
+
+    if (items.textIndentCheck == true) {
+      getElement(elements[e], singleElement, items.textEveryCheck).style.textIndent = `${getRandomNumber(0, 100)}%`;
+    }
+
+    if (items.whiteSpaceCheck == true) {
+      getElement(elements[e], singleElement, items.textEveryCheck).style.whiteSpace = whiteSpaceValues[Math.floor(Math.random() * whiteSpaceValues.length)];
+    }
+
+    if (items.wordBreakCheck == true) {
+      getElement(elements[e], singleElement, items.textEveryCheck).style.wordBreak = wordBreakValues[Math.floor(Math.random() * wordBreakValues.length)];
+    }
+
+    if (items.wordSpacingCheck == true) {
+      getElement(elements[e], singleElement, items.textEveryCheck).style.wordSpacing = `${getRandomNumber(1, 50)}px`;
+    }
+
+    if (items.verticalAlignCheck == true) {
+      getElement(elements[e], singleElement, items.textEveryCheck).style.verticalAlign = verticalAlignValues[Math.floor(Math.random() * verticalAlignValues.length)];
+    }
+  }
+
+  if (items.randomSelectionCheck == true) {
+    const selectionStyle = document.querySelector("[data-extension='websiteRandomizer']#selectionStyle");
+
+    if (selectionStyle) selectionStyle.remove();
+
+    document.head.insertAdjacentHTML("beforeend", `
+      <style data-extension="websiteRandomizer" id="selectionStyle">
+        ::selection {
+          background-color: rgb(${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}) !important;
+          color: rgb(${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}) !important;
+        }
+      </style>
+    `);
   }
 }
 });
@@ -238,9 +238,9 @@ randomTypeCheck: true, randomStartCheck: true, randomMaxLengthCheck: true, rando
 if (items.randomElementsCheck == true && items.elementAutoCheck == true) {
 
   setTimeout(function() { 
-    elementsPause = false; 
+    elementsPaused = false; 
     randomElements(); 
-    elementsPause = true;
+    elementsPaused = true;
     setInterval(randomElements, items.elementsDelay * 1000);
   }, items.elementsDelay * 1000);
 
@@ -304,164 +304,164 @@ function randomElements() {
   "streetview", "strikethrough_s", "style", "subdirectory_arrow_left", "subdirectory_arrow_right", "subject", "subscriptions", "subtitle", "subway", "supervisor_account", "surround_sound", "swap_calls", "swap_horiz", "swap_vert", "swap_vertical_circle", "switch_camera", "switch_video", "sync", "sync_disabled", "sync_problem", "system_update", "system_update_alt", "tab", "tab_unselected", "tablet", "tablet_android", "tablet_mac", "tag_faces", "tap_and_play", "terrain", "text_fields", "text_format", "textsms", "texture", "theaters", "thumb_down", "thumb_up", "thumbs_up_down", "time_to_leave", "timelapse", "timeline", "timer", "timer_10", "timer_3", "timer_off", "title", "toc", "today", "toll", "tonality", "touch_app", "toys", "track_changes", "traffic", "train", "tram", "transfer_within_a_station", "transform", "translate", "trending_down", "trending_flat", "trending_up", "tune", "turned_in", "turned_in_not", "tv", "unarchive", "undo", "unfold_less", "unfold_more", "update", "usb", "verified_user", "vertical_align_bottom", "vertical_align_center", "vertical_align_top", "vibration", "video_call", "video_label", "video_library", "videocam", 
   "videocam_off", "videogame_asset", "view_agenda", "view_array", "view_carousel", "view_column", "view_comfy", "view_compact", "view_day", "view_headline", "view_list", "view_module", "view_quilt", "view_stream", "view_week", "vignette", "visibility", "visibility_off", "voice_chat", "voicemail", "volume_down", "volume_mute", "volume_off", "volume_up", "vpn_key", "vpn_lock", "wallpaper", "warning", "watch", "watch_later", "wb_auto", "wb_cloudy", "wb_incandescent", "wb_iridescent", "wb_sunny", "wc", "web", "web_asset", "weekend", "whatshot", "widgets", "wifi", "wifi_lock", "wifi_tethering", "work", "wrap_text", "youtube_searched_for", "zoom_in", "zoom_out", "zoom_out_map"];
 
-  if (elementsPause == false) {
-    icons.forEach(function(icon) { icon.remove() });
+  if (elementsPaused) return;
+
+  icons.forEach(function(icon) { icon.remove() });
     
-    for (let e = 0; e < elements.length; e++) {
-      if (items.borderCheck == true) {
-        getElement(elements[e], singleElement, items.elementsEveryCheck).style.border = `${borders[Math.floor(Math.random() * borders.length)]} rgb(${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)})
-        ${getRandomNumber(0, 25)}px`;
-      }
-
-      if (items.outlineCheck == true) {
-        getElement(elements[e], singleElement, items.elementsEveryCheck).style.outline = `${borders[Math.floor(Math.random() * borders.length)]} rgb(${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)})
-        ${getRandomNumber(0, 25)}px`;
-      }
-
-      if (items.rotationCheck == true) {
-        getElement(elements[e], singleElement, items.elementsEveryCheck).style.transform = `rotate(${getRandomNumber(-360, 360)}deg)`;
-      }
-
-      if (items.cursorCheck == true) {
-        getElement(elements[e], singleElement, items.elementsEveryCheck).style.cursor = cursors[Math.floor(Math.random() * cursors.length)];
-      }
-
-      if (items.elementBackgroundCheck == true) {
-        getElement(elements[e], singleElement, items.elementsEveryCheck).style.backgroundColor = `rgb(${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)})`;
-      }
-
-      if (items.borderRadiusCheck == true) {
-        getElement(elements[e], singleElement, items.elementsEveryCheck).style.borderRadius = `${getRandomNumber(0, 100)}px ${getRandomNumber(0, 100)}px ${getRandomNumber(0, 100)}px ${getRandomNumber(0, 100)}px`;
-      }
-
-      if (items.paddingCheck == true) {
-        getElement(elements[e], singleElement, items.elementsEveryCheck).style.padding = `${getRandomNumber(0, 50)}px ${getRandomNumber(0, 50)}px ${getRandomNumber(0, 50)}px ${getRandomNumber(0, 50)}px`;
-      }
-
-      if (items.opacityCheck == true) {
-        getElement(elements[e], singleElement, items.elementsEveryCheck).style.opacity = Math.random();
-      }
-
-      if (items.positionCheck == true) {
-        getElement(elements[e], singleElement, items.elementsEveryCheck).style.position = positions[Math.floor(Math.random() * positions.length)];
-      }
-
-      if (items.boxShadowCheck == true) {
-        getElement(elements[e], singleElement, items.elementsEveryCheck).style.boxShadow = `${getRandomNumber(0, 100)}px ${getRandomNumber(0, 100)}px ${getRandomNumber(0, 100)}px ${getRandomNumber(0, 100)}px 
-        rgb(${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}) ${boxShadow[Math.floor(Math.random() * boxShadow.length)]}`;
-      }
-
-      if (items.floatCheck == true) {
-        getElement(elements[e], singleElement, items.elementsEveryCheck).style.float = floats[Math.floor(Math.random() * floats.length)];
-      }
-
-      if (items.widthCheck == true) {
-        getElement(elements[e], singleElement, items.elementsEveryCheck).style.width = `${getRandomNumber(0, 100)}%`;
-      }
-
-      if (items.heightCheck == true) {
-        getElement(elements[e], singleElement, items.elementsEveryCheck).style.height = `${getRandomNumber(0, 100)}%`;
-      }
-
-      if (items.visibilityCheck == true) {
-        getElement(elements[e], singleElement, items.elementsEveryCheck).style.visibility = visibility[Math.floor(Math.random() * visibility.length)];
-      }
-
-      if (items.displayCheck == true) {
-        getElement(elements[e], singleElement, items.elementsEveryCheck).style.display = displays[Math.floor(Math.random() * displays.length)];
-      }
-
-      if (items.overflowCheck == true) {
-        getElement(elements[e], singleElement, items.elementsEveryCheck).style.overflow = overflow[Math.floor(Math.random() * overflow.length)];
-      }
-      
-      if (items.zIndexCheck == true) {
-        getElement(elements[e], singleElement, items.elementsEveryCheck).style.zIndex = getRandomNumber(-1, 5);
-      }
-
-      if (items.translateCheck == true) {
-        getElement(elements[e], singleElement, items.elementsEveryCheck).style.transform = `translate(${getRandomNumber(0, 200)}px, ${getRandomNumber(0, 200)}px)`;
-      }
-
-      if (items.randomContentEditCheck == true) {
-        getElement(elements[e], singleElement, items.elementsEveryCheck).contentEditable = trueFalse[Math.floor(Math.random() * trueFalse.length)];
-      }
-
-      if (items.randomIDCheck == true) {
-        getElement(elements[e], singleElement, items.elementsEveryCheck).id = elements[Math.floor(Math.random() * elements.length)].id;
-      }
-
-      if (items.randomClassCheck == true) {
-        getElement(elements[e], singleElement, items.elementsEveryCheck).classList = elements[Math.floor(Math.random() * elements.length)].classList;
-      } 
-
-      if (items.randomDraggableCheck == true) {
-        getElement(elements[e], singleElement, items.elementsEveryCheck).draggable = trueFalse[Math.floor(Math.random() * trueFalse.length)];
-      }
-
-      if (items.randomTitleCheck == true) { 
-        getElement(elements[e], singleElement, items.elementsEveryCheck).title = elements[Math.floor(Math.random() * elements.length)].textContent;
-      } 
-
-      if (items.resizeCheck == true) {
-        getElement(elements[e], singleElement, items.elementsEveryCheck).style.resize = resizeValues[Math.floor(Math.random() * resizeValues.length)];
-      }
-
-      if (items.backgroundImageCheck == true && images[Math.floor(Math.random() * images.length)]) {
-        getElement(elements[e], singleElement, items.elementsEveryCheck).style.backgroundImage = `url(${images[Math.floor(Math.random() * images.length)].src})`;
-      }
-
-      if (items.randomIconCheck == true) {
-        const iconElement = `<i class='material-icons'>${googleIcons[Math.floor(Math.random() * googleIcons.length)]}</i>`;
-
-        getElement(elements[e], singleElement, items.elementsEveryCheck).insertAdjacentHTML(insertPositions[Math.floor(Math.random() * insertPositions.length)], iconElement);
-      }
-
-      if (items.randomTabIndexCheck == true) {
-        getElement(elements[e], singleElement, items.elementsEveryCheck).tabIndex = getRandomNumber(0, elements.length);
-      }
+  for (let e = 0; e < elements.length; e++) {
+    if (items.borderCheck == true) {
+      getElement(elements[e], singleElement, items.elementsEveryCheck).style.border = `${borders[Math.floor(Math.random() * borders.length)]} rgb(${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)})
+      ${getRandomNumber(0, 25)}px`;
     }
 
-    for (let o = 0; o < ol.length; o++) {
-      if (items.randomStartCheck == true) {
-        getElement(ol[o], singleOl, items.elementsEveryCheck).start = getRandomNumber(0, li.length);
-      }
-
-      if (items.randomReversedCheck == true) {
-        if (getElement(ol[o], singleOl, items.elementsEveryCheck).hasAttribute("reversed")) {
-          getElement(ol[o], singleOl, items.elementsEveryCheck).removeAttribute("reversed");
-        } else {
-          getElement(ol[o], singleOl, items.elementsEveryCheck).setAttributeNode(document.createAttribute("reversed"));
-        }
-      }
+    if (items.outlineCheck == true) {
+      getElement(elements[e], singleElement, items.elementsEveryCheck).style.outline = `${borders[Math.floor(Math.random() * borders.length)]} rgb(${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)})
+      ${getRandomNumber(0, 25)}px`;
     }
 
-    for (let i = 0; i < inputs.length; i++) {
-      if (items.randomMaxLengthCheck == true) {
-        getElement(inputs[i], singleInput, items.elementsEveryCheck).maxLength = getRandomNumber(0, 100);
-      }
+    if (items.rotationCheck == true) {
+      getElement(elements[e], singleElement, items.elementsEveryCheck).style.transform = `rotate(${getRandomNumber(-360, 360)}deg)`;
     }
 
-    for (let te = 0; te < typeElements.length; te++) {
-      if (items.randomTypeCheck == true) {
-        getElement(typeElements[te], singleTypeElement, items.elementsEveryCheck).type = types[Math.floor(Math.random() * types.length)];
-      }
+    if (items.cursorCheck == true) {
+      getElement(elements[e], singleElement, items.elementsEveryCheck).style.cursor = cursors[Math.floor(Math.random() * cursors.length)];
     }
 
-    if (items.randomDisabledCheck == true && randomDisabledElement) {
-      if (randomDisabledElement.hasAttribute("disabled")) {
-        randomDisabledElement.removeAttribute("disabled");
+    if (items.elementBackgroundCheck == true) {
+      getElement(elements[e], singleElement, items.elementsEveryCheck).style.backgroundColor = `rgb(${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)})`;
+    }
+
+    if (items.borderRadiusCheck == true) {
+      getElement(elements[e], singleElement, items.elementsEveryCheck).style.borderRadius = `${getRandomNumber(0, 100)}px ${getRandomNumber(0, 100)}px ${getRandomNumber(0, 100)}px ${getRandomNumber(0, 100)}px`;
+    }
+
+    if (items.paddingCheck == true) {
+      getElement(elements[e], singleElement, items.elementsEveryCheck).style.padding = `${getRandomNumber(0, 50)}px ${getRandomNumber(0, 50)}px ${getRandomNumber(0, 50)}px ${getRandomNumber(0, 50)}px`;
+    }
+
+    if (items.opacityCheck == true) {
+      getElement(elements[e], singleElement, items.elementsEveryCheck).style.opacity = Math.random();
+    }
+
+    if (items.positionCheck == true) {
+      getElement(elements[e], singleElement, items.elementsEveryCheck).style.position = positions[Math.floor(Math.random() * positions.length)];
+    }
+
+    if (items.boxShadowCheck == true) {
+      getElement(elements[e], singleElement, items.elementsEveryCheck).style.boxShadow = `${getRandomNumber(0, 100)}px ${getRandomNumber(0, 100)}px ${getRandomNumber(0, 100)}px ${getRandomNumber(0, 100)}px 
+      rgb(${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}) ${boxShadow[Math.floor(Math.random() * boxShadow.length)]}`;
+    }
+
+    if (items.floatCheck == true) {
+      getElement(elements[e], singleElement, items.elementsEveryCheck).style.float = floats[Math.floor(Math.random() * floats.length)];
+    }
+
+    if (items.widthCheck == true) {
+      getElement(elements[e], singleElement, items.elementsEveryCheck).style.width = `${getRandomNumber(0, 100)}%`;
+    }
+
+    if (items.heightCheck == true) {
+      getElement(elements[e], singleElement, items.elementsEveryCheck).style.height = `${getRandomNumber(0, 100)}%`;
+    }
+
+    if (items.visibilityCheck == true) {
+      getElement(elements[e], singleElement, items.elementsEveryCheck).style.visibility = visibility[Math.floor(Math.random() * visibility.length)];
+    }
+
+    if (items.displayCheck == true) {
+      getElement(elements[e], singleElement, items.elementsEveryCheck).style.display = displays[Math.floor(Math.random() * displays.length)];
+    }
+
+    if (items.overflowCheck == true) {
+      getElement(elements[e], singleElement, items.elementsEveryCheck).style.overflow = overflow[Math.floor(Math.random() * overflow.length)];
+    }
+    
+    if (items.zIndexCheck == true) {
+      getElement(elements[e], singleElement, items.elementsEveryCheck).style.zIndex = getRandomNumber(-1, 5);
+    }
+
+    if (items.translateCheck == true) {
+      getElement(elements[e], singleElement, items.elementsEveryCheck).style.transform = `translate(${getRandomNumber(0, 200)}px, ${getRandomNumber(0, 200)}px)`;
+    }
+
+    if (items.randomContentEditCheck == true) {
+      getElement(elements[e], singleElement, items.elementsEveryCheck).contentEditable = trueFalse[Math.floor(Math.random() * trueFalse.length)];
+    }
+
+    if (items.randomIDCheck == true) {
+      getElement(elements[e], singleElement, items.elementsEveryCheck).id = elements[Math.floor(Math.random() * elements.length)].id;
+    }
+
+    if (items.randomClassCheck == true) {
+      getElement(elements[e], singleElement, items.elementsEveryCheck).classList = elements[Math.floor(Math.random() * elements.length)].classList;
+    } 
+
+    if (items.randomDraggableCheck == true) {
+      getElement(elements[e], singleElement, items.elementsEveryCheck).draggable = trueFalse[Math.floor(Math.random() * trueFalse.length)];
+    }
+
+    if (items.randomTitleCheck == true) { 
+      getElement(elements[e], singleElement, items.elementsEveryCheck).title = elements[Math.floor(Math.random() * elements.length)].textContent;
+    } 
+
+    if (items.resizeCheck == true) {
+      getElement(elements[e], singleElement, items.elementsEveryCheck).style.resize = resizeValues[Math.floor(Math.random() * resizeValues.length)];
+    }
+
+    if (items.backgroundImageCheck == true && images[Math.floor(Math.random() * images.length)]) {
+      getElement(elements[e], singleElement, items.elementsEveryCheck).style.backgroundImage = `url(${images[Math.floor(Math.random() * images.length)].src})`;
+    }
+
+    if (items.randomIconCheck == true) {
+      const iconElement = `<i class='material-icons'>${googleIcons[Math.floor(Math.random() * googleIcons.length)]}</i>`;
+
+      getElement(elements[e], singleElement, items.elementsEveryCheck).insertAdjacentHTML(insertPositions[Math.floor(Math.random() * insertPositions.length)], iconElement);
+    }
+
+    if (items.randomTabIndexCheck == true) {
+      getElement(elements[e], singleElement, items.elementsEveryCheck).tabIndex = getRandomNumber(0, elements.length);
+    }
+  }
+
+  for (let o = 0; o < ol.length; o++) {
+    if (items.randomStartCheck == true) {
+      getElement(ol[o], singleOl, items.elementsEveryCheck).start = getRandomNumber(0, li.length);
+    }
+
+    if (items.randomReversedCheck == true) {
+      if (getElement(ol[o], singleOl, items.elementsEveryCheck).hasAttribute("reversed")) {
+        getElement(ol[o], singleOl, items.elementsEveryCheck).removeAttribute("reversed");
       } else {
-        randomDisabledElement.setAttributeNode(document.createAttribute("disabled"));
+        getElement(ol[o], singleOl, items.elementsEveryCheck).setAttributeNode(document.createAttribute("reversed"));
       }
     }
+  }
 
-    if (items.randomSelectedCheck == true && randomOption) {
-      if (randomOption.hasAttribute("selected")) {
-        randomOption.removeAttribute("selected");
-      }
-      randomOption.setAttributeNode(document.createAttribute("selected"));
+  for (let i = 0; i < inputs.length; i++) {
+    if (items.randomMaxLengthCheck == true) {
+      getElement(inputs[i], singleInput, items.elementsEveryCheck).maxLength = getRandomNumber(0, 100);
     }
+  }
+
+  for (let te = 0; te < typeElements.length; te++) {
+    if (items.randomTypeCheck == true) {
+      getElement(typeElements[te], singleTypeElement, items.elementsEveryCheck).type = types[Math.floor(Math.random() * types.length)];
+    }
+  }
+
+  if (items.randomDisabledCheck == true && randomDisabledElement) {
+    if (randomDisabledElement.hasAttribute("disabled")) {
+      randomDisabledElement.removeAttribute("disabled");
+    } else {
+      randomDisabledElement.setAttributeNode(document.createAttribute("disabled"));
+    }
+  }
+
+  if (items.randomSelectedCheck == true && randomOption) {
+    if (randomOption.hasAttribute("selected")) {
+      randomOption.removeAttribute("selected");
+    }
+    randomOption.setAttributeNode(document.createAttribute("selected"));
   }
 }
 });
