@@ -10,12 +10,6 @@ document.addEventListener("keydown", function(event) {
   if (event.shiftKey && key == 84) textPaused = !textPaused; //Shift + T (84)
 
   if (event.shiftKey && key == 69) elementsPaused = !elementsPaused; //Shift + E (69)
-
-  console.log(`
-  Image Paused: ${imagesPaused}
-  Text Paused: ${textPaused}
-  Element Paused: ${elementsPaused}
-`);
 }); 
 
 function getRandomNumber(min, max) {
