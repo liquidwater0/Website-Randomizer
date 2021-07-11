@@ -10,6 +10,12 @@ document.addEventListener("keydown", function(event) {
   if (event.shiftKey && key == 84) textPaused = !textPaused; //Shift + T (84)
 
   if (event.shiftKey && key == 69) elementsPaused = !elementsPaused; //Shift + E (69)
+
+  console.log(`
+  Image Paused: ${imagesPaused}
+  Text Paused: ${textPaused}
+  Element Paused: ${elementsPaused}
+`);
 }); 
 
 function getRandomNumber(min, max) {
@@ -20,17 +26,16 @@ function getElement(every, single, everyChecked) { return everyChecked ? every :
 
 chrome.storage.sync.get({randomImagesCheck: false, imagesDelay: 1, imagesAutoCheck: true, imageCheck: true, imageWidthCheck: true, imageHeightCheck: true, imagesEveryCheck: true}, function(items) {
 
-if (items.randomImagesCheck == true && items.imagesAutoCheck == true) {
-
+if (items.randomImagesCheck == true) {
   setTimeout(function() {
-    imagesPaused = false;
-    randomImages();
-    imagesPaused = true;
+    if (items.imagesAutoCheck == true) {
+      imagesPaused = false;
+      randomImages();
+      imagesPaused = true;
+    }
+
     setInterval(randomImages, items.imagesDelay * 1000);
   }, items.imagesDelay * 1000);
-
-} else if (items.randomImagesCheck == true && items.imagesAutoCheck == false) {
-  setInterval(randomImages, items.imagesDelay * 1000);
 }
 
 function randomImages() {
@@ -60,17 +65,16 @@ fontSizeCheck: true, colorCheck: true, textTransformCheck: true, letterSpacingCh
 writingModeCheck: true, whiteSpaceCheck: true, wordBreakCheck: true, wordSpacingCheck: true, directionCheck: true, verticalAlignCheck: true, randomSelectionCheck: true,
 textEveryCheck: true}, function(items) {
 
-if (items.randomTextCheck == true && items.textAutoCheck == true) { 
-
+if (items.randomTextCheck == true) {
   setTimeout(function() {
-    textPaused = false;
-    randomText();
-    textPaused = true;
+    if (items.textAutoCheck == true) {
+      textPaused = false;
+      randomText();
+      textPaused = true;
+    }
+
     setInterval(randomText, items.textDelay * 1000);
   }, items.textDelay * 1000);
-
-} else if (items.randomTextCheck == true && items.textAutoCheck == false) {
-  setInterval(randomText, items.textDelay * 1000);
 }
 
 function randomText() {
@@ -196,17 +200,16 @@ if (items.randomElementsCheck == true && items.randomIconCheck == true) {
   `);
 }
 
-if (items.randomElementsCheck == true && items.elementAutoCheck == true) {
+if (items.randomElementsCheck == true) {
+  setTimeout(function() {
+    if (items.elementAutoCheck == true) {
+      elementsPaused = false;
+      randomElements();
+      elementsPaused = true;
+    }
 
-  setTimeout(function() { 
-    elementsPaused = false; 
-    randomElements(); 
-    elementsPaused = true;
     setInterval(randomElements, items.elementsDelay * 1000);
   }, items.elementsDelay * 1000);
-
-} else if (items.randomElementsCheck == true && items.elementAutoCheck == false) {
-  setInterval(randomElements, items.elementsDelay * 1000);
 }
 
 function randomElements() {
