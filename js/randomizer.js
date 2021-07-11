@@ -1,10 +1,3 @@
-chrome.storage.sync.get({randomElementsCheck: false, randomIconCheck: true}, function(items) {
-  if (items.randomElementsCheck == true && items.randomIconCheck == true) {
-    document.head.insertAdjacentHTML("beforeend", `<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">`);
-    document.head.insertAdjacentHTML("beforeend", `<style>.material-icons { font-family: 'Material Icons' !important }</style>`);
-  }
-});
-
 let imagesPaused = true;
 let textPaused = true;
 let elementsPaused = true;
@@ -194,6 +187,14 @@ paddingCheck: true, opacityCheck: true, positionCheck: true, boxShadowCheck: tru
 visibilityCheck: true, displayCheck: true, overflowCheck: true, zIndexCheck: true, translateCheck: true, randomIDCheck: true, randomClassCheck: true, randomTitleCheck: true, 
 randomContentEditCheck: true, randomDraggableCheck: true, resizeCheck: true, randomDisabledCheck: true, randomSelectedCheck: true, backgroundImageCheck: true, randomIconCheck: true, 
 randomTypeCheck: true, randomStartCheck: true, randomMaxLengthCheck: true, randomTabIndexCheck: true, randomReversedCheck: true, elementsEveryCheck: true}, function(items) {
+
+if (items.randomElementsCheck == true && items.randomIconCheck == true) {
+  document.head.insertAdjacentHTML("beforeend", `
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <style>.material-icons { font-family: 'Material Icons' !important }</style>
+  `);
+}
 
 if (items.randomElementsCheck == true && items.elementAutoCheck == true) {
 
