@@ -40,16 +40,16 @@ function randomImages() {
   const images = document.querySelectorAll("img");
   const singleImage = images[Math.floor(Math.random() * images.length)];
 
-  for (let img = 0; img < images.length; img++) {
+  images.forEach(function(image) {
     if (items.imageCheck == true) {
-      getElement(images[img], singleImage, everyCheck).src = images[Math.floor(Math.random() * images.length)].src;
-      getElement(images[img], singleImage, everyCheck).srcset = "";
+      getElement(image, singleImage, everyCheck).src = images[Math.floor(Math.random() * images.length)].src;
+      getElement(image, singleImage, everyCheck).srcset = "";
     }
 
-    if (items.imageWidthCheck == true) getElement(images[img], singleImage, everyCheck).width = getRandomNumber(0, 500);
+    if (items.imageWidthCheck == true) getElement(image, singleImage, everyCheck).width = getRandomNumber(0, 500);
 
-    if (items.imageHeightCheck == true) getElement(images[img], singleImage, everyCheck).height = getRandomNumber(0, 500);
-  }
+    if (items.imageHeightCheck == true) getElement(image, singleImage, everyCheck).height = getRandomNumber(0, 500);
+  });
 }
 });
 
@@ -110,58 +110,58 @@ function randomText() {
  
   if (items.changeTitleCheck == true) document.title = getRandomText();
    
-  for (let te = 0; te < textElements.length; te++) {
-    if (items.textCheck == true && getElement(textElements[te], singleTextElement, everyCheck).hasChildNodes()) {
-      getElement(textElements[te], singleTextElement, everyCheck).childNodes[0].nodeValue = getRandomText();
+  textElements.forEach(function(textElement) {
+    if (items.textCheck == true && getElement(textElement, singleTextElement, everyCheck).hasChildNodes()) {
+      getElement(textElement, singleTextElement, everyCheck).childNodes[0].nodeValue = getRandomText();
     }
 
-    if (items.writingModeCheck == true) getElement(textElements[te], singleTextElement, everyCheck).style.writingMode = writingModes[Math.floor(Math.random() * writingModes.length)];
-  }
+    if (items.writingModeCheck == true) getElement(textElement, singleTextElement, everyCheck).style.writingMode = writingModes[Math.floor(Math.random() * writingModes.length)];
+  });
   
-  for (let i = 0; i < inputs.length; i++) {
-    if (items.textFieldCheck == true) getElement(inputs[i], singleInput, everyCheck).value = getRandomText();
+  inputs.forEach(function(input) {
+    if (items.textFieldCheck == true) getElement(input, singleInput, everyCheck).value = getRandomText();
 
-    if (items.textFieldPlaceCheck == true) getElement(inputs[i], singleInput, everyCheck).placeholder = getRandomText();
-  } 
+    if (items.textFieldPlaceCheck == true) getElement(input, singleInput, everyCheck).placeholder = getRandomText();
+  });
 
-  for (let e = 0; e < elements.length; e++) {
-    if (items.directionCheck == true) getElement(elements[e], singleElement, everyCheck).style.direction = directions[Math.floor(Math.random() * directions.length)];
+  elements.forEach(function(element) {
+    if (items.directionCheck == true) getElement(element, singleElement, everyCheck).style.direction = directions[Math.floor(Math.random() * directions.length)];
 
-    if (items.fontFamilyCheck == true) getElement(elements[e], singleElement, everyCheck).style.fontFamily = fonts[Math.floor(Math.random() * fonts.length)];
+    if (items.fontFamilyCheck == true) getElement(element, singleElement, everyCheck).style.fontFamily = fonts[Math.floor(Math.random() * fonts.length)];
     
-    if (items.fontWeightCheck == true) getElement(elements[e], singleElement, everyCheck).style.fontWeight = getRandomNumber(100, 900);
+    if (items.fontWeightCheck == true) getElement(element, singleElement, everyCheck).style.fontWeight = getRandomNumber(100, 900);
 
-    if (items.fontStyleCheck == true) getElement(elements[e], singleElement, everyCheck).style.fontStyle = fontStyles[Math.floor(Math.random() * fontStyles.length)];
+    if (items.fontStyleCheck == true) getElement(element, singleElement, everyCheck).style.fontStyle = fontStyles[Math.floor(Math.random() * fontStyles.length)];
 
-    if (items.textAlignCheck == true) getElement(elements[e], singleElement, everyCheck).style.textAlign = textAlign[Math.floor(Math.random() * textAlign.length)];
+    if (items.textAlignCheck == true) getElement(element, singleElement, everyCheck).style.textAlign = textAlign[Math.floor(Math.random() * textAlign.length)];
 
-    if (items.textDecorCheck == true) getElement(elements[e], singleElement, everyCheck).style.textDecoration = textDecor[Math.floor(Math.random() * textDecor.length)];
+    if (items.textDecorCheck == true) getElement(element, singleElement, everyCheck).style.textDecoration = textDecor[Math.floor(Math.random() * textDecor.length)];
     
-    if (items.fontSizeCheck == true) getElement(elements[e], singleElement, everyCheck).style.fontSize = `${getRandomNumber(1, 50)}px`;
+    if (items.fontSizeCheck == true) getElement(element, singleElement, everyCheck).style.fontSize = `${getRandomNumber(1, 50)}px`;
   
-    if (items.colorCheck == true) getElement(elements[e], singleElement, everyCheck).style.color = `rgb(${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)})`;
+    if (items.colorCheck == true) getElement(element, singleElement, everyCheck).style.color = `rgb(${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)})`;
 
-    if (items.textTransformCheck == true) getElement(elements[e], singleElement, everyCheck).style.textTransform = textTransform[Math.floor(Math.random() * textTransform.length)];
+    if (items.textTransformCheck == true) getElement(element, singleElement, everyCheck).style.textTransform = textTransform[Math.floor(Math.random() * textTransform.length)];
 
-    if (items.letterSpacingCheck == true) getElement(elements[e], singleElement, everyCheck).style.letterSpacing = `${getRandomNumber(0, 25)}px`;
+    if (items.letterSpacingCheck == true) getElement(element, singleElement, everyCheck).style.letterSpacing = `${getRandomNumber(0, 25)}px`;
 
-    if (items.lineHeightCheck == true) getElement(elements[e], singleElement, everyCheck).style.lineHeight = `${getRandomNumber(0, 100)}%`;
+    if (items.lineHeightCheck == true) getElement(element, singleElement, everyCheck).style.lineHeight = `${getRandomNumber(0, 100)}%`;
 
     if (items.textShadowCheck == true) {
-      getElement(elements[e], singleElement, everyCheck).style.textShadow = `${getRandomNumber(0, 10)}px ${getRandomNumber(0, 10)}px ${getRandomNumber(0, 10)}px 
+      getElement(element, singleElement, everyCheck).style.textShadow = `${getRandomNumber(0, 10)}px ${getRandomNumber(0, 10)}px ${getRandomNumber(0, 10)}px 
       rgb(${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)})`;
     }
 
-    if (items.textIndentCheck == true) getElement(elements[e], singleElement, everyCheck).style.textIndent = `${getRandomNumber(0, 100)}%`;
+    if (items.textIndentCheck == true) getElement(element, singleElement, everyCheck).style.textIndent = `${getRandomNumber(0, 100)}%`;
 
-    if (items.whiteSpaceCheck == true) getElement(elements[e], singleElement, everyCheck).style.whiteSpace = whiteSpaceValues[Math.floor(Math.random() * whiteSpaceValues.length)];
+    if (items.whiteSpaceCheck == true) getElement(element, singleElement, everyCheck).style.whiteSpace = whiteSpaceValues[Math.floor(Math.random() * whiteSpaceValues.length)];
 
-    if (items.wordBreakCheck == true) getElement(elements[e], singleElement, everyCheck).style.wordBreak = wordBreakValues[Math.floor(Math.random() * wordBreakValues.length)];
+    if (items.wordBreakCheck == true) getElement(element, singleElement, everyCheck).style.wordBreak = wordBreakValues[Math.floor(Math.random() * wordBreakValues.length)];
 
-    if (items.wordSpacingCheck == true) getElement(elements[e], singleElement, everyCheck).style.wordSpacing = `${getRandomNumber(1, 50)}px`;
+    if (items.wordSpacingCheck == true) getElement(element, singleElement, everyCheck).style.wordSpacing = `${getRandomNumber(1, 50)}px`;
 
-    if (items.verticalAlignCheck == true) getElement(elements[e], singleElement, everyCheck).style.verticalAlign = verticalAlignValues[Math.floor(Math.random() * verticalAlignValues.length)];
-  }
+    if (items.verticalAlignCheck == true) getElement(element, singleElement, everyCheck).style.verticalAlign = verticalAlignValues[Math.floor(Math.random() * verticalAlignValues.length)];
+  });
 
   if (items.randomSelectionCheck == true) {
     const selectionStyle = document.querySelector("[data-extension='websiteRandomizer']#selectionStyle");
@@ -220,8 +220,8 @@ function randomElements() {
   const options = document.querySelectorAll("option");
   const randomOption = options[Math.floor(Math.random() * options.length)];
 
-  const ol = document.querySelectorAll("ol");
-  const singleOl = ol[Math.floor(Math.random() * ol.length)];
+  const olElements = document.querySelectorAll("ol");
+  const singleOl = olElements[Math.floor(Math.random() * olElements.length)];
 
   const li = document.querySelectorAll("li");
 
@@ -268,97 +268,97 @@ function randomElements() {
 
   icons.forEach(function(icon) { icon.remove() });
     
-  for (let e = 0; e < elements.length; e++) {
+  elements.forEach(function(element) {
     if (items.borderCheck == true) {
-      getElement(elements[e], singleElement, everyCheck).style.border = `${borders[Math.floor(Math.random() * borders.length)]} rgb(${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)})
+      getElement(element, singleElement, everyCheck).style.border = `${borders[Math.floor(Math.random() * borders.length)]} rgb(${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)})
       ${getRandomNumber(0, 25)}px`;
     }
 
     if (items.outlineCheck == true) {
-      getElement(elements[e], singleElement, everyCheck).style.outline = `${borders[Math.floor(Math.random() * borders.length)]} rgb(${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)})
+      getElement(element, singleElement, everyCheck).style.outline = `${borders[Math.floor(Math.random() * borders.length)]} rgb(${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)})
       ${getRandomNumber(0, 25)}px`;
     }
 
-    if (items.rotationCheck == true) getElement(elements[e], singleElement, everyCheck).style.transform = `rotate(${getRandomNumber(-360, 360)}deg)`;
+    if (items.rotationCheck == true) getElement(element, singleElement, everyCheck).style.transform = `rotate(${getRandomNumber(-360, 360)}deg)`;
     
-    if (items.cursorCheck == true) getElement(elements[e], singleElement, everyCheck).style.cursor = cursors[Math.floor(Math.random() * cursors.length)];
+    if (items.cursorCheck == true) getElement(element, singleElement, everyCheck).style.cursor = cursors[Math.floor(Math.random() * cursors.length)];
 
-    if (items.elementBackgroundCheck == true) getElement(elements[e], singleElement, everyCheck).style.backgroundColor = `rgb(${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)})`;
+    if (items.elementBackgroundCheck == true) getElement(element, singleElement, everyCheck).style.backgroundColor = `rgb(${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)})`;
 
     if (items.borderRadiusCheck == true) {
-      getElement(elements[e], singleElement, everyCheck).style.borderRadius = `${getRandomNumber(0, 100)}px ${getRandomNumber(0, 100)}px ${getRandomNumber(0, 100)}px ${getRandomNumber(0, 100)}px`;
+      getElement(element, singleElement, everyCheck).style.borderRadius = `${getRandomNumber(0, 100)}px ${getRandomNumber(0, 100)}px ${getRandomNumber(0, 100)}px ${getRandomNumber(0, 100)}px`;
     }
 
-    if (items.paddingCheck == true) getElement(elements[e], singleElement, everyCheck).style.padding = `${getRandomNumber(0, 50)}px ${getRandomNumber(0, 50)}px ${getRandomNumber(0, 50)}px ${getRandomNumber(0, 50)}px`;
+    if (items.paddingCheck == true) getElement(element, singleElement, everyCheck).style.padding = `${getRandomNumber(0, 50)}px ${getRandomNumber(0, 50)}px ${getRandomNumber(0, 50)}px ${getRandomNumber(0, 50)}px`;
 
-    if (items.opacityCheck == true) getElement(elements[e], singleElement, everyCheck).style.opacity = Math.random();
+    if (items.opacityCheck == true) getElement(element, singleElement, everyCheck).style.opacity = Math.random();
 
-    if (items.positionCheck == true) getElement(elements[e], singleElement, everyCheck).style.position = positions[Math.floor(Math.random() * positions.length)];
+    if (items.positionCheck == true) getElement(element, singleElement, everyCheck).style.position = positions[Math.floor(Math.random() * positions.length)];
 
     if (items.boxShadowCheck == true) {
-      getElement(elements[e], singleElement, everyCheck).style.boxShadow = `${getRandomNumber(0, 100)}px ${getRandomNumber(0, 100)}px ${getRandomNumber(0, 100)}px ${getRandomNumber(0, 100)}px 
+      getElement(element, singleElement, everyCheck).style.boxShadow = `${getRandomNumber(0, 100)}px ${getRandomNumber(0, 100)}px ${getRandomNumber(0, 100)}px ${getRandomNumber(0, 100)}px 
       rgb(${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}) ${boxShadow[Math.floor(Math.random() * boxShadow.length)]}`;
     }
 
-    if (items.floatCheck == true) getElement(elements[e], singleElement, everyCheck).style.float = floats[Math.floor(Math.random() * floats.length)];
+    if (items.floatCheck == true) getElement(element, singleElement, everyCheck).style.float = floats[Math.floor(Math.random() * floats.length)];
 
-    if (items.widthCheck == true) getElement(elements[e], singleElement, everyCheck).style.width = `${getRandomNumber(0, 100)}%`;
+    if (items.widthCheck == true) getElement(element, singleElement, everyCheck).style.width = `${getRandomNumber(0, 100)}%`;
 
-    if (items.heightCheck == true) getElement(elements[e], singleElement, everyCheck).style.height = `${getRandomNumber(0, 100)}%`;
+    if (items.heightCheck == true) getElement(element, singleElement, everyCheck).style.height = `${getRandomNumber(0, 100)}%`;
 
-    if (items.visibilityCheck == true) getElement(elements[e], singleElement, everyCheck).style.visibility = visibility[Math.floor(Math.random() * visibility.length)];
+    if (items.visibilityCheck == true) getElement(element, singleElement, everyCheck).style.visibility = visibility[Math.floor(Math.random() * visibility.length)];
 
-    if (items.displayCheck == true) getElement(elements[e], singleElement, everyCheck).style.display = displays[Math.floor(Math.random() * displays.length)];
+    if (items.displayCheck == true) getElement(element, singleElement, everyCheck).style.display = displays[Math.floor(Math.random() * displays.length)];
 
-    if (items.overflowCheck == true) getElement(elements[e], singleElement, everyCheck).style.overflow = overflow[Math.floor(Math.random() * overflow.length)];
+    if (items.overflowCheck == true) getElement(element, singleElement, everyCheck).style.overflow = overflow[Math.floor(Math.random() * overflow.length)];
     
-    if (items.zIndexCheck == true) getElement(elements[e], singleElement, everyCheck).style.zIndex = getRandomNumber(-1, 5);
+    if (items.zIndexCheck == true) getElement(element, singleElement, everyCheck).style.zIndex = getRandomNumber(-1, 5);
 
-    if (items.translateCheck == true) getElement(elements[e], singleElement, everyCheck).style.transform = `translate(${getRandomNumber(0, 200)}px, ${getRandomNumber(0, 200)}px)`;
+    if (items.translateCheck == true) getElement(element, singleElement, everyCheck).style.transform = `translate(${getRandomNumber(0, 200)}px, ${getRandomNumber(0, 200)}px)`;
     
-    if (items.randomContentEditCheck == true) getElement(elements[e], singleElement, everyCheck).contentEditable = trueFalse[Math.floor(Math.random() * trueFalse.length)];
+    if (items.randomContentEditCheck == true) getElement(element, singleElement, everyCheck).contentEditable = trueFalse[Math.floor(Math.random() * trueFalse.length)];
 
-    if (items.randomIDCheck == true) getElement(elements[e], singleElement, everyCheck).id = elements[Math.floor(Math.random() * elements.length)].id;
+    if (items.randomIDCheck == true) getElement(element, singleElement, everyCheck).id = elements[Math.floor(Math.random() * elements.length)].id;
     
-    if (items.randomClassCheck == true) getElement(elements[e], singleElement, everyCheck).classList = elements[Math.floor(Math.random() * elements.length)].classList;
+    if (items.randomClassCheck == true) getElement(element, singleElement, everyCheck).classList = elements[Math.floor(Math.random() * elements.length)].classList;
 
-    if (items.randomDraggableCheck == true) getElement(elements[e], singleElement, everyCheck).draggable = trueFalse[Math.floor(Math.random() * trueFalse.length)];
+    if (items.randomDraggableCheck == true) getElement(element, singleElement, everyCheck).draggable = trueFalse[Math.floor(Math.random() * trueFalse.length)];
 
-    if (items.randomTitleCheck == true) getElement(elements[e], singleElement, everyCheck).title = elements[Math.floor(Math.random() * elements.length)].textContent;
+    if (items.randomTitleCheck == true) getElement(element, singleElement, everyCheck).title = elements[Math.floor(Math.random() * elements.length)].textContent;
 
-    if (items.resizeCheck == true) getElement(elements[e], singleElement, everyCheck).style.resize = resizeValues[Math.floor(Math.random() * resizeValues.length)];
+    if (items.resizeCheck == true) getElement(element, singleElement, everyCheck).style.resize = resizeValues[Math.floor(Math.random() * resizeValues.length)];
 
     if (items.backgroundImageCheck == true && images[Math.floor(Math.random() * images.length)]) {
-      getElement(elements[e], singleElement, everyCheck).style.backgroundImage = `url(${images[Math.floor(Math.random() * images.length)].src})`;
+      getElement(element, singleElement, everyCheck).style.backgroundImage = `url(${images[Math.floor(Math.random() * images.length)].src})`;
     }
 
     if (items.randomIconCheck == true) {
       const iconElement = `<i class='material-icons'>${googleIcons[Math.floor(Math.random() * googleIcons.length)]}</i>`;
 
-      getElement(elements[e], singleElement, everyCheck).insertAdjacentHTML(insertPositions[Math.floor(Math.random() * insertPositions.length)], iconElement);
+      getElement(element, singleElement, everyCheck).insertAdjacentHTML(insertPositions[Math.floor(Math.random() * insertPositions.length)], iconElement);
     }
 
-    if (items.randomTabIndexCheck == true) getElement(elements[e], singleElement, everyCheck).tabIndex = getRandomNumber(0, elements.length);
-  }
+    if (items.randomTabIndexCheck == true) getElement(element, singleElement, everyCheck).tabIndex = getRandomNumber(0, elements.length);
+  });
 
-  for (let o = 0; o < ol.length; o++) {
-    if (items.randomStartCheck == true) getElement(ol[o], singleOl, everyCheck).start = getRandomNumber(0, li.length);
+  inputs.forEach(function(input) {
+    if (items.randomMaxLengthCheck == true) getElement(input, singleInput, everyCheck).maxLength = getRandomNumber(0, 100);
+  });
 
-    if (items.randomReversedCheck == true) {
-      if (getElement(ol[o], singleOl, everyCheck).hasAttribute("reversed")) {
-        getElement(ol[o], singleOl, everyCheck).removeAttribute("reversed");
-      } else {
-        getElement(ol[o], singleOl, everyCheck).setAttributeNode(document.createAttribute("reversed"));
-      }
+  typeElements.forEach(function(typeElement) {
+    if (items.randomTypeCheck == true) getElement(typeElement, singleTypeElement, everyCheck).type = types[Math.floor(Math.random() * types.length)];
+  });
+
+  olElements.forEach(function(ol) {
+    if (items.randomStartCheck == true) getElement(ol, singleOl, everyCheck).start = getRandomNumber(0, li.length);
+  });
+
+  if (items.randomReversedCheck == true) {
+    if (singleOl.hasAttribute("reversed")) {
+      singleOl.removeAttribute("reversed");
+    } else {
+      singleOl.setAttributeNode(document.createAttribute("reversed"));
     }
-  }
-
-  for (let i = 0; i < inputs.length; i++) {
-    if (items.randomMaxLengthCheck == true) getElement(inputs[i], singleInput, everyCheck).maxLength = getRandomNumber(0, 100);
-  }
-
-  for (let te = 0; te < typeElements.length; te++) {
-    if (items.randomTypeCheck == true) getElement(typeElements[te], singleTypeElement, everyCheck).type = types[Math.floor(Math.random() * types.length)];
   }
 
   if (items.randomDisabledCheck == true && randomDisabledElement) {
