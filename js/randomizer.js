@@ -33,12 +33,12 @@ if (items.randomImagesCheck == true) {
 }
 
 function randomImages() {
+  if (imagesPaused) return;
+
   const everyCheck = items.imagesEveryCheck;
 
   const images = document.querySelectorAll("img");
   const singleImage = images[Math.floor(Math.random() * images.length)];
-
-  if (imagesPaused) return;
 
   for (let img = 0; img < images.length; img++) {
     if (items.imageCheck == true) {
@@ -72,6 +72,8 @@ if (items.randomTextCheck == true) {
 }
 
 function randomText() {
+  if (textPaused) return;
+
   const everyCheck = items.textEveryCheck;
 
   const textElements = document.querySelectorAll("body *:not(script):not(link):not(style):not(noscript):not(div):not(nav):not(main):not(tr):not(ul):not(table)");
@@ -105,8 +107,6 @@ function randomText() {
       return textElements[Math.floor(Math.random() * textElements.length)].textContent;
     }
   }
-
-  if (textPaused) return;
  
   if (items.changeTitleCheck == true) document.title = getRandomText();
    
@@ -207,6 +207,8 @@ if (items.randomElementsCheck == true) {
 }
 
 function randomElements() {
+  if (elementsPaused) return;
+  
   const everyCheck = items.elementsEveryCheck;
 
   const elements = document.querySelectorAll("body *:not(script):not(link):not(style):not(noscript)");
@@ -263,8 +265,6 @@ function randomElements() {
   "settings_cell", "settings_ethernet", "settings_input_antenna", "settings_input_component", "settings_input_composite", "settings_input_hdmi", "settings_input_svideo", "settings_overscan", "settings_phone", "settings_power", "settings_remote", "settings_system_daydream", "settings_voice", "share", "shop", "shop_two", "shopping_basket", "shopping_cart", "short_text", "show_chart", "shuffle", "signal_cellular_4_bar", "signal_cellular_connected_no_internet_4_bar", "signal_cellular_no_sim", "signal_cellular_null", "signal_cellular_off", "signal_wifi_4_bar", "signal_wifi_4_bar_lock", "signal_wifi_off", "sim_card", "sim_card_alert", "skip_next", "skip_previous", "slideshow", "slow_motion_video", "smartphone", "smoke_free", "smoking_rooms", "sms", "sms_failed", "snooze", "sort", "sort_by_alpha", "spa", "space_bar", "speaker", "speaker_group", "speaker_notes", "speaker_notes_off", "speaker_phone", "spellcheck", "star", "star_border", "star_half", "stars", "stay_current_landscape", "stay_current_portrait", "stay_primary_landscape", "stay_primary_portrait", "stop", "stop_screen_share", "storage", "store", "store_mall_directory", "straighten", 
   "streetview", "strikethrough_s", "style", "subdirectory_arrow_left", "subdirectory_arrow_right", "subject", "subscriptions", "subtitle", "subway", "supervisor_account", "surround_sound", "swap_calls", "swap_horiz", "swap_vert", "swap_vertical_circle", "switch_camera", "switch_video", "sync", "sync_disabled", "sync_problem", "system_update", "system_update_alt", "tab", "tab_unselected", "tablet", "tablet_android", "tablet_mac", "tag_faces", "tap_and_play", "terrain", "text_fields", "text_format", "textsms", "texture", "theaters", "thumb_down", "thumb_up", "thumbs_up_down", "time_to_leave", "timelapse", "timeline", "timer", "timer_10", "timer_3", "timer_off", "title", "toc", "today", "toll", "tonality", "touch_app", "toys", "track_changes", "traffic", "train", "tram", "transfer_within_a_station", "transform", "translate", "trending_down", "trending_flat", "trending_up", "tune", "turned_in", "turned_in_not", "tv", "unarchive", "undo", "unfold_less", "unfold_more", "update", "usb", "verified_user", "vertical_align_bottom", "vertical_align_center", "vertical_align_top", "vibration", "video_call", "video_label", "video_library", "videocam", 
   "videocam_off", "videogame_asset", "view_agenda", "view_array", "view_carousel", "view_column", "view_comfy", "view_compact", "view_day", "view_headline", "view_list", "view_module", "view_quilt", "view_stream", "view_week", "vignette", "visibility", "visibility_off", "voice_chat", "voicemail", "volume_down", "volume_mute", "volume_off", "volume_up", "vpn_key", "vpn_lock", "wallpaper", "warning", "watch", "watch_later", "wb_auto", "wb_cloudy", "wb_incandescent", "wb_iridescent", "wb_sunny", "wc", "web", "web_asset", "weekend", "whatshot", "widgets", "wifi", "wifi_lock", "wifi_tethering", "work", "wrap_text", "youtube_searched_for", "zoom_in", "zoom_out", "zoom_out_map"];
-
-  if (elementsPaused) return;
 
   icons.forEach(function(icon) { icon.remove() });
     
