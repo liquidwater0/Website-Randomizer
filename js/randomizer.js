@@ -353,7 +353,7 @@ function randomElements() {
     if (items.randomStartCheck == true) getElement(ol, singleOl, everyCheck).start = getRandomNumber(0, li.length);
   });
 
-  if (items.randomReversedCheck == true) {
+  if (items.randomReversedCheck == true && singleOl) {
     if (singleOl.hasAttribute("reversed")) {
       singleOl.removeAttribute("reversed");
     } else {
