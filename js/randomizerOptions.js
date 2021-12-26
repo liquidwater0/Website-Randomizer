@@ -8,26 +8,6 @@ version.textContent = `Website Randomizer v${manifest.version}`;
 document.addEventListener("DOMContentLoaded", get);
 document.getElementById("saveButton").addEventListener("click", save);
 
-document.getElementById("scrollImage").addEventListener("click", function() {
-    document.getElementById("imageRandomizer").scrollIntoView();
-});
-
-document.getElementById("scrollText").addEventListener("click", function() {
-    document.getElementById("textRandomizer").scrollIntoView();
-});
-
-document.getElementById("scrollElement").addEventListener("click", function() {
-    document.getElementById("elementRandomizer").scrollIntoView();
-});
-
-document.getElementById("scrollOptions").addEventListener("click", function() {
-    document.getElementById("randomizerOptions").scrollIntoView();
-});
-
-document.getElementById("scrollUI").addEventListener("click", function() {
-    document.getElementById("uiOptions").scrollIntoView();
-});
-
 themeSwitch.addEventListener("input", function() {
     chrome.storage.sync.set({"themeSwitchChecked": themeSwitch.checked});
 
