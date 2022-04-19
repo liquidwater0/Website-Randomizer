@@ -1,7 +1,9 @@
-chrome.runtime.onInstalled.addListener(function() {
-	if (chrome.runtime.openOptionsPage) {
+chrome.runtime.onInstalled.addListener(details => {
+    if (details.reason !== "install") return;
+
+    if (chrome.runtime.openOptionsPage) {
 		chrome.runtime.openOptionsPage();
 	} else {
-		window.open(chrome.runtime.getURL("randomizerOptions.html"));
+		window.open(chrome.runtime.getURL("options.html"));
 	}
 });
