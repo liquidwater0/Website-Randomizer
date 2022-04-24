@@ -4,6 +4,6 @@ chrome.runtime.onInstalled.addListener(details => {
     if (chrome.runtime.openOptionsPage) {
 		chrome.runtime.openOptionsPage();
 	} else {
-		window.open(chrome.runtime.getURL("randomizerOptions.html"));
+		window.open(chrome.runtime.getURL("options.html"));
 	}
 });
