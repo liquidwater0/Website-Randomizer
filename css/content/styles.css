@@ -1,0 +1,8 @@
+html[data-extension="websiteRandomizer"] *::selection {
+    background-color: var(--randomBackgroundColor) !important;
+    color: var(--randomTextColor) !important;
+}
+
+.material-icons {
+    font-family: 'Material Icons' !important;
+}
