@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Options</title>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="css/materialize.min.css">
+        <link rel="stylesheet" href="css/options.css">
+    </head>
+    <body>
+        <nav class="top-nav blur-background">
+            <ul class="z-depth-2">
+                <li><a href="#imageRandomizer">Image</a></li>
+                <li><a href="#textRandomizer">Text</a></li>
+                <li><a href="#elementRandomizer">Element</a></li>
+                <li><a href="#randomizerOptions">Options</a></li>
+            </ul>
+        </nav>
+
+        <div class="randomizer-container" id="imageRandomizer">
+            <h4 class="heading z-depth-1">Image Randomizer</h4>
+
+            <div class="checkbox-container">
+                <button class="select-all-button" data-select-all>Select All</button>
+
+                <label class="enable-checkbox">
+                    <input class="filled-in" type="checkbox" data-checkbox="imageEnabled" data-default-enabled="false">
+                    <span>Enabled</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomImages">
+                    <span>Random Images</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomImageHeight">
+                    <span>Random Image Height</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomImageWidth">
+                    <span>Random Image Width</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="randomizer-container" id="textRandomizer">
+            <h4 class="heading z-depth-1">Text Randomizer</h4>
+
+            <div class="checkbox-container">
+                <button class="select-all-button" data-select-all>Select All</button>
+
+                <label class="enable-checkbox">
+                    <input class="filled-in" type="checkbox" data-checkbox="textEnabled" data-default-enabled="false">
+                    <span>Enabled</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomPageTitle">
+                    <span>Random Page Title</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomText">
+                    <span>Random Text</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomTextFieldPlaceholders">
+                    <span>Random Text Field Placeholders</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomTextFieldValues">
+                    <span>Random Text Field Values</span>
+                </label>
+
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="shuffleText">
+                    <span>Shuffle Text</span>
+                </label>
+
+                <div class="divider">Styles</div>
+
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomFont">
+                    <span>Random Font</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomFontSize">
+                    <span>Random Font Size</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomFontStyle">
+                    <span>Random Font Style</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomFontWeight">
+                    <span>Random Font Weight</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomLetterSpacing">
+                    <span>Random Letter Spacing</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomLineHeight">
+                    <span>Random Line Height</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomTextAlign">
+                    <span>Random Text Align</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomTextColor">
+                    <span>Random Text Color</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomTextDecoration">
+                    <span>Random Text Decoration</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomTextIndent">
+                    <span>Random Text Indent</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomTextSelection">
+                    <span>Random Text Selection</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomTextShadow">
+                    <span>Random Text Shadow</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomTextTransform">
+                    <span>Random Text Transform</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomVerticalAlign">
+                    <span>Random Vertical Align</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomWordBreak">
+                    <span>Random Word Break Type</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomWordSpacing">
+                    <span>Random Word Spacing</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="randomizer-container" id="elementRandomizer">
+            <h4 class="heading z-depth-1">Element Randomizer</h4>
+
+            <div class="checkbox-container">
+                <button class="select-all-button" data-select-all>Select All</button>
+
+                <label class="enable-checkbox">
+                    <input class="filled-in" type="checkbox" data-checkbox="elementEnabled" data-default-enabled="false">
+                    <span>Enabled</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomIcons">
+                    <span>Random Icons</span>
+                </label>
+
+                <div class="divider">Attributes</div>
+
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomClassList">
+                    <span>Random Class List</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomContentEditable">
+                    <span>Random Content Editable</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomDisabled">
+                    <span>Random Disabled</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomDraggable">
+                    <span>Random Draggable</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomID">
+                    <span>Random ID</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomListReversed">
+                    <span>Random List Reversed</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomListStart">
+                    <span>Random List Start</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomMaxLength">
+                    <span>Random Max Length</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomOptionSelected">
+                    <span>Random Option Selected</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomTabIndex">
+                    <span>Random Tab Index</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomTooltip">
+                    <span>Random Tooltip</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomType">
+                    <span>Random Type</span>
+                </label>
+
+                <div class="divider">Styles</div>
+
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomBackgroundColor">
+                    <span>Random Background Color</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomBackgroundImage">
+                    <span>Random Background Image</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomBorder">
+                    <span>Random Border</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomBoxShadow">
+                    <span>Random Box Shadow</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomCornerRadius">
+                    <span>Random Corner Radius</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomCursor">
+                    <span>Random Cursor</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomDisplayType">
+                    <span>Random Display Type</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomFloat">
+                    <span>Random Float</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomHeight">
+                    <span>Random Height</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomMove">
+                    <span>Random Move</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomOpacity">
+                    <span>Random Opacity</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomOutline">
+                    <span>Random Outline</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomOverflow">
+                    <span>Random Overflow</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomPadding">
+                    <span>Random Padding</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomPositioningType">
+                    <span>Random Positioning Type</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomResizeAbility">
+                    <span>Random Resize Ability</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomRotation">
+                    <span>Random Rotation</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomStackOrder">
+                    <span>Random Stack Order</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomVisibility">
+                    <span>Random Visibility</span>
+                </label>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="randomWidth">
+                    <span>Random Width</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="randomizer-container" id="randomizerOptions">
+            <h4 class="heading z-depth-2">Randomizer Options</h4>
+            
+            <div class="divider">All Randomizers</div>
+
+            <div>
+                <div class="input-field">
+                    <input placeholder="Enter Seconds" id="randomizerDelay" type="text">
+                    <label>Randomizer Delay <span class="input-default-text">- Default: 1 second</span></label>
+                </div>
+            </div>
+
+            <div class="divider">Text Randomizer</div>
+
+            <div>
+                <label>
+                    <input class="filled-in" type="checkbox" data-checkbox="singleWords" data-default-enabled="false">
+                    <span>Single Words</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="bottom-bar z-depth-2 blur-background">
+            <button class="waves-effect waves-light btn" id="saveButton">Save</button>
+            <div class="version" id="version"></div>
+            <button class="icon-button" id="themeChanger" title="Change theme"><i class="material-icons"></i></button>
+        </div>
+        
+        <script src="js/materialize.min.js"></script>
+        <script src="js/options.js"></script>
+    </body>
+</html>
