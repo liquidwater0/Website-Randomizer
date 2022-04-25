@@ -7,6 +7,7 @@ chrome.storage.sync.get({}, items => {
         const everything = document.querySelectorAll("body *");
         const images = document.querySelectorAll("img");
         const inputs = document.querySelectorAll("input, textarea");
+        const checkableInputs = document.querySelectorAll("input[type='checkbox'], input[type='radio']");
         const selectElements = document.querySelectorAll("select");
         const olElements = document.querySelectorAll("ol");
 
@@ -40,6 +41,13 @@ chrome.storage.sync.get({}, items => {
         const resizeValues = ["none", "both", "horizontal", "vertical"];
         const visibilityValues = ["visible", "hidden"];
 
+        if (getEnabled("randomCheckedStates")) {
+            checkableInputs.forEach(input => {
+                const randomChecked = booleans[Math.floor(Math.random() * booleans.length)];
+                input.checked = randomChecked;
+            });
+        }
+
         if (getEnabled("randomIcons")) {
             document.head.insertAdjacentHTML("beforeend", `
                 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -50,6 +58,20 @@ chrome.storage.sync.get({}, items => {
                 const randomIcon = `<i class='material-icons'>${googleIcons[Math.floor(Math.random() * googleIcons.length)]}</i>`;
                 
                 element.insertAdjacentHTML(randomInsertPosition, randomIcon);
+            });
+        }
+
+        if (getEnabled("randomInputValues")) {
+            inputs.forEach(input => {
+                if (input.type === "range") input.value = getRandomNumber(0, 100);
+
+                if (input.type === "color") {
+                    const randomRed = getRandomNumber(0, 255);
+                    const randomGreen = getRandomNumber(0, 255);
+                    const randomBlue = getRandomNumber(0, 255);
+
+                    input.value = rgbToHex(randomRed, randomGreen, randomBlue);
+                }
             });
         }
 
