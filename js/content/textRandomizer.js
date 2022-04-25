@@ -4,7 +4,7 @@ chrome.storage.sync.get({}, items => {
     function textRandomizer() {
         if (!getEnabled("textEnabled")) return;
 
-        const inputs = document.querySelectorAll("input:not([type='button'], [type='file'])");
+        const inputs = document.querySelectorAll("input:not([type='button'], [type='file']), textarea");
 
         const fonts = ["Arial", "Helvetica", "sans-serif", "Gadget", "Bookman Old Style", "serif", "Comic Sans MS", "cursive", "Courier", "monospace",
         "Garamond", "Georgia", "Impact", "Charcoal", "Lucida Console", "Monaco", "Lucida Sans Unicode", "Lucida Grande", "MS Sans Serif", "MS Serif", "New York",
@@ -16,6 +16,35 @@ chrome.storage.sync.get({}, items => {
         const verticalAlignValues = ["baseline", "sub", "super", "top", "text-top", "middle", "bottom", "text-bottom"];
         const wordBreakValues = ["keep-all", "break-word", "break-all"];
         
+        if (getEnabled("randomDates")) {
+            inputs.forEach(input => {
+                if (input.type === "date") {
+                    const { month, day, year } = getRandomDate();
+                    input.value = `${year}-${month}-${day}`;
+                }
+
+                if (input.type === "datetime-local") {
+                    const { month, day, year, hour, minutes, seconds, milliseconds } = getRandomDate();
+                    input.value = `${year}-${month}-${day}T${hour}:${minutes}:${seconds}.${milliseconds}`;
+                }
+
+                if (input.type === "month") {
+                    const { month, year } = getRandomDate();
+                    input.value = `${year}-${month}`;
+                }
+
+                if (input.type === "time") {
+                    const { hour, minutes, seconds, milliseconds } = getRandomDate();
+                    input.value = `${hour}:${minutes}:${seconds}.${milliseconds}`;
+                }
+
+                if (input.type === "week") {
+                    const { year, week } = getRandomDate();
+                    input.value = `${year}-W${week}`;
+                }
+            });
+        }
+
         if (getEnabled("randomPageTitle")) document.title = getRandomText();
         if (getEnabled("randomText")) randomizeText();
 
@@ -24,7 +53,15 @@ chrome.storage.sync.get({}, items => {
         }
 
         if (getEnabled("randomTextFieldValues")) {
-            inputs.forEach(input => input.value = getRandomText());
+            inputs.forEach(input => {
+                const textFieldInputs = ["email", "password", "search", "tel", "text", "url"];
+
+                if (textFieldInputs.some(type => input.type === type) || input.tagName === "TEXTAREA") {
+                    input.value = getRandomText();
+                }
+
+                if (input.type === "number") input.value = getRandomNumber(0, 100);
+            });
         }
 
         if (getEnabled("shuffleText")) shuffleText();
