@@ -1,22 +1,22 @@
-let delay;
 let checkStatesMap = new Map();
 
+let staticImages = [];
+let staticText = [];
+let staticClassLists = [];
+let staticIDs = [];
+
 chrome.storage.sync.get({
-    randomizerDelay: 1, checkStates: {}
+    checkStates: {}
 }, items => {
-    delay = items.randomizerDelay * 1000;
     checkStatesMap = new Map(Object.entries(items.checkStates));
 });
 
 function getEnabled(checkbox) {
+    const defaultDisabled = ["imageEnabled", "textEnabled", "elementEnabled", "singleWords"];
+
     if (checkStatesMap.has(checkbox)) {
         return checkStatesMap.get(checkbox);
-    } else if (
-        checkbox === "imageEnabled" ||
-        checkbox === "textEnabled" || 
-        checkbox === "elementEnabled" ||
-        checkbox === "singleWords"
-    ) {
+    } else if (defaultDisabled.some(item => item === checkbox)) {
         return false;
     } else {
         return true;
@@ -24,12 +24,24 @@ function getEnabled(checkbox) {
 }
 
 function randomStyle(property, value) {
-    const everything = document.querySelectorAll("body *");
-    everything.forEach(element => element.style[property] = value());
+    const elements = nodes.elements;
+
+    elements.forEach(element => {
+        if (!element || !element.tagName) return;
+        element.style[property] = value();
+    });
 }
 
 function getRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+function removeArrayDuplicates() {
+    //https://dev.to/marinamosti/removing-duplicates-in-an-array-of-objects-in-js-with-sets-3fep
+    staticImages = [...new Map(staticImages.map(item => [item.src, item])).values()];
+    staticText = [...new Set(staticText).keys()];
+    staticClassLists = [...new Set(staticClassLists).keys()];
+    staticIDs = [...new Set(staticIDs).keys()];
 }
 
 //https://www.w3docs.com/snippets/javascript/how-to-convert-rgb-to-hex-and-vice-versa.html
@@ -69,5 +81,77 @@ function getRandomDate() {
         minutes: minutes,
         seconds: seconds,
         milliseconds: milliseconds
+    }
+}
+
+function getNodes(nodes) {
+    const imageNodes = [];
+    const textNodes = [];
+    const elementNodes = [];
+
+    nodes.forEach(node => {
+        const textWalker = document.createTreeWalker(
+            node,
+            NodeFilter.SHOW_TEXT,
+            {
+                acceptNode: node => {
+                    const rejectedElements = ["script", "style", "noscript", "title"];
+
+                    if (
+                        rejectedElements.some(item => item.toUpperCase() === node.parentElement.tagName) || 
+                        node.nodeValue.trim() === ""
+                    ) return NodeFilter.FILTER_SKIP;
+
+                    return NodeFilter.FILTER_ACCEPT;
+                }
+            }
+        );
+
+        const elementWalker = document.createTreeWalker(
+            node,
+            NodeFilter.SHOW_ELEMENT,
+            {
+                acceptNode: node => {
+                    if (node.tagName === "I" && node.classList.contains("material-icons")) return NodeFilter.FILTER_SKIP;
+                    return NodeFilter.FILTER_ACCEPT;
+                }
+            }
+        );
+
+        let currentText = textWalker.currentNode;
+        let currentElement = elementWalker.currentNode;
+
+        while (currentText) {
+            if (currentText.nodeValue) {
+                staticText.push(currentText.nodeValue);
+                textNodes.push(currentText);
+            }
+
+            currentText = textWalker.nextNode();
+        }
+
+        while (currentElement) {
+            if (currentElement.tagName === "IMG") {
+                staticImages.push({
+                    src: currentElement.src,
+                    srcset: currentElement.srcset,
+                    alt: currentElement.alt
+                });
+
+                imageNodes.push(currentElement);
+            }
+
+            staticClassLists.push(currentElement.classList);
+            staticIDs.push(currentElement.id);
+
+            elementNodes.push(currentElement);
+            currentElement = elementWalker.nextNode();
+        }
+    });
+
+    return {
+        images: imageNodes,
+        text: textNodes,
+        elements: elementNodes
     }
 }
