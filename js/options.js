@@ -32,7 +32,6 @@ function changeTheme() {
 
 const checkboxes = document.querySelectorAll("[data-checkbox]");
 const selectAllButtons = document.querySelectorAll("[data-select-all]");
-const randomizerDelayInput = document.getElementById("randomizerDelay");
 
 let allChecked;
 
@@ -56,26 +55,17 @@ function save() {
     });
 
     chrome.storage.sync.set({
-        "checkStates": Object.fromEntries(checkStates), "randomizerDelay": Number(randomizerDelayInput.value.split(" ")[0])
+        "checkStates": Object.fromEntries(checkStates)
     }, () => {
         saveButton.textContent = "Saved!";
         setTimeout(() => saveButton.textContent = "Save", 3000);
-
-        if (randomizerDelayInput.value <= 1) {
-            randomizerDelayInput.value = "1 second";
-            save();
-        } else if (randomizerDelayInput.value > 1) {
-            randomizerDelayInput.value = `${randomizerDelayInput.value} seconds`;
-        }
     });
 }
 
 function get() {
     chrome.storage.sync.get({
-        checkStates: {}, randomizerDelay: 1
+        checkStates: {}
     }, items => {
-        randomizerDelayInput.value = `${items.randomizerDelay} ${(items.randomizerDelay <= 1) ? "second" : "seconds"}`;
-
         updateTheme();
 
         const checkStatesMap = new Map(Object.entries(items.checkStates));
