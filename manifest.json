@@ -29,7 +29,8 @@
 				"js/content/textUtilities.js",
 				"js/content/imageRandomizer.js",
 				"js/content/textRandomizer.js",
-				"js/content/elementRandomizer.js"
+				"js/content/elementRandomizer.js",
+				"js/content/main.js"
 			],
 			"css": ["css/content/styles.css"]
 		}
