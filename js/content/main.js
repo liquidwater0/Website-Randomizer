@@ -2,19 +2,25 @@ let nodes;
 
 //find a better way to do this
 setTimeout(() => {
+    if(isAllDisabled()) return;
+
     const everything = document.querySelectorAll("body *");
     nodes = getNodes(everything);
     activateAll(nodes);
 }, 10);
 
 function activateAll(nodes) {
+    if(isAllDisabled()) return;
+
     removeArrayDuplicates();
-    imageRandomizer(nodes);
-    textRandomizer(nodes);
-    elementRandomizer(nodes);
+    if (getEnabled("imageEnabled")) imageRandomizer(nodes);
+    if (getEnabled("textEnabled")) textRandomizer(nodes);
+    if (getEnabled("elementEnabled")) elementRandomizer(nodes);
 }
 
 const observer = new MutationObserver(entries => {
+    if(isAllDisabled()) return;
+    
     const mutations = entries;
 
     mutations.forEach(mutation => {
