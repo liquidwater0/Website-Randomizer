@@ -1,6 +1,4 @@
 function imageRandomizer(nodes) {
-    if (!getEnabled("imageEnabled")) return;
-    
     const images = nodes.images;
 
     if (getEnabled("randomImages")) {
