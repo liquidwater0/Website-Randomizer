@@ -1,10 +1,14 @@
-document.head.insertAdjacentHTML("beforeend", `
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-`);
+//putting this in the function makes things freeze
+//needs to be here so checked state loads properly
+chrome.storage.sync.get({}, items => {
+    if (getEnabled("elementEnabled") && getEnabled("randomIcons")) {
+        document.head.insertAdjacentHTML("beforeend", `
+            <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        `);
+    }
+});
 
 function elementRandomizer(nodes) {
-    if (!getEnabled("elementEnabled")) return;
-
     const elements = nodes.elements;
 
     const googleIcons = ["3d_rotation", "ac_unit", "access_alarm", "access_alarms", "access_time", "accessibility", "accessible", "account_balance", "account_balance_wallet", "account_box", "account_circle", "adb", "add", "add_a_photo", "add_alarm", "add_alert", "add_box", "add_circle", "add_circle_outline", "add_location", "add_shopping_cart", "add_to_photos", "add_to_queue", "adjust", "airline_seat_flat", "airline_seat_flat_angled", "airline_seat_individual_suite","airline_seat_legroom_extra", "airline_seat_legroom_normal", "airline_seat_legroom_reduced", "airline_seat_recline_extra", "airline_seat_recline_normal", "airplanemode_active", "airplanemode_inactive", "airplay", "airport_shuttle", "alarm", "alarm_add", "alarm_off", "alarm_on", "album", "all_inclusive", "all_out", "android", "announcement", "apps", "archive", "arrow_back", "arrow_downward", "arrow_drop_down", "arrow_drop_down_circle", "arrow_drop_up", "arrow_forward", "arrow_upward", "art_track", "aspect_ratio", "assessment", "assignment", "assignment_ind", "assignment_late", "assignment_return", "assignment_returned", "assignment_turned_in", "assistant", 
