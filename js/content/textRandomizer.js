@@ -2,8 +2,6 @@ let titleChanged = false;
 let textSelectActivated = false;
 
 function textRandomizer(nodes) {
-    if (!getEnabled("textEnabled")) return;
-
     const elements = nodes.elements;
     const text = nodes.text;
 
