@@ -23,6 +23,12 @@ function getEnabled(checkbox) {
     }
 }
 
+function isAllDisabled() {
+    if (!getEnabled("imageEnabled") && !getEnabled("textEnabled") && !getEnabled("elementEnabled")) {
+        return true;
+    }
+}
+
 function randomStyle(property, value) {
     const elements = nodes.elements;
 
