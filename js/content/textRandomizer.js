@@ -1,10 +1,7 @@
 let titleChanged = false;
 let textSelectActivated = false;
 
-function textRandomizer(nodes) {
-    const elements = nodes.elements;
-    const text = nodes.text;
-
+function textRandomizer({ text, elements }) {
     const fonts = ["Arial", "Helvetica", "sans-serif", "Gadget", "Bookman Old Style", "serif", "Comic Sans MS", "cursive", "Courier", "monospace",
     "Garamond", "Georgia", "Impact", "Charcoal", "Lucida Console", "Monaco", "Lucida Sans Unicode", "Lucida Grande", "MS Sans Serif", "MS Serif", "New York",
     "Palatino Linotype", "Book Antiqua", "Palatino", "Tahoma", "Times New Roman", "Times", "Trebuchet MS", "Verdana"];
