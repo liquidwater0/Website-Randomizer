@@ -1,7 +1,3 @@
-let singleWords;
-//This is here so check states load in properly
-chrome.storage.sync.get({}, items => singleWords = getEnabled("singleWords"));
-
 function randomizeText(nodes) {
     nodes.forEach(node => node.nodeValue = getRandomText());
 }
@@ -16,7 +12,9 @@ function getRandomText() {
 
     const words = randomText.split(" ");
 
-    if (singleWords) randomText = words[Math.floor(Math.random() * words.length)];
+    if (getEnabled("singleWords")) {
+        randomText = words[Math.floor(Math.random() * words.length)];
+    }
 
     return randomText;
 }
