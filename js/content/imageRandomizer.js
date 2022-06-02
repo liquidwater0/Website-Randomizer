@@ -1,6 +1,4 @@
-function imageRandomizer(nodes) {
-    const images = nodes.images;
-
+function imageRandomizer({ images }) {
     if (getEnabled("randomImages")) {
         images.forEach(image => {
             const randomImage = staticImages[Math.floor(Math.random() * staticImages.length)];
