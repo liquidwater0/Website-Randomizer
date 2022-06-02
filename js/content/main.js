@@ -6,12 +6,10 @@ setTimeout(() => {
 
     const everything = document.querySelectorAll("body *");
     nodes = getNodes(everything);
-    activateAll(nodes);
+    activateAll();
 }, 10);
 
-function activateAll(nodes) {
-    if(isAllDisabled()) return;
-
+function activateAll() {
     removeArrayDuplicates();
     if (getEnabled("imageEnabled")) imageRandomizer(nodes);
     if (getEnabled("textEnabled")) textRandomizer(nodes);
@@ -32,7 +30,7 @@ const observer = new MutationObserver(entries => {
         if (isIcon) return;
 
         nodes = getNodes(addedNodes);
-        activateAll(nodes);
+        activateAll();
     });
 });
 
