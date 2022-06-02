@@ -34,7 +34,7 @@ function randomStyle(property, value) {
 
     elements.forEach(element => {
         if (!element || !element.tagName) return;
-        element.style[property] = value();
+        element.style[property] = value(); //Value is a function so each element gets different values.
     });
 }
 
