@@ -1,0 +1,38 @@
+{
+	"manifest_version": 3,
+	"name": "Website Randomizer",
+	"version": "0",
+	"description": "Website Randomizer is a fun little extension that randomizes Images, Text, and Elements on websites.",
+	"permissions": ["storage"],
+	"icons": {
+		"16": "wr_16.png",
+		"32": "wr_32.png",
+		"48": "wr_48.png",
+		"128": "wr_128.png"
+	},
+	"action": {
+		"default_popup": "popup.html",
+		"default_icon": "wr_16.png"
+	},
+	"options_ui": {
+		"page": "options.html",
+		"open_in_tab": false
+	},
+	"background": {
+		"service_worker": "background.js"
+	},
+	"content_scripts": [
+		{
+			"matches": ["<all_urls>"],
+			"js": [
+				"js/content/utilities.js",
+				"js/content/textUtilities.js",
+				"js/content/imageRandomizer.js",
+				"js/content/textRandomizer.js",
+				"js/content/elementRandomizer.js",
+				"js/content/main.js"
+			],
+			"css": ["css/content/styles.css"]
+		}
+	]
+}

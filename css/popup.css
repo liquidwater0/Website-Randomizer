@@ -1,0 +1,59 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --primary-color-1: rgb(0, 160, 255);
+    --primary-color-2: rgb(0, 160, 255, 0.75);
+}
+
+html[data-theme="dark"] {
+    --theme-1: rgb(45, 45, 45);
+    --text-color: white;
+}
+
+html[data-theme="light"] {
+    --theme-1: white;
+    --text-color: black;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: var(--theme-1);
+    width: 220px;
+    height: 180px;
+}
+
+button {
+    background-color: var(--primary-color-1) !important;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px !important;
+}
+
+button:hover {
+    background-color: var(--primary-color-2) !important;
+}
+
+.heading {
+    color: var(--text-color);
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.version {
+    position: fixed;
+    top: 7px;
+    left: 7px;
+    font-weight: bold;
+    font-size: 17px;
+    color: var(--text-color);
+}
