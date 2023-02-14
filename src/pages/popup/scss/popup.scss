@@ -1,0 +1,37 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto", sans-serif !important;
+}
+
+body {
+    width: 220px;
+    height: 180px;
+    padding: 0.75rem;
+}
+
+#popup {
+    display: flex;
+    position: relative;
+    height: 100%;
+}
+
+.version-text {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.extension-title {
+    text-align: center;
+    margin-bottom: 1rem;
+    line-height: 1.1;
+}
