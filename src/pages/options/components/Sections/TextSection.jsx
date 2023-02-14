@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useUpdateEffect } from '../../hooks/useUpdateEffect';
 import { Button } from '@mui/material';
 import SubSection from "../Sections/SubSection";
@@ -6,7 +6,6 @@ import Checkbox from "../Checkbox";
 import { textCheckboxes } from '../../../../checkboxes';
 
 export default function TextSection({ saveToggle }) {
-    const firstRender = useRef(true);
     const [options, setOptions] = useState(textCheckboxes);
     const [toggleAll, setToggleAll] = useState(true);
 
