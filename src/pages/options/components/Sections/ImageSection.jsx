@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useUpdateEffect } from '../../hooks/useUpdateEffect';
 import { Button } from '@mui/material';
 import Checkbox from "../Checkbox";
 import { imageCheckboxes } from '../../../../checkboxes';
 
 export default function ImageSection({ saveToggle }) {
-    const firstRender = useRef(true);
     const [options, setOptions] = useState(imageCheckboxes);
     const [toggleAll, setToggleAll] = useState(true);
 
@@ -14,12 +14,7 @@ export default function ImageSection({ saveToggle }) {
         });
     }, []);
 
-    useEffect(() => {
-        if (firstRender.current) {
-            firstRender.current = false;
-            return;
-        }
-
+    useUpdateEffect(() => {
         const storage = {};
 
         options.forEach(({ storageKey, checked }) => {

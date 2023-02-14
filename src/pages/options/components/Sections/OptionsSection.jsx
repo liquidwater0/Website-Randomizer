@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useUpdateEffect } from '../../hooks/useUpdateEffect';
 import SubSection from './SubSection';
 import Checkbox from "../Checkbox";
 import { optionsCheckboxes } from '../../../../checkboxes';
 
 export default function OptionsSection({ saveToggle }) {
-    const firstRender = useRef(true);
     const [options, setOptions] = useState(optionsCheckboxes);
 
     useEffect(() => {
@@ -13,12 +13,7 @@ export default function OptionsSection({ saveToggle }) {
         });
     }, []);
 
-    useEffect(() => {
-        if (firstRender.current) {
-            firstRender.current = false;
-            return;
-        }
-
+    useUpdateEffect(() => {
         const storage = {};
 
         options.forEach(({ storageKey, checked }) => {

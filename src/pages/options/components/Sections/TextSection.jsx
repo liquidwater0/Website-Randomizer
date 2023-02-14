@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useUpdateEffect } from '../../hooks/useUpdateEffect';
 import { Button } from '@mui/material';
 import SubSection from "../Sections/SubSection";
 import Checkbox from "../Checkbox";
@@ -15,12 +16,7 @@ export default function TextSection({ saveToggle }) {
         });
     }, []);
 
-    useEffect(() => {
-        if (firstRender.current) {
-            firstRender.current = false;
-            return;
-        }
-
+    useUpdateEffect(() => {
         const storage = {};
 
         options.forEach(({ storageKey, checked }) => {

@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useUpdateEffect } from '../../hooks/useUpdateEffect';
 import { Button } from '@mui/material';
 import SubSection from "../Sections/SubSection";
 import Checkbox from "../Checkbox";
 import { elementCheckboxes } from '../../../../checkboxes';
 
 export default function ElementSection({ saveToggle }) {
-    const firstRender = useRef(true);
     const [options, setOptions] = useState(elementCheckboxes);
     const [toggleAll, setToggleAll] = useState(true);
 
@@ -15,12 +15,7 @@ export default function ElementSection({ saveToggle }) {
         });
     }, []);
 
-    useEffect(() => {
-        if (firstRender.current) {
-            firstRender.current = false;
-            return;
-        }
-
+    useUpdateEffect(() => {
         const storage = {};
 
         options.forEach(({ storageKey, checked }) => {
