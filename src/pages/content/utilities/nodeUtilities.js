@@ -53,12 +53,7 @@ export default function getNodes(newNodes) {
             NodeFilter.SHOW_ELEMENT,
             {
                 acceptNode: node => {
-                    const rejectedElements = ["script", "style", "noscript"];
-
-                    if (rejectedElements.some(item => item.toUpperCase() === node.parentElement.tagName) || isIcon(node)) {
-                        return NodeFilter.FILTER_SKIP;
-                    }
-
+                    if (isIcon(node)) return NodeFilter.FILTER_SKIP;
                     return NodeFilter.FILTER_ACCEPT;
                 }
             }
@@ -77,6 +72,11 @@ export default function getNodes(newNodes) {
         }
 
         while (currentElement) {
+            //Why does it work here but not in the filter function?????
+            const rejectedElements = ["script", "style", "noscript"];
+
+            if (rejectedElements.some(item => item.toUpperCase() === node.tagName)) return;
+
             if (currentElement.tagName === "IMG") {
                 staticImages.push({
                     src: currentElement.src,
