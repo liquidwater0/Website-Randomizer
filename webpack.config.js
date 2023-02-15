@@ -2,7 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const config = {
-  mode: "development",
+  mode: "production",
   devtool: "cheap-module-source-map",
   entry: {
     background: path.join(__dirname, "./src/pages/background/index.js"),
