@@ -115,6 +115,7 @@ function randomize({ elements }) {
 
         elements.forEach(element => {
             const randomClassList = staticClassLists[Math.floor(Math.random() * staticClassLists.length)];
+            if (!randomClassList) return;
             element.classList = randomClassList;
         });
     });
@@ -144,6 +145,7 @@ function randomize({ elements }) {
 
         elements.forEach(element => {
             const randomID = staticIDs[Math.floor(Math.random() * staticIDs.length)];
+            if (!randomID) return;
             element.id = randomID;
         });
     });
