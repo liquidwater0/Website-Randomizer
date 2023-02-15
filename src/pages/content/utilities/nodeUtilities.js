@@ -80,8 +80,13 @@ export default function getNodes(newNodes) {
                 imageNodes.push(currentElement);
             }
 
-            staticClassLists.push(currentElement.classList);
-            staticIDs.push(currentElement.id);
+            if (currentElement.classList && currentElement.classList.toString().trim() !== "") {
+                staticClassLists.push(currentElement.classList.toString());
+            }
+
+            if (currentElement.id && currentElement.id.trim() !== "") {
+                staticIDs.push(currentElement.id);
+            }
 
             elementNodes.push(currentElement);
             currentElement = elementWalker.nextNode();
