@@ -75,7 +75,7 @@ export default function getNodes(newNodes) {
             //Why does it work here but not in the filter function?????
             const rejectedElements = ["script", "style", "noscript"];
 
-            if (rejectedElements.some(item => item.toUpperCase() === node.tagName)) return;
+            if (rejectedElements.some(item => item.toUpperCase() === currentElement.tagName)) return;
 
             if (currentElement.tagName === "IMG") {
                 staticImages.push({
