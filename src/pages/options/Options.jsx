@@ -47,6 +47,7 @@ export default function Options() {
             <Footer 
                 version={manifest.version}
                 darkTheme={darkTheme} 
+                saveToggle={saveToggle}
                 setDarkTheme={setDarkTheme} 
                 setSaveToggle={setSaveToggle}
             />
