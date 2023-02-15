@@ -15,15 +15,15 @@ import OptionsSection from "./components/Sections/OptionsSection";
 const manifest = chrome.runtime.getManifest();
 
 export default function Options() {
-    const [darkTheme, setDarkTheme] = useChromeStorageSync("darkTheme", true);
+    const [theme, setTheme] = useChromeStorageSync("theme", "dark");
     const [saveToggle, setSaveToggle] = useState(true); //This is for saving options.
 
     useEffect(() => {
-        document.documentElement.setAttribute("data-theme", darkTheme ? "dark" : "light");
-    }, [darkTheme]);
+        document.documentElement.setAttribute("data-theme", theme);
+    }, [theme]);
 
     return (
-        <ThemeProvider theme={ darkTheme ? dark : light }>
+        <ThemeProvider theme={ theme === "dark" ? dark : light }>
             <CssBaseline/>
             <Font/>
 
@@ -46,9 +46,9 @@ export default function Options() {
 
             <Footer 
                 version={manifest.version}
-                darkTheme={darkTheme} 
+                theme={theme} 
                 saveToggle={saveToggle}
-                setDarkTheme={setDarkTheme} 
+                setTheme={setTheme} 
                 setSaveToggle={setSaveToggle}
             />
         </ThemeProvider>

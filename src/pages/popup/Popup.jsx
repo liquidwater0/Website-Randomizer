@@ -8,11 +8,11 @@ import Font from "../../global components/Font";
 const manifest = chrome.runtime.getManifest();
 
 export default function Popup() {
-    const [darkTheme] = useChromeStorageSync("darkTheme", true);
+    const [theme] = useChromeStorageSync("theme", "dark");
 
     useEffect(() => {
-        document.documentElement.setAttribute("data-theme", darkTheme ? "dark" : "light");
-    }, [darkTheme]);
+        document.documentElement.setAttribute("data-theme", theme);
+    }, [theme]);
 
     function openOptionsPage() {
         if (chrome.runtime.openOptionsPage) {
@@ -23,7 +23,7 @@ export default function Popup() {
     }
 
     return (
-        <ThemeProvider theme={ darkTheme ? dark : light }>
+        <ThemeProvider theme={ theme === "dark" ? dark : light }>
             <CssBaseline/>
             <Font/>
 

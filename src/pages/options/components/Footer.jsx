@@ -6,17 +6,17 @@ import { Brightness7, Brightness4 } from '@mui/icons-material';
 export default function Footer(props) {
     const {
         version,
-        darkTheme,
+        theme,
         saveToggle,
-        setDarkTheme,
+        setTheme,
         setSaveToggle
     } = props;
 
     const [buttonText, setButtonText] = useState("Save");
 
-    const theme = useTheme();
+    const muiTheme = useTheme();
     const footerStyles = {
-        backgroundColor: theme.palette.footer
+        backgroundColor: muiTheme.palette.footer
     }
 
     useUpdateEffect(() => {
@@ -45,9 +45,9 @@ export default function Footer(props) {
                 size="large"
                 aria-label='theme toggle button'
                 title="toggle theme"
-                onClick={() => setDarkTheme(prev => !prev)}
+                onClick={() => setTheme(prev => prev === "dark" ? "light" : "dark")}
             >
-                { darkTheme ? <Brightness7/> : <Brightness4/> }
+                { theme === "dark" ? <Brightness7/> : <Brightness4/> }
             </IconButton>
         </footer>
     );
