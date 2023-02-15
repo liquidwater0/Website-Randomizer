@@ -127,9 +127,10 @@ function randomize({ elements }) {
 
     getEnabled("randomDisabled").then(enabled => {
         if (!enabled) return;
-        elements.forEach(input => {
-            if (input.tagName !== "INPUT") return;
 
+        elements.forEach(input => {
+            if (input.tagName !== "INPUT" && input.tagName !== "BUTTON") return;
+            
             const random = booleans[Math.floor(Math.random() * booleans.length)];
             if (random) input.setAttribute("disabled", "");
         });
