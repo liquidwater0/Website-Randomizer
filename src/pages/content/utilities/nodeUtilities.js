@@ -39,7 +39,9 @@ export default function getNodes(newNodes) {
                     if (
                         rejectedElements.some(item => item.toUpperCase() === node.parentElement.tagName) || 
                         node.nodeValue.trim() === ""
-                    ) return NodeFilter.FILTER_SKIP;
+                    ) {
+                        return NodeFilter.FILTER_SKIP;
+                    }
 
                     return NodeFilter.FILTER_ACCEPT;
                 }
@@ -51,7 +53,12 @@ export default function getNodes(newNodes) {
             NodeFilter.SHOW_ELEMENT,
             {
                 acceptNode: node => {
-                    if (isIcon(node)) return NodeFilter.FILTER_SKIP;
+                    const rejectedElements = ["script", "style", "noscript"];
+
+                    if (rejectedElements.some(item => item.toUpperCase() === node.parentElement.tagName) || isIcon(node)) {
+                        return NodeFilter.FILTER_SKIP;
+                    }
+
                     return NodeFilter.FILTER_ACCEPT;
                 }
             }
