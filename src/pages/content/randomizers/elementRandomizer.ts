@@ -128,8 +128,12 @@ function randomize({ elements }: Nodes) {
     getEnabled("randomDisabled").then(enabled => {
         if (!enabled) return;
 
-        elements.forEach((input: HTMLInputElement | HTMLButtonElement) => {
-            if (input.tagName !== "INPUT" && input.tagName !== "BUTTON") return;
+        elements.forEach((input: HTMLInputElement | HTMLButtonElement | HTMLTextAreaElement) => {
+            if (
+                input.tagName !== "INPUT" && 
+                input.tagName !== "BUTTON" && 
+                input.tagName !== "TEXTAREA"
+            ) return;
             
             const random = booleans[Math.floor(Math.random() * booleans.length)];
             if (random) input.setAttribute("disabled", "");
