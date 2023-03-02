@@ -1,5 +1,3 @@
-import { isIcon } from "./utilities";
-
 export type Nodes = { 
     images: HTMLImageElement[],
     text: Node[],
@@ -54,9 +52,7 @@ export default function getNodes(newNodes: NodeListOf<HTMLElement> | Node[]) {
                     if (
                         rejectedElements.some(item => item.toUpperCase() === node.parentElement.tagName) || 
                         node.nodeValue.trim() === ""
-                    ) {
-                        return NodeFilter.FILTER_SKIP;
-                    }
+                    ) return NodeFilter.FILTER_SKIP;
 
                     return NodeFilter.FILTER_ACCEPT;
                 }
@@ -67,8 +63,7 @@ export default function getNodes(newNodes: NodeListOf<HTMLElement> | Node[]) {
             node,
             NodeFilter.SHOW_ELEMENT,
             {
-                acceptNode: node => {
-                    if (isIcon(node)) return NodeFilter.FILTER_SKIP;
+                acceptNode: () => {
                     return NodeFilter.FILTER_ACCEPT;
                 }
             }
@@ -87,8 +82,7 @@ export default function getNodes(newNodes: NodeListOf<HTMLElement> | Node[]) {
         }
 
         while (currentElement) {
-            //Why does it work here but not in the filter function?????
-            const rejectedElements = ["script", "style", "noscript"];
+            const rejectedElements = ["script", "style", "noscript", "title"];
 
             if (rejectedElements.some(item => item.toUpperCase() === (currentElement as HTMLElement).tagName)) return;
 

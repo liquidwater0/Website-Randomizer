@@ -11,6 +11,7 @@ setTimeout(() => {
         if (allDisabled) return;
 
         const everything = document.querySelectorAll<HTMLElement>("body *");
+
         getNodes(everything);
         activateAll();
     });
@@ -31,10 +32,9 @@ const observer = new MutationObserver(entries => {
         const mutations = entries;
 
         mutations.forEach(mutation => {
-            const addedNodes = [...mutation.addedNodes];
-            const isNodeIcon = addedNodes.some(node => isIcon(node));
+            const addedNodes = [...mutation.addedNodes].filter(node => !isIcon(node));
 
-            if (isNodeIcon) return;
+            if (addedNodes.length <= 0) return;
 
             getNodes(addedNodes);
             activateAll();
