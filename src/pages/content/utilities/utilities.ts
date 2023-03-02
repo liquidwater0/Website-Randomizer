@@ -22,7 +22,7 @@ export async function isAllDisabled() {
     });
 }
 
-export function randomStyle(nodes, property, value) {
+export function randomStyle(nodes: HTMLElement[], property: any, value: () => any) {
     const elements = [...nodes]; //convert to array so forEach doesn't break if only one element is passed in.
 
     elements.forEach(element => {
@@ -31,7 +31,7 @@ export function randomStyle(nodes, property, value) {
     });
 }
 
-export function getRandomNumber(min, max) {
+export function getRandomNumber(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
@@ -44,12 +44,15 @@ export function removeArrayDuplicates() {
 }
 
 //https://www.w3docs.com/snippets/javascript/how-to-convert-rgb-to-hex-and-vice-versa.html
-export function rgbToHex(red, green, blue) {
+export function rgbToHex(red: number, green: number, blue: number) {
     return `#${((1 << 24) + (red << 16) + (green << 8) + blue).toString(16).slice(1)}`;
 }
 
-export function isIcon(element) {
-    return element.tagName === "I" && element.classList.contains("material-icons");
+export function isIcon(element: Element | HTMLElement | Node) {
+    return (
+        (element as HTMLElement).tagName === "I" && 
+        (element as HTMLElement).classList.contains("material-icons")
+    );
 }
 
 export function getRandomDate() {

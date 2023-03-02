@@ -3,24 +3,24 @@ import { useUpdateEffect } from '../../hooks/useUpdateEffect';
 import { Button } from '@mui/material';
 import SubSection from "../Sections/SubSection";
 import Checkbox from "../Checkbox";
-import { elementCheckboxes } from '../../../../checkboxes';
+import { textCheckboxes } from '../../../../checkboxes';
 
-export default function ElementSection({ saveToggle }) {
-    const [options, setOptions] = useState(elementCheckboxes);
+export default function TextSection({ saveToggle }: { saveToggle: boolean }) {
+    const [options, setOptions] = useState(textCheckboxes);
     const [toggleAll, setToggleAll] = useState(true);
 
     useEffect(() => {
-        chrome.storage.sync.get({ elementCheckedStates: elementCheckboxes }, items => {
-            setOptions(items.elementCheckedStates);
+        chrome.storage.sync.get({ textCheckedStates: textCheckboxes }, items => {
+            setOptions(items.textCheckedStates);
         });
     }, []);
 
     useUpdateEffect(() => {
-        const storage = {};
+        const storage: { textCheckedStates?: typeof options } = {};
 
         options.forEach(({ storageKey, checked }) => {
-            storage.elementCheckedStates = options;
-            storage[storageKey] = checked;
+            storage.textCheckedStates = options;
+            // storage[storageKey] = checked;
         });
 
         chrome.storage.sync.set(storage);
@@ -30,7 +30,7 @@ export default function ElementSection({ saveToggle }) {
         setOptions(prev => {
             const copy = [...prev];
             copy.forEach(checkbox => {
-                if (checkbox.storageKey === "elementEnabled") return;
+                if (checkbox.storageKey === "textEnabled") return;
                 checkbox.checked = toggleAll;
             });
             return copy;
@@ -63,23 +63,6 @@ export default function ElementSection({ saveToggle }) {
                     );
                 })
             }
-            <SubSection text="Attributes">
-                {
-                    options.map(({ name, checked, subSection }, index) => {
-                        if (subSection !== "attributes") return;
-                        return (
-                            <Checkbox
-                                key={name}
-                                index={index}
-                                setOptions={setOptions}
-                                label={name}
-                                ariaLabel={name}
-                                checked={checked}
-                            />
-                        );
-                    })
-                }
-            </SubSection>
             <SubSection text="Styles">
                 {
                     options.map(({ name, checked, subSection }, index) => {

@@ -16,7 +16,7 @@ const manifest = chrome.runtime.getManifest();
 
 export default function Options() {
     const [theme, setTheme] = useChromeStorageSync("theme", "dark");
-    const [saveToggle, setSaveToggle] = useState(true); //This is for saving options.
+    const [saveToggle, setSaveToggle] = useState<boolean>(true); //This is for saving options.
 
     useEffect(() => {
         document.documentElement.setAttribute("data-theme", theme);

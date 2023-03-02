@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { useTheme } from '@mui/material';
 
-export default function Section({ children, text, id }) {
+type SectionProps = {
+    children: ReactNode,
+    text: string,
+    id: string
+}
+
+export default function Section({ children, text, id }: SectionProps) {
     const theme = useTheme();
     const headingStyles = {
-        backgroundColor: theme.palette.sectionHeading
+        backgroundColor: (theme.palette as any).sectionHeading
     }
 
     return (

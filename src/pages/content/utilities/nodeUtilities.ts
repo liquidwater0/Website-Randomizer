@@ -1,32 +1,47 @@
 import { isIcon } from "./utilities";
 
-export let staticImages = [];
-export let staticText = [];
-export let staticClassLists = [];
-export let staticIDs = [];
+export type Nodes = { 
+    images: HTMLImageElement[],
+    text: Node[],
+    elements: HTMLElement[]
+}
 
-export let nodes = {};
+type Image = { src: string, srcset: string, alt: string };
+type Text = string;
+type Class = string;
+type ID = string;
 
-export function updateStaticImages(newArray) {
+export let staticImages: Image[] = [];
+export let staticText: Text[] = [];
+export let staticClassLists: Class[] = [];
+export let staticIDs: ID[] = [];
+
+export let nodes: Nodes = {
+    images: [],
+    text: [],
+    elements: [],
+};
+
+export function updateStaticImages(newArray: Image[]) {
     staticImages = newArray;
 }
 
-export function updateStaticText(newArray) {
+export function updateStaticText(newArray: Text[]) {
     staticText = newArray;
 }
 
-export function updateStaticClassLists(newArray) {
+export function updateStaticClassLists(newArray: Class[]) {
     staticClassLists = newArray;
 }
 
-export function updateStaticIDs(newArray) {
+export function updateStaticIDs(newArray: ID[]) {
     staticIDs = newArray;
 }
 
-export default function getNodes(newNodes) {
-    const imageNodes = [];
-    const textNodes = [];
-    const elementNodes = [];
+export default function getNodes(newNodes: NodeListOf<HTMLElement> | Node[]) {
+    const imageNodes: HTMLImageElement[] = [];
+    const textNodes: Node[] = [];
+    const elementNodes: HTMLElement[] = [];
 
     newNodes.forEach(node => {
         const textWalker = document.createTreeWalker(
@@ -75,27 +90,29 @@ export default function getNodes(newNodes) {
             //Why does it work here but not in the filter function?????
             const rejectedElements = ["script", "style", "noscript"];
 
-            if (rejectedElements.some(item => item.toUpperCase() === currentElement.tagName)) return;
+            if (rejectedElements.some(item => item.toUpperCase() === (currentElement as HTMLElement).tagName)) return;
 
-            if (currentElement.tagName === "IMG") {
+            if ((currentElement as HTMLImageElement).tagName === "IMG") {
                 staticImages.push({
-                    src: currentElement.src,
-                    srcset: currentElement.srcset,
-                    alt: currentElement.alt
+                    src: (currentElement as HTMLImageElement).src,
+                    srcset: (currentElement as HTMLImageElement).srcset,
+                    alt: (currentElement as HTMLImageElement).alt
                 });
 
-                imageNodes.push(currentElement);
+                imageNodes.push((currentElement as HTMLImageElement));
             }
 
-            if (currentElement.classList && currentElement.classList.toString().trim() !== "") {
-                staticClassLists.push(currentElement.classList.toString());
-            }
+            if (
+                (currentElement as HTMLElement).classList && 
+                (currentElement as HTMLElement).classList.toString().trim() !== ""
+            ) staticClassLists.push((currentElement as HTMLElement).classList.toString());
 
-            if (currentElement.id && currentElement.id.trim() !== "") {
-                staticIDs.push(currentElement.id);
-            }
+            if (
+                (currentElement as HTMLElement).id && 
+                (currentElement as HTMLElement).id.trim() !== ""
+            ) staticIDs.push((currentElement as HTMLElement).id);
 
-            elementNodes.push(currentElement);
+            elementNodes.push((currentElement as HTMLElement));
             currentElement = elementWalker.nextNode();
         }
     });

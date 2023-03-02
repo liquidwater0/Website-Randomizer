@@ -7,11 +7,10 @@ import elementRandomizer from "./randomizers/elementRandomizer";
 
 //find a better way to do this
 setTimeout(() => {
-    isAllDisabled()
-    .then(allDisabled => {
+    isAllDisabled().then(allDisabled => {
         if (allDisabled) return;
 
-        const everything = document.querySelectorAll("body *");
+        const everything = document.querySelectorAll<HTMLElement>("body *");
         getNodes(everything);
         activateAll();
     });
@@ -26,8 +25,7 @@ function activateAll() {
 }
 
 const observer = new MutationObserver(entries => {
-    isAllDisabled()
-    .then(allDisabled => {
+    isAllDisabled().then(allDisabled => {
         if (allDisabled) return;
 
         const mutations = entries;

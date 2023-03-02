@@ -1,4 +1,11 @@
-export const imageCheckboxes = [
+export type CheckboxOption = {
+    name: string,
+    storageKey: string,
+    subSection: string | null,
+    checked: boolean
+}
+
+export const imageCheckboxes: CheckboxOption[] = [
     {
         name: "Enabled",
         storageKey: "imageEnabled",
@@ -22,7 +29,7 @@ export const imageCheckboxes = [
     }
 ];
 
-export const textCheckboxes = [
+export const textCheckboxes: CheckboxOption[] = [
     {
         name: "Enabled",
         storageKey: "textEnabled",
@@ -141,7 +148,7 @@ export const textCheckboxes = [
     }
 ];
 
-export const elementCheckboxes = [
+export const elementCheckboxes: CheckboxOption[] = [
     {
         name: "Enabled",
         storageKey: "elementEnabled",
@@ -325,7 +332,7 @@ export const elementCheckboxes = [
     }
 ];
 
-export const optionsCheckboxes = [
+export const optionsCheckboxes: CheckboxOption[] = [
     {
         name: "Single Words",
         storageKey: "singleWords",

@@ -6,7 +6,7 @@ import {
     isIcon
 } from "../utilities/utilities";
 import { getRandomText } from "../utilities/textUtilities";
-import { staticImages, staticClassLists, staticIDs } from "../utilities/nodeUtilities";
+import { staticImages, staticClassLists, staticIDs, Nodes } from "../utilities/nodeUtilities";
 
 Promise.all([
     getEnabled("elementEnabled"), 
@@ -22,14 +22,14 @@ Promise.all([
     }
 });
 
-export default function elementRandomizer(nodes) {
+export default function elementRandomizer(nodes: Nodes) {
     getEnabled("elementEnabled").then(enabled => {
         if (!enabled) return;
         randomize(nodes);
     });
 }
 
-function randomize({ elements }) {
+function randomize({ elements }: Nodes) {
     const googleIcons = ["3d_rotation", "ac_unit", "access_alarm", "access_alarms", "access_time", "accessibility", "accessible", "account_balance", "account_balance_wallet", "account_box", "account_circle", "adb", "add", "add_a_photo", "add_alarm", "add_alert", "add_box", "add_circle", "add_circle_outline", "add_location", "add_shopping_cart", "add_to_photos", "add_to_queue", "adjust", "airline_seat_flat", "airline_seat_flat_angled", "airline_seat_individual_suite","airline_seat_legroom_extra", "airline_seat_legroom_normal", "airline_seat_legroom_reduced", "airline_seat_recline_extra", "airline_seat_recline_normal", "airplanemode_active", "airplanemode_inactive", "airplay", "airport_shuttle", "alarm", "alarm_add", "alarm_off", "alarm_on", "album", "all_inclusive", "all_out", "android", "announcement", "apps", "archive", "arrow_back", "arrow_downward", "arrow_drop_down", "arrow_drop_down_circle", "arrow_drop_up", "arrow_forward", "arrow_upward", "art_track", "aspect_ratio", "assessment", "assignment", "assignment_ind", "assignment_late", "assignment_return", "assignment_returned", "assignment_turned_in", "assistant", 
     "assistant_photo", "attach_file", "attach_money", "attachment", "audiotrack", "autorenew", "av_timer", "backspace", "backup", "battery_alert", "battery_charging_full", "battery_full", "battery_std", "battery_unknown", "beach_access", "beenhere", "block", "bluetooth", "bluetooth_audio", "bluetooth_connected", "bluetooth_disabled", "bluetooth_searching", "blur_circular", "blur_linear", "blur_off", "blur_on", "book", "bookmark", "bookmark_border", "border_all", "border_bottom", "border_clear", "border_color", "border_horizontal", "border_inner", "border_left", "border_outer", "border_right", "border_style", "border_top", "border_vertical", "branding_watermark", "brightness_1", "brightness_2", "brightness_3", "brightness_4", "brightness_5", "brightness_6", "brightness_7", "brightness_auto", "brightness_high", "brightness_low", "brightness_medium", "broken_image", "brush", "bubble_chart", "bug_report", "build", "burst_mode", "business", "business_center", "cached", "cake", "call", "call_end", "call_made", "call_merge", "call_missed", "call_missed_outgoing", "call_received", "call_split", "call_to_action", "camera", "camera_alt", 
     "camera_enhance", "camera_front", "camera_rear", "camera_roll", "cancel", "card_giftcard", "card_membership", "card_travel", "casino", "cast", "cast_connected", "center_focus_strong", "center_focus_weak", "change_history", "chat", "chat_bubble", "chat_bubble_outline", "check", "check_box", "check_box_outline_blank", "check_circle", "chevron_left", "chevron_right", "child_care", "child_friendly", "chrome_reader_mode", "class", "clear", "clear_all", "close", "closed_caption", "cloud", "cloud_circle", "cloud_done", "cloud_download", "cloud_off", "cloud_queue", "cloud_upload", "code", "collections", "collections_bookmark", "color_lens", "colorize", "comment", "compare", "compare_arrows", "computer", "confirmation_number", "contact_mail", "contact_phone", "contacts", "content_copy", "content_cut", "content_paste", "control_point", "control_point_duplicate", "copyright", "create", "create_new_folder", "credit_card", "crop", "crop_16_9", "crop_3_2", "crop_5_4", "crop_7_5", "crop_din", "crop_free", "crop_landscape", "crop_original", "crop_portrait", "crop_rotate", "crop_square", "dashboard", "data_usage", "date_range", "dehaze", 
@@ -63,7 +63,7 @@ function randomize({ elements }) {
     getEnabled("randomCheckedStates").then(enabled => {
         if (!enabled) return;
 
-        elements.forEach(input => {
+        elements.forEach((input: HTMLInputElement) => {
             if (input.tagName !== "INPUT") return;
 
             if (input.type === "checkbox" || input.type === "radio") {
@@ -85,7 +85,7 @@ function randomize({ elements }) {
             //If element has an icon already then skip it
             if (hasIcons) return;
             
-            const randomInsertPosition = insertPositions[Math.floor(Math.random() * insertPositions.length)];
+            const randomInsertPosition: any = insertPositions[Math.floor(Math.random() * insertPositions.length)];
             const randomIcon = `<i class='material-icons'>${googleIcons[Math.floor(Math.random() * googleIcons.length)]}</i>`;
             
             element.insertAdjacentHTML(randomInsertPosition, randomIcon);
@@ -95,10 +95,10 @@ function randomize({ elements }) {
     getEnabled("randomInputValues").then(enabled => {
         if (!enabled) return;
 
-        elements.forEach(input => {
+        elements.forEach((input: HTMLInputElement) => {
             if (input.tagName !== "INPUT") return;
 
-            if (input.type === "range") input.value = getRandomNumber(0, 100);
+            if (input.type === "range") input.value = getRandomNumber(0, 100).toString();
 
             if (input.type === "color") {
                 const randomRed = getRandomNumber(0, 255);
@@ -116,19 +116,19 @@ function randomize({ elements }) {
         elements.forEach(element => {
             const randomClassList = staticClassLists[Math.floor(Math.random() * staticClassLists.length)];
             if (!randomClassList) return;
-            element.classList = randomClassList;
+            (element as any).classList = randomClassList; //figure out how to not use any
         });
     });
 
     getEnabled("randomContentEditable").then(enabled => {
         if (!enabled) return;
-        elements.forEach(element => element.contentEditable = booleans[Math.floor(Math.random() * booleans.length)]);
+        elements.forEach(element => element.contentEditable = booleans[Math.floor(Math.random() * booleans.length)].toString());
     });
 
     getEnabled("randomDisabled").then(enabled => {
         if (!enabled) return;
 
-        elements.forEach(input => {
+        elements.forEach((input: HTMLInputElement | HTMLButtonElement) => {
             if (input.tagName !== "INPUT" && input.tagName !== "BUTTON") return;
             
             const random = booleans[Math.floor(Math.random() * booleans.length)];
@@ -154,7 +154,7 @@ function randomize({ elements }) {
     getEnabled("randomListReversed").then(enabled => {
         if (!enabled) return;
 
-        elements.forEach(ol => {
+        elements.forEach((ol: HTMLOListElement) => {
             if (ol.tagName !== "OL") return;
 
             const random = booleans[Math.floor(Math.random() * booleans.length)];
@@ -165,7 +165,7 @@ function randomize({ elements }) {
     getEnabled("randomListStart").then(enabled => {
         if (!enabled) return;
 
-        elements.forEach(ol => {
+        elements.forEach((ol: HTMLOListElement) => {
             if (ol.tagName !== "OL") return;
 
             const liElements = ol.querySelectorAll("li");
@@ -176,7 +176,7 @@ function randomize({ elements }) {
     getEnabled("randomMaxLength").then(enabled => {
         if (!enabled) return;
 
-        elements.forEach(input => {
+        elements.forEach((input: HTMLInputElement | HTMLTextAreaElement) => {
             input.maxLength = getRandomNumber(1, 50);
         });
     });
@@ -184,7 +184,7 @@ function randomize({ elements }) {
     getEnabled("randomOptionSelected").then(enabled => {
         if (!enabled) return;
 
-        elements.forEach(select => {
+        elements.forEach((select: HTMLSelectElement) => {
             if (select.tagName !== "SELECT") return;
 
             const options = select.querySelectorAll("option");
@@ -213,7 +213,7 @@ function randomize({ elements }) {
     getEnabled("randomType").then(enabled => {
         if (!enabled) return;
 
-        elements.forEach(input => {
+        elements.forEach((input: HTMLInputElement) => {
             if (input.tagName !== "INPUT") return;
             input.type = types[Math.floor(Math.random() * types.length)];
         });

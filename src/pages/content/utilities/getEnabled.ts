@@ -1,4 +1,6 @@
-const allCheckedStates = new Promise((resolve, reject) => {
+import { CheckboxOption } from "../../../checkboxes";
+
+const allCheckedStates: Promise<CheckboxOption[]> = new Promise((resolve, reject) => {
     chrome.storage.sync.get({ 
         imageCheckedStates: [], textCheckedStates: [], elementCheckedStates: [], optionsCheckedStates: [] 
     }, items => {
@@ -12,7 +14,7 @@ const allCheckedStates = new Promise((resolve, reject) => {
 });
 
 async function getMap() {
-    const map = new Map();
+    const map: Map<string, boolean> = new Map();
 
     [...await allCheckedStates].forEach(({ storageKey, checked }) => {
         map.set(storageKey, checked);
@@ -21,7 +23,7 @@ async function getMap() {
     return map;
 }
 
-export default async function getEnabled(storageKey) {
+export default async function getEnabled(storageKey: string) {
     const checkedStatesMap = await getMap();
 
     if (!checkedStatesMap.has(storageKey)) {

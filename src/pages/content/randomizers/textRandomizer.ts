@@ -1,18 +1,19 @@
 import getEnabled from "../utilities/getEnabled";
 import { getRandomNumber, getRandomDate, randomStyle } from "../utilities/utilities";
 import { getRandomText, randomizeText, shuffleText } from "../utilities/textUtilities";
+import { Nodes } from "../utilities/nodeUtilities";
 
-let titleChanged = false;
-let textSelectActivated = false;
+let titleChanged: boolean = false;
+let textSelectActivated: boolean = false;
 
-export default function textRandomizer(nodes) {
+export default function textRandomizer(nodes: Nodes) {
     getEnabled("textEnabled").then(enabled => {
         if (!enabled) return;
         randomize(nodes);
     });
 }
 
-function randomize({ text, elements }) {
+function randomize({ text, elements }: Nodes) {
     const fonts = ["Arial", "Helvetica", "sans-serif", "Gadget", "Bookman Old Style", "serif", "Comic Sans MS", "cursive", "Courier", "monospace",
     "Garamond", "Georgia", "Impact", "Charcoal", "Lucida Console", "Monaco", "Lucida Sans Unicode", "Lucida Grande", "MS Sans Serif", "MS Serif", "New York",
     "Palatino Linotype", "Book Antiqua", "Palatino", "Tahoma", "Times New Roman", "Times", "Trebuchet MS", "Verdana"];
@@ -26,7 +27,7 @@ function randomize({ text, elements }) {
     getEnabled("randomDates").then(enabled => {
         if (!enabled) return;
 
-        elements.forEach(input => {
+        elements.forEach((input: HTMLInputElement) => {
             if (input.tagName !== "INPUT") return;
 
             if (input.type === "date") {
@@ -76,7 +77,7 @@ function randomize({ text, elements }) {
         if (!enabled) return;
 
         getEnabled("singleWords").then(singleWords => {
-            elements.forEach(input => {
+            elements.forEach((input: HTMLInputElement | HTMLTextAreaElement) => {
                 input.placeholder = getRandomText(singleWords);
             });
         });
@@ -86,14 +87,14 @@ function randomize({ text, elements }) {
         if (!enabled) return;
 
         getEnabled("singleWords").then(singleWords => {
-            elements.forEach(input => {
+            elements.forEach((input: HTMLInputElement | HTMLTextAreaElement) => {
                 const textFieldInputs = ["email", "password", "search", "tel", "text", "url"];
 
                 if (textFieldInputs.some(type => input.type === type) || input.tagName === "TEXTAREA") {
                     input.value = getRandomText(singleWords);
                 }
                 
-                if (input.type === "number") input.value = getRandomNumber(0, 100);
+                if (input.type === "number") input.value = getRandomNumber(0, 100).toString();
             });
         });
     });

@@ -4,10 +4,10 @@ import { useTheme, ButtonGroup, Button } from '@mui/material';
 export default function Header() {
     const theme = useTheme();
     const headerStyles = {
-        backgroundColor: theme.palette.header
+        backgroundColor: (theme.palette as any).header
     }
 
-    function scrollToSection(selector) {
+    function scrollToSection(selector: string) {
         const section = document.querySelector(selector);
         if (!section) return;
         section.scrollIntoView();

@@ -1,7 +1,7 @@
 import getEnabled from "./getEnabled";
 import { staticText } from "./nodeUtilities";
 
-export function randomizeText(nodes) {
+export function randomizeText(nodes: Node[]) {
     getEnabled("singleWords").then(singleWords => {
         nodes.forEach(node => {
             node.nodeValue = getRandomText(singleWords);
@@ -9,7 +9,7 @@ export function randomizeText(nodes) {
     });
 }
 
-export function shuffleText(nodes) {
+export function shuffleText(nodes: Node[]) {
     //Single words check has to be here so Shuffle Text works with Random Text
     getEnabled("singleWords").then(() => {
         nodes.forEach(node => {
@@ -18,7 +18,7 @@ export function shuffleText(nodes) {
     });
 }
 
-export function getRandomText(singleWords = false) {
+export function getRandomText(singleWords: boolean = false) {
     let randomText = staticText[Math.floor(Math.random() * staticText.length)];
     if (!randomText) return "";
 
@@ -28,7 +28,7 @@ export function getRandomText(singleWords = false) {
     return randomText;
 }
 
-function getShuffledText(text) {
+function getShuffledText(text: string) {
     const words = text.split(" ");
     const shuffledText = words
         .map(value => ({ value, sort: Math.random() }))

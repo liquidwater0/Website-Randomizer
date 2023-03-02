@@ -4,7 +4,7 @@ import SubSection from './SubSection';
 import Checkbox from "../Checkbox";
 import { optionsCheckboxes } from '../../../../checkboxes';
 
-export default function OptionsSection({ saveToggle }) {
+export default function OptionsSection({ saveToggle }: { saveToggle: boolean }) {
     const [options, setOptions] = useState(optionsCheckboxes);
 
     useEffect(() => {
@@ -14,11 +14,11 @@ export default function OptionsSection({ saveToggle }) {
     }, []);
 
     useUpdateEffect(() => {
-        const storage = {};
+        const storage: { optionsCheckedStates?: typeof options } = {};
 
         options.forEach(({ storageKey, checked }) => {
             storage.optionsCheckedStates = options;
-            storage[storageKey] = checked;
+            // storage[storageKey] = checked;
         });
 
         chrome.storage.sync.set(storage);

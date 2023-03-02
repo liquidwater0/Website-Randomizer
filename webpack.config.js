@@ -5,10 +5,10 @@ const config = {
   mode: "production",
   devtool: "cheap-module-source-map",
   entry: {
-    background: path.join(__dirname, "./src/pages/background/index.js"),
-    content: path.join(__dirname, "./src/pages/content/index.js"),
-    options: path.join(__dirname, "./src/pages/options/index.jsx"),
-    popup: path.join(__dirname, "./src/pages/popup/index.jsx"),
+    background: path.join(__dirname, "./src/pages/background/index.ts"),
+    content: path.join(__dirname, "./src/pages/content/index.ts"),
+    options: path.join(__dirname, "./src/pages/options/index.tsx"),
+    popup: path.join(__dirname, "./src/pages/popup/index.tsx"),
   },
   output: {
     publicPath: "/",
@@ -16,7 +16,7 @@ const config = {
     filename: "[name]/[name].js",
   },
   resolve: {
-    extensions: ["*", ".js", ".jsx"]
+    extensions: ["*", ".js", ".jsx", ".ts", ".tsx"]
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -55,6 +55,11 @@ const config = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: ["babel-loader"]
+      },
+      {
+        test: /\.(ts|tsx)$/,
+        exclude: /node_modules/,
+        use: ["ts-loader"]
       },
       {
         test: /\.(css|scss)$/,

@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { Checkbox as MUICheckbox, FormControlLabel } from '@mui/material';
 
-function Checkbox({ index, setOptions, label, ariaLabel, checked }) {
+type CheckboxProps = {
+    index: number,
+    setOptions: Dispatch<SetStateAction<any>>,
+    label: string,
+    ariaLabel: string,
+    checked: boolean
+}
+
+function Checkbox({ index, setOptions, label, ariaLabel, checked }: CheckboxProps) {
     function handleChange() {
-        setOptions(prev => {
+        setOptions((prev: any) => {
             const optionsCopy = [...prev];
             const currentCheckbox = optionsCopy[index];
             currentCheckbox.checked = !currentCheckbox.checked;

@@ -1,15 +1,15 @@
 import getEnabled from "../utilities/getEnabled";
 import { getRandomNumber } from "../utilities/utilities";
-import { staticImages } from "../utilities/nodeUtilities";
+import { staticImages, Nodes } from "../utilities/nodeUtilities";
 
-export default function imageRandomizer(nodes) {
+export default function imageRandomizer(nodes: Nodes) {
     getEnabled("imageEnabled").then(enabled => {
         if (!enabled) return;
         randomize(nodes);
     });
 }
 
-function randomize({ images }) {
+function randomize({ images }: Nodes) {
     getEnabled("randomImages").then(enabled => {
         if (!enabled) return;
 

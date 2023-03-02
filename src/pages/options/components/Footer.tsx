@@ -1,26 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, Dispatch, SetStateAction } from 'react';
 import { useUpdateEffect } from '../hooks/useUpdateEffect';
 import { Button, IconButton, useTheme } from '@mui/material';
 import { Brightness7, Brightness4 } from '@mui/icons-material';
 
-export default function Footer(props) {
-    const {
-        version,
-        theme,
-        saveToggle,
-        setTheme,
-        setSaveToggle
-    } = props;
+type FooterProps = {
+    version: string,
+    theme: string,
+    saveToggle: boolean,
+    setTheme: Dispatch<SetStateAction<string>>,
+    setSaveToggle: Dispatch<SetStateAction<boolean>>
+}
 
-    const [buttonText, setButtonText] = useState("Save");
+export default function Footer({ version, theme, saveToggle, setTheme, setSaveToggle }: FooterProps) {
+    const [buttonText, setButtonText] = useState<string>("Save");
 
     const muiTheme = useTheme();
     const footerStyles = {
-        backgroundColor: muiTheme.palette.footer
+        backgroundColor: (muiTheme.palette as any).footer
     }
 
     useUpdateEffect(() => {
-        let timeout;
+        let timeout: NodeJS.Timeout;
 
         setButtonText("Saved!");
         timeout = setTimeout(() => setButtonText("Save"), 3000);
