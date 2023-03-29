@@ -36,11 +36,6 @@ export const textCheckboxes: CheckboxOption[] = [
         subSection: null,
         checked: false
     }, {
-        name: "Random Dates",
-        storageKey: "randomDates",
-        subSection: null,
-        checked: true
-    }, {
         name: "Random Page Title",
         storageKey: "randomPageTitle",
         subSection: null,

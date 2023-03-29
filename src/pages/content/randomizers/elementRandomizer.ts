@@ -3,7 +3,8 @@ import {
     getRandomNumber,
     randomStyle, 
     rgbToHex, 
-    isIcon
+    isIcon,
+    getRandomDate
 } from "../utilities/utilities";
 import { getRandomText } from "../utilities/textUtilities";
 import { staticImages, staticClassLists, staticIDs, Nodes } from "../utilities/nodeUtilities";
@@ -106,6 +107,31 @@ function randomize({ elements }: Nodes) {
                 const randomBlue = getRandomNumber(0, 255);
 
                 input.value = rgbToHex(randomRed, randomGreen, randomBlue);
+            }
+
+            if (input.type === "date") {
+                const { month, day, year } = getRandomDate();
+                input.value = `${year}-${month}-${day}`;
+            }
+
+            if (input.type === "datetime-local") {
+                const { month, day, year, hour, minutes, seconds, milliseconds } = getRandomDate();
+                input.value = `${year}-${month}-${day}T${hour}:${minutes}:${seconds}.${milliseconds}`;
+            }
+
+            if (input.type === "month") {
+                const { month, year } = getRandomDate();
+                input.value = `${year}-${month}`;
+            }
+
+            if (input.type === "time") {
+                const { hour, minutes, seconds, milliseconds } = getRandomDate();
+                input.value = `${hour}:${minutes}:${seconds}.${milliseconds}`;
+            }
+
+            if (input.type === "week") {
+                const { year, week } = getRandomDate();
+                input.value = `${year}-W${week}`;
             }
         });
     });
