@@ -15,14 +15,7 @@ export default function ImageSection({ saveToggle }: { saveToggle: boolean }) {
     }, []);
 
     useUpdateEffect(() => {
-        const storage: { imageCheckedStates?: typeof options } = {};
-
-        options.forEach(({ storageKey, checked }) => {
-            storage.imageCheckedStates = options;
-            // storage[storageKey] = checked;
-        });
-
-        chrome.storage.sync.set(storage);
+        chrome.storage.sync.set({ imageCheckedStates: options });
     }, [saveToggle]);
 
     function toggleAllCheckboxes() {
