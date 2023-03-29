@@ -16,14 +16,7 @@ export default function TextSection({ saveToggle }: { saveToggle: boolean }) {
     }, []);
 
     useUpdateEffect(() => {
-        const storage: { textCheckedStates?: typeof options } = {};
-
-        options.forEach(({ storageKey, checked }) => {
-            storage.textCheckedStates = options;
-            // storage[storageKey] = checked;
-        });
-
-        chrome.storage.sync.set(storage);
+        chrome.storage.sync.set({ textCheckedStates: options });
     }, [saveToggle]);
 
     function toggleAllCheckboxes() {
