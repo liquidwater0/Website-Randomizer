@@ -1,7 +1,7 @@
 {
 	"manifest_version": 3,
 	"name": "Website Randomizer",
-	"version": "4.2",
+	"version": "4.3",
 	"description": "Website Randomizer is a fun little extension that randomizes Images, Text, and Elements on websites.",
 	"permissions": ["storage"],
 	"options_ui": {
