@@ -23,7 +23,7 @@ export default function ElementSection({ saveToggle }: { saveToggle: boolean }) 
         setOptions(prev => {
             const copy = [...prev];
             copy.forEach(checkbox => {
-                if (checkbox.storageKey === "elementEnabled") return;
+                if (checkbox.id === "elementEnabled") return;
                 checkbox.checked = toggleAll;
             });
             return copy;

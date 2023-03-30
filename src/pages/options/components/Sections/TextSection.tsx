@@ -23,7 +23,7 @@ export default function TextSection({ saveToggle }: { saveToggle: boolean }) {
         setOptions(prev => {
             const copy = [...prev];
             copy.forEach(checkbox => {
-                if (checkbox.storageKey === "textEnabled") return;
+                if (checkbox.id === "textEnabled") return;
                 checkbox.checked = toggleAll;
             });
             return copy;

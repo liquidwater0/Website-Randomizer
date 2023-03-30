@@ -16,20 +16,20 @@ const allCheckedStates: Promise<CheckboxOption[]> = new Promise((resolve, reject
 async function getMap() {
     const map: Map<string, boolean> = new Map();
 
-    [...await allCheckedStates].forEach(({ storageKey, checked }) => {
-        map.set(storageKey, checked);
+    [...await allCheckedStates].forEach(({ id, checked }) => {
+        map.set(id, checked);
     });
 
     return map;
 }
 
-export default async function getEnabled(storageKey: string) {
+export default async function getEnabled(id: string) {
     const checkedStatesMap = await getMap();
 
-    if (!checkedStatesMap.has(storageKey)) {
-        console.log(`Checked state of [${storageKey}] does not exist!`);
+    if (!checkedStatesMap.has(id)) {
+        console.log(`Checked state of [${id}] does not exist!`);
         return false;
     }
 
-    return checkedStatesMap.get(storageKey);
+    return checkedStatesMap.get(id);
 }

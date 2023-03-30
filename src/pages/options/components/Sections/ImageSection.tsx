@@ -22,7 +22,7 @@ export default function ImageSection({ saveToggle }: { saveToggle: boolean }) {
         setOptions(prev => {
             const copy = [...prev];
             copy.forEach(checkbox => {
-                if (checkbox.storageKey === "imageEnabled") return;
+                if (checkbox.id === "imageEnabled") return;
                 checkbox.checked = toggleAll;
             });
             return copy;
