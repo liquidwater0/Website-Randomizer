@@ -42,15 +42,15 @@ export default function ImageSection({ saveToggle }: { saveToggle: boolean }) {
             </Button>
             {
                 //putting subSection null check for some reason causes nothing to appear even though it works everywhere else.
-                options.sort((a, b) => a.label > b.label ? 1 : -1).map(({ label, checked, subSection }, index) => {
+                options.sort((a, b) => a.name > b.name ? 1 : -1).map(({ name, checked, subSection }, index) => {
                     // if (subSection !== null) return;
                     return (
                         <Checkbox
-                            key={label}
+                            key={name}
                             index={index}
                             setOptions={setOptions}
-                            label={label}
-                            ariaLabel={label}
+                            label={name}
+                            ariaLabel={name}
                             checked={checked}
                         />
                     );
