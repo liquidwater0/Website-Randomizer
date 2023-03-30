@@ -42,15 +42,15 @@ export default function TextSection({ saveToggle }: { saveToggle: boolean }) {
                 Toggle All
             </Button>
             {
-                options.map(({ name, checked, subSection }, index) => {
+                options.sort((a, b) => a.label > b.label ? 1 : -1).map(({ label, checked, subSection }, index) => {
                     if (subSection !== null) return;
                     return (
                         <Checkbox
-                            key={name}
+                            key={label}
                             index={index}
                             setOptions={setOptions}
-                            label={name}
-                            ariaLabel={name}
+                            label={label}
+                            ariaLabel={label}
                             checked={checked}
                         />
                     );
@@ -58,15 +58,15 @@ export default function TextSection({ saveToggle }: { saveToggle: boolean }) {
             }
             <SubSection text="Styles">
                 {
-                    options.map(({ name, checked, subSection }, index) => {
+                    options.sort((a, b) => a.label > b.label ? 1 : -1).map(({ label, checked, subSection }, index) => {
                         if (subSection !== "styles") return;
                         return (
                             <Checkbox
-                                key={name}
+                                key={label}
                                 index={index}
                                 setOptions={setOptions}
-                                label={name}
-                                ariaLabel={name}
+                                label={label}
+                                ariaLabel={label}
                                 checked={checked}
                             />
                         );

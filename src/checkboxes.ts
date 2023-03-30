@@ -1,5 +1,5 @@
 export type CheckboxOption = {
-    name: string,
+    label: string,
     id: string,
     subSection: string | null,
     checked: boolean
@@ -7,22 +7,22 @@ export type CheckboxOption = {
 
 export const imageCheckboxes: CheckboxOption[] = [
     {
-        name: "Enabled",
+        label: "Enabled",
         id: "imageEnabled",
         subSection: null,
         checked: false
     }, {
-        name: "Random Images",
+        label: "Random Images",
         id: "randomImages",
         subSection: null,
         checked: true
     }, {
-        name: "Random Image Height",
+        label: "Random Image Height",
         id: "randomImageHeight",
         subSection: null,
         checked: true
     }, {
-        name: "Random Image Width",
+        label: "Random Image Width",
         id: "randomImageWidth",
         subSection: null,
         checked: true
@@ -31,112 +31,112 @@ export const imageCheckboxes: CheckboxOption[] = [
 
 export const textCheckboxes: CheckboxOption[] = [
     {
-        name: "Enabled",
+        label: "Enabled",
         id: "textEnabled",
         subSection: null,
         checked: false
     }, {
-        name: "Random Page Title",
+        label: "Random Page Title",
         id: "randomPageTitle",
         subSection: null,
         checked: true
     }, {
-        name: "Random Text",
+        label: "Random Text",
         id: "randomText",
         subSection: null,
         checked: true
     }, {
-        name: "Random Text Field Placeholders",
+        label: "Random Text Field Placeholders",
         id: "randomTextFieldPlaceholders",
         subSection: null,
         checked: true
     }, {
-        name: "Random Text Field Values",
+        label: "Random Text Field Values",
         id: "randomTextFieldValues",
         subSection: null,
         checked: true
     }, {
-        name: "Shuffle Text",
+        label: "Shuffle Text",
         id: "shuffleText",
         subSection: null,
         checked: false
     }, {
-        name: "Random Font",
+        label: "Random Font",
         id: "randomFont",
         subSection: "styles",
         checked: true
     }, {
-        name: "Random Font Size",
+        label: "Random Font Size",
         id: "randomFontSize",
         subSection: "styles",
         checked: true
     }, {
-        name: "Random Font Style",
+        label: "Random Font Style",
         id: "randomFontStyle",
         subSection: "styles",
         checked: true
     }, {
-        name: "Random Font Weight",
+        label: "Random Font Weight",
         id: "randomFontWeight",
         subSection: "styles",
         checked: true
     }, {
-        name: "Random Letter Spacing",
+        label: "Random Letter Spacing",
         id: "randomLetterSpacing",
         subSection: "styles",
         checked: true
     }, {
-        name: "Random Line Height",
+        label: "Random Line Height",
         id: "randomLineHeight",
         subSection: "styles",
         checked: true
     }, {
-        name: "Random Text Align",
+        label: "Random Text Align",
         id: "randomTextAlign",
         subSection: "styles",
         checked: true
     }, {
-        name: "Random Text Color",
+        label: "Random Text Color",
         id: "randomTextColor",
         subSection: "styles",
         checked: true
     }, {
-        name: "Random Text Decoration",
+        label: "Random Text Decoration",
         id: "randomTextDecoration",
         subSection: "styles",
         checked: true
     }, {
-        name: "Random Text Indent",
+        label: "Random Text Indent",
         id: "randomTextIndent",
         subSection: "styles",
         checked: true
     }, {
-        name: "Random Text Selection",
+        label: "Random Text Selection",
         id: "randomTextSelection",
         subSection: "styles",
         checked: true
     }, {
-        name: "Random Text Shadow",
+        label: "Random Text Shadow",
         id: "randomTextShadow",
         subSection: "styles",
         checked: true
     }, {
-        name: "Random Text Transform",
+        label: "Random Text Transform",
         id: "randomTextTransform",
         subSection: "styles",
         checked: true
     }, {
-        name: "Random Vertical Align",
+        label: "Random Vertical Align",
         id: "randomVerticalAlign",
         subSection: "styles",
         checked: true
     }, {
-        name: "Random Word Break Type",
+        label: "Random Word Break Type",
         id: "randomWordBreakType",
         subSection: "styles",
         checked: true
     }, {
-        name: "Random Word Spacing",
+        label: "Random Word Spacing",
         id: "randomWordSpacing",
         subSection: "styles",
         checked: true
@@ -145,182 +145,182 @@ export const textCheckboxes: CheckboxOption[] = [
 
 export const elementCheckboxes: CheckboxOption[] = [
     {
-        name: "Enabled",
+        label: "Enabled",
         id: "elementEnabled",
         subSection: null,
         checked: false
     }, {
-        name: "Random Checked States",
+        label: "Random Checked States",
         id: "randomCheckedStates",
         subSection: null,
         checked: true
     }, {
-        name: "Random Icons",
+        label: "Random Icons",
         id: "randomIcons",
         subSection: null,
         checked: true
     }, {
-        name: "Random Input Values",
+        label: "Random Input Values",
         id: "randomInputValues",
         subSection: null,
         checked: true
     }, {
-        name: "Random Class List",
+        label: "Random Class List",
         id: "randomClassList",
         subSection: "attributes",
         checked: true
     }, {
-        name: "Random Content Editable",
+        label: "Random Content Editable",
         id: "randomContentEditable",
         subSection: "attributes",
         checked: true
     }, {
-        name: "Random Disabled",
+        label: "Random Disabled",
         id: "randomDisabled",
         subSection: "attributes",
         checked: true
     }, {
-        name: "Random Draggable",
+        label: "Random Draggable",
         id: "randomDraggable",
         subSection: "attributes",
         checked: true
     }, {
-        name: "Random ID",
+        label: "Random ID",
         id: "randomID",
         subSection: "attributes",
         checked: true
     }, {
-        name: "Random List Reversed",
+        label: "Random List Reversed",
         id: "randomListReversed",
         subSection: "attributes",
         checked: true
     }, {
-        name: "Random List Start",
+        label: "Random List Start",
         id: "randomListStart",
         subSection: "attributes",
         checked: true
     }, {
-        name: "Random Max Length",
+        label: "Random Max Length",
         id: "randomMaxLength",
         subSection: "attributes",
         checked: true
     }, {
-        name: "Random Option Selected",
+        label: "Random Option Selected",
         id: "randomOptionSelected",
         subSection: "attributes",
         checked: true
     }, {
-        name: "Random Tab Index",
+        label: "Random Tab Index",
         id: "randomTabIndex",
         subSection: "attributes",
         checked: true
     }, {
-        name: "Random Tooltip",
+        label: "Random Tooltip",
         id: "randomTooltip",
         subSection: "attributes",
         checked: true
     }, {
-        name: "Random Type",
+        label: "Random Type",
         id: "randomType",
         subSection: "attributes",
         checked: true
     }, {
-        name: "Random Background Color",
+        label: "Random Background Color",
         id: "randomBackgroundColor",
         subSection: "styles",
         checked: true
     }, {
-        name: "Random Background Image",
+        label: "Random Background Image",
         id: "randomBackgroundImage",
         subSection: "styles",
         checked: true
     }, {
-        name: "Random Border",
+        label: "Random Border",
         id: "randomBorder",
         subSection: "styles",
         checked: true
     }, {
-        name: "Random Box Shadow",
+        label: "Random Box Shadow",
         id: "randomBoxShadow",
         subSection: "styles",
         checked: true
     }, {
-        name: "Random Corner Radius",
+        label: "Random Corner Radius",
         id: "randomCornerRadius",
         subSection: "styles",
         checked: true
     }, {
-        name: "Random Cursor",
+        label: "Random Cursor",
         id: "randomCursor",
         subSection: "styles",
         checked: true
     }, {
-        name: "Random Display Type",
+        label: "Random Display Type",
         id: "randomDisplayType",
         subSection: "styles",
         checked: true
     }, {
-        name: "Random Float",
+        label: "Random Float",
         id: "randomFloat",
         subSection: "styles",
         checked: true
     }, {
-        name: "Random Height",
+        label: "Random Height",
         id: "randomHeight",
         subSection: "styles",
         checked: true
     }, {
-        name: "Random Move",
+        label: "Random Move",
         id: "randomMove",
         subSection: "styles",
         checked: true
     }, {
-        name: "Random Opacity",
+        label: "Random Opacity",
         id: "randomOpacity",
         subSection: "styles",
         checked: true
     }, {
-        name: "Random Outline",
+        label: "Random Outline",
         id: "randomOutline",
         subSection: "styles",
         checked: true
     }, {
-        name: "Random Overflow",
+        label: "Random Overflow",
         id: "randomOverflow",
         subSection: "styles",
         checked: true
     }, {
-        name: "Random Padding",
+        label: "Random Padding",
         id: "randomPadding",
         subSection: "styles",
         checked: true
     }, {
-        name: "Random Positioning Type",
+        label: "Random Positioning Type",
         id: "randomPositioningType",
         subSection: "styles",
         checked: true
     }, {
-        name: "Random Resize Ability",
+        label: "Random Resize Ability",
         id: "randomResizeAbility",
         subSection: "styles",
         checked: true
     }, {
-        name: "Random Rotation",
+        label: "Random Rotation",
         id: "randomRotation",
         subSection: "styles",
         checked: true
     }, {
-        name: "Random Stack Order",
+        label: "Random Stack Order",
         id: "randomStackOrder",
         subSection: "styles",
         checked: true
     }, {
-        name: "Random Visibility",
+        label: "Random Visibility",
         id: "randomVisibility",
         subSection: "styles",
         checked: true
     }, {
-        name: "Random Width",
+        label: "Random Width",
         id: "randomWidth",
         subSection: "styles",
         checked: true
@@ -329,7 +329,7 @@ export const elementCheckboxes: CheckboxOption[] = [
 
 export const optionsCheckboxes: CheckboxOption[] = [
     {
-        name: "Single Words",
+        label: "Single Words",
         id: "singleWords",
         subSection: "textRandomizer",
         checked: false

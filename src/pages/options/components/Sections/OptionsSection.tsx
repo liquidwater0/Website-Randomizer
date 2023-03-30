@@ -21,15 +21,15 @@ export default function OptionsSection({ saveToggle }: { saveToggle: boolean }) 
         <>
             <SubSection text="Text Randomizer">
                 {
-                    options.map(({ name, checked, subSection }, index) => {
+                    options.sort((a, b) => a.label > b.label ? 1 : -1).map(({ label, checked, subSection }, index) => {
                         if (subSection !== "textRandomizer") return;
                         return (
                             <Checkbox
-                                key={name}
+                                key={label}
                                 index={index}
                                 setOptions={setOptions}
-                                label={name}
-                                ariaLabel={name}
+                                label={label}
+                                ariaLabel={label}
                                 checked={checked}
                             />
                         );
