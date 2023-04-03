@@ -1,5 +1,5 @@
 import getEnabled from "../utilities/getEnabled";
-import { activate, getRandomNumber, getRandomDate, randomStyle } from "../utilities/utilities";
+import { activate, getRandomNumber, randomStyle } from "../utilities/utilities";
 import { getRandomText, randomizeText, shuffleText } from "../utilities/textUtilities";
 import { Nodes } from "../utilities/nodeUtilities";
 
