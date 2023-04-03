@@ -10,6 +10,13 @@ import {
     updateStaticIDs 
 } from "./nodeUtilities";
 
+export function activate(id: string, callback: () => void) {
+    getEnabled(id).then(enabled => {
+        if (!enabled) return;
+        callback();
+    });
+}
+
 export async function isAllDisabled() {
     return Promise.all([
         getEnabled("imageEnabled"), 

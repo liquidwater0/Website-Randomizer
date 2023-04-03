@@ -1,5 +1,5 @@
 import getEnabled from "../utilities/getEnabled";
-import { getRandomNumber, getRandomDate, randomStyle } from "../utilities/utilities";
+import { activate, getRandomNumber, getRandomDate, randomStyle } from "../utilities/utilities";
 import { getRandomText, randomizeText, shuffleText } from "../utilities/textUtilities";
 import { Nodes } from "../utilities/nodeUtilities";
 
@@ -24,8 +24,7 @@ function randomize({ text, elements }: Nodes) {
     const verticalAlignValues = ["baseline", "sub", "super", "top", "text-top", "middle", "bottom", "text-bottom"];
     const wordBreakValues = ["keep-all", "break-word", "break-all"];
 
-    getEnabled("randomPageTitle").then(enabled => {
-        if (!enabled) return;
+    activate("randomPageTitle", () => {
         if (titleChanged) return;
 
         getEnabled("singleWords").then(singleWords => {
@@ -35,14 +34,9 @@ function randomize({ text, elements }: Nodes) {
         titleChanged = true;
     });
 
-    getEnabled("randomText").then(enabled => {
-        if (!enabled) return;
-        randomizeText(text);
-    });
+    activate("randomText", () => randomizeText(text));
 
-    getEnabled("randomTextFieldPlaceholders").then(enabled => {
-        if (!enabled) return;
-
+    activate("randomTextFieldPlaceholders", () => {
         getEnabled("singleWords").then(singleWords => {
             elements.forEach((input: HTMLInputElement | HTMLTextAreaElement) => {
                 input.placeholder = getRandomText(singleWords);
@@ -50,9 +44,7 @@ function randomize({ text, elements }: Nodes) {
         });
     });
 
-    getEnabled("randomTextFieldValues").then(enabled => {
-        if (!enabled) return;
-
+    activate("randomTextFieldValues", () => {
         getEnabled("singleWords").then(singleWords => {
             elements.forEach((input: HTMLInputElement | HTMLTextAreaElement) => {
                 const textFieldInputs = ["email", "password", "search", "tel", "text", "url"];
@@ -66,64 +58,49 @@ function randomize({ text, elements }: Nodes) {
         });
     });
 
-    getEnabled("shuffleText").then(enabled => {
-        if (!enabled) return;
-        shuffleText(text);
-    });
+    activate("shuffleText", () => shuffleText(text));
 
-    getEnabled("randomFont").then(enabled => {
-        if (!enabled) return;
+    activate("randomFont", () => {
         randomStyle(elements, "fontFamily", () => fonts[Math.floor(Math.random() * fonts.length)]);
     });
 
-    getEnabled("randomFontSize").then(enabled => {
-        if (!enabled) return;
+    activate("randomFontSize", () => {
         randomStyle(elements, "fontSize", () => `${getRandomNumber(7, 30)}px`);
     });
 
-    getEnabled("randomFontStyle").then(enabled => {
-        if (!enabled) return;
+    activate("randomFontStyle", () => {
         randomStyle(elements, "fontStyle", () => fontStyles[Math.floor(Math.random() * fontStyles.length)]);
     });
 
-    getEnabled("randomFontWeight").then(enabled => {
-        if (!enabled) return;
+    activate("randomFontWeight", () => {
         randomStyle(elements, "fontWeight", () => getRandomNumber(100, 900));
     });
 
-    getEnabled("randomLetterSpacing").then(enabled => {
-        if (!enabled) return;
+    activate("randomLetterSpacing", () => {
         randomStyle(elements, "letterSpacing", () => `${getRandomNumber(-1, 5)}px`);
     });
 
-    getEnabled("randomLineHeight").then(enabled => {
-        if (!enabled) return;
+    activate("randomLineHeight", () => {
         randomStyle(elements, "lineHeight", () => `${getRandomNumber(10, 50)}px`);
     });
 
-    getEnabled("randomTextAlign").then(enabled => {
-        if (!enabled) return;
+    activate("randomTextAlign", () => {
         randomStyle(elements, "textAlign", () => textAlignModes[Math.floor(Math.random() * textAlignModes.length)]);
     });
 
-    getEnabled("randomTextColor").then(enabled => {
-        if (!enabled) return;
+    activate("randomTextColor", () => {
         randomStyle(elements, "color", () => `rgb(${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)})`);
     });
 
-    getEnabled("randomTextDecoration").then(enabled => {
-        if (!enabled) return;
+    activate("randomTextDecoration", () => {
         randomStyle(elements, "textDecoration", () => textDecorations[Math.floor(Math.random() * textDecorations.length)]);
     });
 
-    getEnabled("randomTextIndent").then(enabled => {
-        if (!enabled) return;
+    activate("randomTextIndent", () => {
         randomStyle(elements, "textIndent", () => `${getRandomNumber(0, 100)}px`);
     });
 
-    getEnabled("randomTextSelection").then(enabled => {
-        if (!enabled) return;
-        
+    activate("randomTextSelection", () => {
         if (!textSelectActivated) {
             textSelectActivated = true;
 
@@ -137,32 +114,26 @@ function randomize({ text, elements }: Nodes) {
         }
     });
 
-    getEnabled("randomTextShadow").then(enabled => {
-        if (!enabled) return;
-        
+    activate("randomTextShadow", () => {
         randomStyle(elements, "textShadow", () => {
             const randomColor = `rgb(${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)})`;
             return `${getRandomNumber(0, 10)}px ${getRandomNumber(0, 10)}px ${getRandomNumber(0, 10)}px ${randomColor}`;
         });
     });
 
-    getEnabled("randomTextTransform").then(enabled => {
-        if (!enabled) return;
+    activate("randomTextTransform", () => {
         randomStyle(elements, "textTransform", () => textTransformValues[Math.floor(Math.random() * textTransformValues.length)]);
     });
 
-    getEnabled("randomVerticalAlign").then(enabled => {
-        if (!enabled) return;
+    activate("randomVerticalAlign", () => {
         randomStyle(elements, "verticalAlign", () => verticalAlignValues[Math.floor(Math.random() * verticalAlignValues.length)]);
     });
 
-    getEnabled("randomWordBreakType").then(enabled => {
-        if (!enabled) return;
+    activate("randomWordBreakType", () => {
         randomStyle(elements, "wordBreak", () => wordBreakValues[Math.floor(Math.random() * wordBreakValues.length)]);
     });
 
-    getEnabled("randomWordSpacing").then(enabled => {
-        if (!enabled) return;
+    activate("randomWordSpacing", () => {
         randomStyle(elements, "wordSpacing", () => `${getRandomNumber(0, 30)}px`);
     });
 }

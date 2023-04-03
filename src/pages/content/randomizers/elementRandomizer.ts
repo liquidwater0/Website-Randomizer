@@ -1,5 +1,6 @@
 import getEnabled from "../utilities/getEnabled";
 import { 
+    activate,
     getRandomNumber,
     randomStyle, 
     rgbToHex, 
@@ -61,9 +62,7 @@ function randomize({ elements }: Nodes) {
     const resizeValues = ["none", "both", "horizontal", "vertical"];
     const visibilityValues = ["visible", "hidden"];
 
-    getEnabled("randomCheckedStates").then(enabled => {
-        if (!enabled) return;
-
+    activate("randomCheckedStates", () => {
         elements.forEach((input: HTMLInputElement) => {
             if (input.tagName !== "INPUT") return;
 
@@ -74,9 +73,7 @@ function randomize({ elements }: Nodes) {
         });
     });
 
-    getEnabled("randomIcons").then(enabled => {
-        if (!enabled) return;
-
+    activate("randomIcons", () => {
         elements.forEach(element => {
             if (!element || !element.tagName || element.tagName === "TITLE") return;
 
@@ -93,9 +90,7 @@ function randomize({ elements }: Nodes) {
         });
     });
 
-    getEnabled("randomInputValues").then(enabled => {
-        if (!enabled) return;
-
+    activate("randomInputValues", () => {
         elements.forEach((input: HTMLInputElement) => {
             if (input.tagName !== "INPUT") return;
 
@@ -136,9 +131,7 @@ function randomize({ elements }: Nodes) {
         });
     });
 
-    getEnabled("randomClassList").then(enabled => {
-        if (!enabled) return;
-
+    activate("randomClassList", () => {
         elements.forEach(element => {
             const randomClassList = staticClassLists[Math.floor(Math.random() * staticClassLists.length)];
             if (!randomClassList) return;
@@ -146,14 +139,13 @@ function randomize({ elements }: Nodes) {
         });
     });
 
-    getEnabled("randomContentEditable").then(enabled => {
-        if (!enabled) return;
-        elements.forEach(element => element.contentEditable = booleans[Math.floor(Math.random() * booleans.length)].toString());
+    activate("randomContentEditable", () => {
+        elements.forEach(element => {
+            element.contentEditable = booleans[Math.floor(Math.random() * booleans.length)].toString();
+        });
     });
 
-    getEnabled("randomDisabled").then(enabled => {
-        if (!enabled) return;
-
+    activate("randomDisabled", () => {
         elements.forEach((input: HTMLInputElement | HTMLButtonElement | HTMLTextAreaElement) => {
             if (
                 input.tagName !== "INPUT" && 
@@ -166,14 +158,13 @@ function randomize({ elements }: Nodes) {
         });
     });
 
-    getEnabled("randomDraggable").then(enabled => {
-        if (!enabled) return;
-        elements.forEach(element => element.draggable = booleans[Math.floor(Math.random() * booleans.length)]);
+    activate("randomDraggable", () => {
+        elements.forEach(element => {
+            element.draggable = booleans[Math.floor(Math.random() * booleans.length)];
+        });
     });
 
-    getEnabled("randomID").then(enabled => {
-        if (!enabled) return;
-
+    activate("randomID", () => {
         elements.forEach(element => {
             const randomID = staticIDs[Math.floor(Math.random() * staticIDs.length)];
             if (!randomID) return;
@@ -181,9 +172,7 @@ function randomize({ elements }: Nodes) {
         });
     });
 
-    getEnabled("randomListReversed").then(enabled => {
-        if (!enabled) return;
-
+    activate("randomListReversed", () => {
         elements.forEach((ol: HTMLOListElement) => {
             if (ol.tagName !== "OL") return;
 
@@ -192,9 +181,7 @@ function randomize({ elements }: Nodes) {
         });
     });
 
-    getEnabled("randomListStart").then(enabled => {
-        if (!enabled) return;
-
+    activate("randomListStart", () => {
         elements.forEach((ol: HTMLOListElement) => {
             if (ol.tagName !== "OL") return;
 
@@ -203,17 +190,13 @@ function randomize({ elements }: Nodes) {
         });
     });
 
-    getEnabled("randomMaxLength").then(enabled => {
-        if (!enabled) return;
-
+    activate("randomMaxLength", () => {
         elements.forEach((input: HTMLInputElement | HTMLTextAreaElement) => {
             input.maxLength = getRandomNumber(1, 50);
         });
     });
 
-    getEnabled("randomOptionSelected").then(enabled => {
-        if (!enabled) return;
-
+    activate("randomOptionSelected", () => {
         elements.forEach((select: HTMLSelectElement) => {
             if (select.tagName !== "SELECT") return;
 
@@ -224,15 +207,12 @@ function randomize({ elements }: Nodes) {
         });
     });
 
-    getEnabled("randomTabIndex").then(enabled => {
-        if (!enabled) return;
+    activate("randomTabIndex", () => {
         const allElements = document.querySelectorAll("*");
         elements.forEach(element => element.tabIndex = getRandomNumber(0, allElements.length));
     });
 
-    getEnabled("randomTooltip").then(enabled => {
-        if (!enabled) return;
-        
+    activate("randomTooltip", () => {
         getEnabled("singleWords").then(singleWords => {
             elements.forEach(element => {
                 element.title = getRandomText(singleWords);
@@ -240,23 +220,18 @@ function randomize({ elements }: Nodes) {
         });
     });
 
-    getEnabled("randomType").then(enabled => {
-        if (!enabled) return;
-
+    activate("randomType", () => {
         elements.forEach((input: HTMLInputElement) => {
             if (input.tagName !== "INPUT") return;
             input.type = types[Math.floor(Math.random() * types.length)];
         });
     });
 
-    getEnabled("randomBackgroundColor").then(enabled => {
-        if (!enabled) return;
+    activate("randomBackgroundColor", () => {
         randomStyle(elements, "backgroundColor", () => `rgb(${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)})`);
     });
 
-    getEnabled("randomBackgroundImage").then(enabled => {
-        if (!enabled) return;
-
+    activate("randomBackgroundImage", () => {
         randomStyle(elements, "background", () => {
             const randomImage = staticImages[Math.floor(Math.random() * staticImages.length)];
             if (randomImage === undefined) return;
@@ -265,9 +240,7 @@ function randomize({ elements }: Nodes) {
         });
     });
 
-    getEnabled("randomBorder").then(enabled => {
-        if (!enabled) return;
-
+    activate("randomBorder", () => {
         randomStyle(elements, "border", () => {
             const randomThickness = getRandomNumber(1, 10);
             const randomStyle = borderStyles[Math.floor(Math.random() * borderStyles.length)];
@@ -277,14 +250,11 @@ function randomize({ elements }: Nodes) {
         });
     });
 
-    getEnabled("randomCornerRadius").then(enabled => {
-        if (!enabled) return;
+    activate("randomCornerRadius", () => {
         randomStyle(elements, "borderRadius", () => `${getRandomNumber(0, 100)}px ${getRandomNumber(0, 100)}px ${getRandomNumber(0, 100)}px ${getRandomNumber(0, 100)}px`);
     });
 
-    getEnabled("randomBoxShadow").then(enabled => {
-        if (!enabled) return;
-
+    activate("randomBoxShadow", () => {
         randomStyle(elements, "boxShadow", () => {
             const randomHOffset = getRandomNumber(0, 10);
             const randomVOffset = getRandomNumber(0, 10);
@@ -297,39 +267,31 @@ function randomize({ elements }: Nodes) {
         });
     });
 
-    getEnabled("randomCursor").then(enabled => {
-        if (!enabled) return;
+    activate("randomCursor", () => {
         randomStyle(elements, "cursor", () => cursors[Math.floor(Math.random() * cursors.length)]);
     });
 
-    getEnabled("randomDisplayType").then(enabled => {
-        if (!enabled) return;
+    activate("randomDisplayType", () => {
         randomStyle(elements, "display", () => displayValues[Math.floor(Math.random() * displayValues.length)]);
     });
 
-    getEnabled("randomFloat").then(enabled => {
-        if (!enabled) return;
+    activate("randomFloat", () => {
         randomStyle(elements, "float", () => floatValues[Math.floor(Math.random() * floatValues.length)]);
     });
 
-    getEnabled("randomHeight").then(enabled => {
-        if (!enabled) return;
+    activate("randomHeight", () => {
         randomStyle(elements, "height", () => `${getRandomNumber(0, 100)}%`);
     });
 
-    getEnabled("randomMove").then(enabled => {
-        if (!enabled) return;
+    activate("randomMove", () => {
         randomStyle(elements, "transform", () => `translate(${getRandomNumber(-200, 200)}px, ${getRandomNumber(-200, 200)}px)`);
     });
 
-    getEnabled("randomOpacity").then(enabled => {
-        if (!enabled) return;
+    activate("randomOpacity", () => {
         randomStyle(elements, "opacity", () => Math.random());
     });
 
-    getEnabled("randomOutline").then(enabled => {
-        if (!enabled) return;
-
+    activate("randomOutline", () => {
         randomStyle(elements, "outline", () => {
             const randomThickness = getRandomNumber(1, 10);
             const randomStyle = borderStyles[Math.floor(Math.random() * borderStyles.length)];
@@ -339,43 +301,35 @@ function randomize({ elements }: Nodes) {
         });
     });
 
-    getEnabled("randomOverflow").then(enabled => {
-        if (!enabled) return;
+    activate("randomOverflow", () => {
         randomStyle(elements, "overflow", () => overflowValues[Math.floor(Math.random() * overflowValues.length)]);
     });
 
-    getEnabled("randomPadding").then(enabled => {
-        if (!enabled) return;
+    activate("randomPadding", () => {
         randomStyle(elements, "padding", () => `${getRandomNumber(0, 50)}px ${getRandomNumber(0, 50)}px ${getRandomNumber(0, 50)}px ${getRandomNumber(0, 50)}px`);
     });
 
-    getEnabled("randomPositioningType").then(enabled => {
-        if (!enabled) return;
+    activate("randomPositioningType", () => {
         randomStyle(elements, "position", () => positionValues[Math.floor(Math.random() * positionValues.length)]);
     });
 
-    getEnabled("randomResizeAbility").then(enabled => {
-        if (!enabled) return;
+    activate("randomResizeAbility", () => {
         randomStyle(elements, "resize", () => resizeValues[Math.floor(Math.random() * resizeValues.length)]);
     });
 
-    getEnabled("randomRotation").then(enabled => {
-        if (!enabled) return;
+    activate("randomRotation", () => {
         randomStyle(elements, "transform", () => `rotate(${getRandomNumber(-360, 360)}deg)`);
     });
 
-    getEnabled("randomStackOrder").then(enabled => {
-        if (!enabled) return;
+    activate("randomStackOrder", () => {
         randomStyle(elements, "zIndex", () => getRandomNumber(-1, 5));
     });
 
-    getEnabled("randomVisibility").then(enabled => {
-        if (!enabled) return;
+    activate("randomVisibility", () => {
         randomStyle(elements, "visibility", () => visibilityValues[Math.floor(Math.random() * visibilityValues.length)]);
     });
 
-    getEnabled("randomWidth").then(enabled => {
-        if (!enabled) return;
+    activate("randomWidth", () => {
         randomStyle(elements, "width", () => `${getRandomNumber(0, 100)}%`);
     });
 }
