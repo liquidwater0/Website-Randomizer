@@ -16,11 +16,13 @@ Promise.all([
 ])
 .then(checkedStates => {
     const allEnabled = checkedStates.every(item => item === true);
-
+    
     if (allEnabled) {
-        document.head.insertAdjacentHTML("beforeend", `
-            <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        `);
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = "https://fonts.googleapis.com/icon?family=Material+Icons";
+
+        document.head.appendChild(link);
     }
 });
 
