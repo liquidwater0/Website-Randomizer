@@ -1,6 +1,6 @@
 {
   "name": "website-randomizer",
-  "version": "4.3.0",
+  "version": "4.4.0",
   "description": "",
   "scripts": {
     "build": "webpack --config webpack.config.js"
